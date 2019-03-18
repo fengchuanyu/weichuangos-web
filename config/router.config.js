@@ -23,12 +23,13 @@ export default [
 
       {
         path: '/project', //一级目录
-        icon: 'team',
+        icon: 'project',
         name: 'project',
         routes: [
           {
             path: '/project/add',//二级目录
             name: 'add',
+            icon: 'setting',
             component: './project/add',
           },
           

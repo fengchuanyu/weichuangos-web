@@ -4,7 +4,7 @@ export default class Add extends Component {
   render() {
     return (
       <div>
-        <h1>项目编辑</h1>
+        <h2>项目编辑</h2>
       </div>
     )
   }
