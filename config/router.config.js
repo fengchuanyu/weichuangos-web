@@ -179,6 +179,19 @@ export default [
         ],
       },
       {
+        name: 'project',
+        icon: 'check-circle-o',
+        path: '/project',
+        routes: [
+          // result
+          {
+            path: '/project/add',
+            name: 'Add',
+            component: './Project/Add',
+          },
+        ],
+      },
+      {
         name: 'exception',
         icon: 'warning',
         path: '/exception',
