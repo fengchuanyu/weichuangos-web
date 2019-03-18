@@ -38,6 +38,4 @@ export default {
   'menu.account.settings': '个人设置',
   'menu.account.trigger': '触发报错',
   'menu.account.logout': '退出登录',
-  'menu.student': '学生管理',
-  'menu.student.list': '学生列表',
 };
