@@ -183,11 +183,11 @@ export default [
         icon: 'check-circle-o',
         path: '/project',
         routes: [
-          // result
+          // project
           {
-            path: '/project/add',
-            name: 'Add',
-            component: './Project/Add',
+            path: '/project/xiangmu',
+            name: 'Xiangmu',
+            component: './Project/Xiangmu',
           },
         ],
       },
