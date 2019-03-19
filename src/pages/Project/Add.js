@@ -9,7 +9,6 @@ export default class Add extends Component {
         <AddComponent/>
         </div>
       </PageHeaderWrapper>
-
     )
   }
 }
