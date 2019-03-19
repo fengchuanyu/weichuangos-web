@@ -6,7 +6,6 @@ export default class Add extends Component {
     return (
       <PageHeaderWrapper title="项目编辑">
         <div>
-        <AddComponent/>
         <SelectComponent/>
         </div>
       </PageHeaderWrapper>
