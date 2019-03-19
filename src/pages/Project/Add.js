@@ -1,12 +1,22 @@
-import React, { Component } from 'react'
-import SelectComponent from '@/components/AddComponent/SelectComponent'
+import React, { Component } from 'react';
+import SelectComponent from '@/components/AddComponent/SelectComponent';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';//面包屑
+import InputNameComponent from '@/components/AddComponent/InputNameComponent';//项目名称
+import InputSelectComponent from '@/components/AddComponent/InputSelectComponent';//项目分类
+import InputNumberComponent from '@/components/AddComponent/InputNumberComponent';//项目编号
+import OtherdocumentsComponent from '@/components/AddComponent/OtherdocumentsComponent';//其他文件
+import ProgressIntroductionConponent from '@/components/AddComponent/ProgressIntroductionConponent';//项目介绍
 export default class Add extends Component {
   render() {
     return (
       <PageHeaderWrapper title="项目编辑">
         <div>
-        <SelectComponent/>
+        项目名称：<InputNameComponent/>
+        项目分类: <InputSelectComponent/>
+        项目编号: <InputNumberComponent/>
+        技术栈:<SelectComponent/>
+        其他文件：<OtherdocumentsComponent/>
+        项目介绍：<ProgressIntroductionConponent/>
         </div>
       </PageHeaderWrapper>
     )
