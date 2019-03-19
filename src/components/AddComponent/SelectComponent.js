@@ -16,13 +16,13 @@ class SelectComponent extends Component{
       }
       render(){
           return(
-              <div>
+              <div id="testaa">
                   <Select
                     mode="multiple"
                     style={{ width: '100%' }}
                     placeholder="Please select"
                     defaultValue={['ES2015+']}
-                    onChange={handleChange}
+                    onChange={this.handleChange}
                 >
                     {children}
                 </Select>

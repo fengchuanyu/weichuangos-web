@@ -5,7 +5,7 @@ export default class Add extends Component {
     return (
       <div>
         <h2>项目编辑</h2>
-        <select-component/>
+        <SelectComponent/>
       </div>
     )
   }
