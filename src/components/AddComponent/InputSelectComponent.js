@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Select } from 'antd';
-import AddComponent from '@/components/AddComponent/AddComponent'
 const Option = Select.Option;
 
 function handleChange(value) {
@@ -15,8 +14,36 @@ function handleFocus() {
   console.log('focus');
 }
 
+
+
+
+
+
 export default class InputSelectComponent extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      option:[]
+    }
+  }
+  componentDidMount(){
+    this.setState({
+      option:this.props.newValues
+    })
+  }
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      option:nextProps.newValues
+    })
+  }
+  
   render() {
+    const children=[];
+    for (let i = 0; i < this.state.option.length; i++) {
+
+      children.push(<Option key={i.toString(36) + i}>{this.state.option[i]}</Option>);
+      
+    }
     return (
       <span>
         <Select
@@ -29,11 +56,8 @@ export default class InputSelectComponent extends Component {
           onBlur={handleBlur}
           filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
         >
-          <Option value="jack">微信小程序</Option>
-          <Option value="lucy">移动端开发</Option>
-          <Option value="tom">Vue</Option>
+          {children}
         </Select>
-        <AddComponent/>
       </span>
     )
   }

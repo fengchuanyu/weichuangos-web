@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import AddListComponent from '@/components/AddComponent/AddListComponent'
 import {
     Button, Modal, Form, Input, Radio,
   } from 'antd';
@@ -7,6 +8,17 @@ import {
   const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
     // eslint-disable-next-line
     class extends React.Component {
+      constructor(props){
+        super(props);
+        this.state={
+          curList:[]
+        }
+      }
+      componentWillReceiveProps(nextProps){
+        this.setState({
+          curList:nextProps.newCur
+        })
+      }
       render() {
         const {
           visible, onCancel, onCreate, form,
@@ -38,10 +50,16 @@ import {
   class AddComponent extends React.Component {
     state = {
       visible: false,
+      curList:[]
     };
-  
+    componentWillReceiveProps(nextProps){
+      this.setState({
+        curList:nextProps.newList
+      })
+    }
     showModal = () => {
       this.setState({ visible: true });
+
     }
   
     handleCancel = () => {
@@ -54,19 +72,17 @@ import {
         if (err) {
           return;
         }
-  
-        console.log('Received values of form: ', values);
+        this.setState({ visible: false});
         form.resetFields();
-        this.setState({ visible: false });
+        this.props.getValues(values.title);      
       });
-      
     }
-  
     saveFormRef = (formRef) => {
       this.formRef = formRef;
     }
   
     render() {
+
       return (
         <span>
           <Button type="primary" onClick={this.showModal}>添加项目</Button>
@@ -74,7 +90,8 @@ import {
             wrappedComponentRef={this.saveFormRef}
             visible={this.state.visible}
             onCancel={this.handleCancel}
-            onCreate={this.handleCreate}
+            onCreate={this.handleCreate}   
+            newCur={this.state.curList}         
           />
         </span>
       );
