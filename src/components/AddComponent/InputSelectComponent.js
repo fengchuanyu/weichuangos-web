@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Select } from 'antd';
+import AddComponent from '@/components/AddComponent/AddComponent'
 const Option = Select.Option;
 
 function handleChange(value) {
@@ -17,22 +18,23 @@ function handleFocus() {
 export default class InputSelectComponent extends Component {
   render() {
     return (
-      <div>
+      <span>
         <Select
-    showSearch
-    style={{ width: 200 }}
-    placeholder="1类"
-    optionFilterProp="children"
-    onChange={handleChange}
-    onFocus={handleFocus}
-    onBlur={handleBlur}
-    filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-  >
-    <Option value="jack">1类</Option>
-    <Option value="lucy">2类</Option>
-    <Option value="tom">3类</Option>
-  </Select>
-      </div>
+          showSearch
+          style={{ width: 200 }}
+          placeholder="微信小程序"
+          optionFilterProp="children"
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+        >
+          <Option value="jack">微信小程序</Option>
+          <Option value="lucy">移动端开发</Option>
+          <Option value="tom">Vue</Option>
+        </Select>
+        <AddComponent/>
+      </span>
     )
   }
 }

@@ -15,30 +15,17 @@ import {
         return (
           <Modal
             visible={visible}
-            title="Create a new collection"
+            title="添加项目"
             okText="Create"
             onCancel={onCancel}
             onOk={onCreate}
           >
             <Form layout="vertical">
-              <Form.Item label="Title">
+              <Form.Item label="项目类别">
                 {getFieldDecorator('title', {
-                  rules: [{ required: true, message: 'Please input the title of collection!' }],
+                  rules: [{ required: true, message: 'Please input the type of project!' }],
                 })(
                   <Input />
-                )}
-              </Form.Item>
-              <Form.Item label="Description">
-                {getFieldDecorator('description')(<Input type="textarea" />)}
-              </Form.Item>
-              <Form.Item className="collection-create-form_last-form-item">
-                {getFieldDecorator('modifier', {
-                  initialValue: 'public',
-                })(
-                  <Radio.Group>
-                    <Radio value="public">Public</Radio>
-                    <Radio value="private">Private</Radio>
-                  </Radio.Group>
                 )}
               </Form.Item>
             </Form>
@@ -72,6 +59,7 @@ import {
         form.resetFields();
         this.setState({ visible: false });
       });
+      
     }
   
     saveFormRef = (formRef) => {
@@ -80,15 +68,15 @@ import {
   
     render() {
       return (
-        <div>
-          <Button type="primary" onClick={this.showModal}>New Collection</Button>
+        <span>
+          <Button type="primary" onClick={this.showModal}>添加项目</Button>
           <CollectionCreateForm
             wrappedComponentRef={this.saveFormRef}
             visible={this.state.visible}
             onCancel={this.handleCancel}
             onCreate={this.handleCreate}
           />
-        </div>
+        </span>
       );
     }
   }
