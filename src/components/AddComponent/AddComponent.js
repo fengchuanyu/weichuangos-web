@@ -14,9 +14,10 @@ import {
           curList:[]
         }
       }
-      componentWillReceiveProps(nextProps){
+      componentDidMount(){
+        console.log(this.props);
         this.setState({
-          curList:nextProps.newCur
+          curList:this.props.newCur
         })
       }
       render() {
@@ -41,6 +42,7 @@ import {
                 )}
               </Form.Item>
             </Form>
+            <AddListComponent TagList={this.state.curList}/>
           </Modal>
         );
       }
@@ -50,13 +52,8 @@ import {
   class AddComponent extends React.Component {
     state = {
       visible: false,
-      curList:[]
+      
     };
-    componentWillReceiveProps(nextProps){
-      this.setState({
-        curList:nextProps.newList
-      })
-    }
     showModal = () => {
       this.setState({ visible: true });
 
@@ -91,7 +88,7 @@ import {
             visible={this.state.visible}
             onCancel={this.handleCancel}
             onCreate={this.handleCreate}   
-            newCur={this.state.curList}         
+            newCur={this.props.newList}         
           />
         </span>
       );
