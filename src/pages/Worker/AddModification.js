@@ -15,7 +15,7 @@ export default class AddModification extends Component {
   render() {
     return (
       <div>
-        <FormList></FormList>
+        <FormList />
       </div>
     );
   }

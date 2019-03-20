@@ -4,7 +4,7 @@
  * @Description:隶属部门选择
  * @Date: 2019-03-20 15:16:22
  * @LastEditTime: 2019-03-20 17:05:08
- * label值不能相同 
+ * label值不能相同
  */
 
 import { Select, Cascader } from 'antd';
