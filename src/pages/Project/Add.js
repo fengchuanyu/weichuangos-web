@@ -6,6 +6,7 @@ import InputNumberComponent from '@/components/AddComponent/InputNumberComponent
 import SelectComponent from '@/components/AddComponent/SelectComponent';//技术栈
 import OtherdocumentsComponent from '@/components/AddComponent/OtherdocumentsComponent';//其他文件
 import ProgressIntroductionConponent from '@/components/AddComponent/ProgressIntroductionConponent';//项目介绍
+import ButtonComponent from '@/components/AddComponent/ButtonComponent';//确认取消按钮
 export default class Add extends Component {
   render() {
     return (
@@ -17,6 +18,7 @@ export default class Add extends Component {
         技术栈:<SelectComponent />
         其他文件：<OtherdocumentsComponent/>
         项目介绍：<ProgressIntroductionConponent/>
+        <ButtonComponent/>
         </div>
       </PageHeaderWrapper>
     )
