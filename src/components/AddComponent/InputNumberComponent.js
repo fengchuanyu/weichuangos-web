@@ -4,7 +4,9 @@ export default class InputNameComponent extends Component {
   render() {
     return (
       <div>
-        <Input placeholder="请输入项目编号" />
+        <Input placeholder="请输入项目编号"
+        style={{ width: 467 }}
+          />
       </div>
     )
   }

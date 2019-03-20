@@ -35,7 +35,7 @@ import {
             <Form layout="vertical">
               <Form.Item label="项目类别">
                 {getFieldDecorator('title', {
-                  rules: [{ required: true, message: 'Please input the type of project!' }],
+                  rules: [{ required: true, message: '请输入项目名称！' }],
                 })(
                   <Input />
                 )}
