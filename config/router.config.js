@@ -20,7 +20,7 @@ export default [
     component: '../layouts/BasicLayout',
     Routes: ['src/pages/Authorized'],
     routes: [
-
+      { path: '/', redirect: '/project/add' }, //这是首页
       {
         path: '/project', //一级目录
         icon: 'project',
