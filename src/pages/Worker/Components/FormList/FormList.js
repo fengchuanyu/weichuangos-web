@@ -1,3 +1,11 @@
+/*
+ * @Author: Why-WU
+ * @LastEditors: Why-WU
+ * @Description: 这是OA员工管理中“增加/删除”的表单组件
+ * @Date: 2019-03-19 22:48:25
+ * @LastEditTime: 2019-03-20 16:54:00
+ */
+
 import {
   Form,
   Input,
@@ -11,46 +19,22 @@ import {
   Button,
   AutoComplete,
 } from 'antd';
+import React, { Component } from 'react';
+import { InputNumber } from 'antd';
+import { DatePicker } from 'antd';
+import moment from 'moment';
+import HomeAdd from '@/pages/Worker/Components/HomeAdd/HomeAdd'; //家庭住址
+import JobSelection from '@/pages/Worker/Components/JobSelection/JobSelection'; //岗位选择
+import Departments from '../Departments/Departments';
 
 const { Option } = Select;
 const AutoCompleteOption = AutoComplete.Option;
 
-const residences = [
-  {
-    value: 'zhejiang',
-    label: 'Zhejiang',
-    children: [
-      {
-        value: 'hangzhou',
-        label: 'Hangzhou',
-        children: [
-          {
-            value: 'xihu',
-            label: 'West Lake',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'jiangsu',
-    label: 'Jiangsu',
-    children: [
-      {
-        value: 'nanjing',
-        label: 'Nanjing',
-        children: [
-          {
-            value: 'zhonghuamen',
-            label: 'Zhong Hua Men',
-          },
-        ],
-      },
-    ],
-  },
-];
+//出生日期
+const { MonthPicker, RangePicker } = DatePicker;
+const dateFormat = 'YYYY/MM/DD';
 
-class RegistrationForm extends React.Component {
+class FormList extends React.Component {
   state = {
     confirmDirty: false,
     autoCompleteResult: [],
@@ -70,29 +54,29 @@ class RegistrationForm extends React.Component {
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
   };
 
-  compareToFirstPassword = (rule, value, callback) => {
+  /* compareToFirstPassword = (rule, value, callback) => {
     const form = this.props.form;
     if (value && value !== form.getFieldValue('password')) {
       callback('Two passwords that you enter is inconsistent!');
     } else {
       callback();
     }
-  };
+  }; */
 
-  validateToNextPassword = (rule, value, callback) => {
+  /* validateToNextPassword = (rule, value, callback) => {
     const form = this.props.form;
     if (value && this.state.confirmDirty) {
       form.validateFields(['confirm'], { force: true });
     }
     callback();
-  };
+  }; */
 
   handleWebsiteChange = value => {
     let autoCompleteResult;
     if (!value) {
       autoCompleteResult = [];
     } else {
-      autoCompleteResult = ['.com', '.org', '.net'].map(domain => `${value}${domain}`);
+      autoCompleteResult = [].map(domain => `${value}${domain}`);
     }
     this.setState({ autoCompleteResult });
   };
@@ -138,34 +122,53 @@ class RegistrationForm extends React.Component {
 
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-        <Form.Item label="E-mail">
-          {getFieldDecorator('email', {
+        <Form.Item label="姓名">
+          {getFieldDecorator('name', {
             rules: [
               {
-                type: 'email',
-                message: 'The input is not valid E-mail!',
-              },
-              {
                 required: true,
-                message: 'Please input your E-mail!',
+                message: '请输入您的姓名！',
               },
             ],
           })(<Input />)}
         </Form.Item>
-        <Form.Item label="Password">
-          {getFieldDecorator('password', {
+        <Form.Item label="性别">
+          {getFieldDecorator('sex', {
             rules: [
               {
                 required: true,
-                message: 'Please input your password!',
+                message: '请输入您的性别',
               },
-              {
+              /* {
                 validator: this.validateToNextPassword,
+              }, */
+            ],
+          })(<Input type="sex" />)}
+        </Form.Item>
+        <Form.Item label="年龄">
+          {getFieldDecorator('age', {
+            rules: [
+              {
+                required: true,
+                message: '请选择您的年龄',
               },
             ],
-          })(<Input type="password" />)}
+          })(<InputNumber min={1} max={100} />) //年龄控制大于1小于100
+          }
         </Form.Item>
-        <Form.Item label="Confirm Password">
+
+        <Form.Item label="岗位">
+          {getFieldDecorator('job', {
+            rules: [
+              {
+                required: true,
+                message: '请选择您的岗位',
+              },
+            ],
+          })(<JobSelection />)}
+        </Form.Item>
+
+        {/* <Form.Item label="Confirm Password">
           {getFieldDecorator('confirm', {
             rules: [
               {
@@ -177,8 +180,8 @@ class RegistrationForm extends React.Component {
               },
             ],
           })(<Input type="password" onBlur={this.handleConfirmBlur} />)}
-        </Form.Item>
-        <Form.Item
+        </Form.Item> */}
+        {/* <Form.Item
           label={
             <span>
               Nickname&nbsp;
@@ -191,15 +194,87 @@ class RegistrationForm extends React.Component {
           {getFieldDecorator('nickname', {
             rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
           })(<Input />)}
+        </Form.Item> */}
+        <Form.Item label="身份证号">
+          {getFieldDecorator('card', {
+            rules: [
+              {
+                required: true,
+                message: '请输入您的身份证号码',
+              },
+            ],
+          })(<Input type="card" />)}
         </Form.Item>
-        <Form.Item label="Habitual Residence">
+        {/* <Form.Item label="年龄">
+          {getFieldDecorator('age', {
+            rules: [
+              {
+                required: true,
+                message: '请选择您的年龄',
+              },
+            ],
+          })(<Input type="card" />)}
+        </Form.Item> */}
+
+        {/*  <Form.Item label="Habitual Residence">
           {getFieldDecorator('residence', {
             initialValue: ['zhejiang', 'hangzhou', 'xihu'],
             rules: [
               { type: 'array', required: true, message: 'Please select your habitual residence!' },
             ],
           })(<Cascader options={residences} />)}
+        </Form.Item> */}
+        <Form.Item label="出生日期">
+          {getFieldDecorator('data', {
+            rules: [
+              {
+                required: true,
+                message: '请选择您的出生日期',
+              },
+            ],
+          })(
+            <div>
+              <DatePicker defaultValue={moment('2015/01/01', dateFormat)} format={dateFormat} />
+            </div>
+          )}
         </Form.Item>
+
+        <Form.Item
+          label={
+            <span>
+              家庭住址&nbsp;
+              <Tooltip title="详细到门牌号">
+                <Icon type="question-circle-o" />
+              </Tooltip>
+            </span>
+          }
+        >
+          {getFieldDecorator('homeadd', {
+            rules: [
+              {
+                required: true,
+                message: '请填写您的家庭住址',
+                whitespace: true,
+              },
+            ],
+          })(<HomeAdd />)}
+        </Form.Item>
+
+        <Form.Item label="隶属部门">
+          {getFieldDecorator('departments', {
+            rules: [
+              {
+                required: true,
+                message: '请选择您的部门',
+              },
+            ],
+          })(<Departments />)}
+        </Form.Item>
+
+        <Form.Item label="员工编号">
+          <Number />
+        </Form.Item>
+
         <Form.Item label="Phone Number">
           {getFieldDecorator('phone', {
             rules: [{ required: true, message: 'Please input your phone number!' }],
@@ -249,6 +324,6 @@ class RegistrationForm extends React.Component {
   }
 }
 
-const WrappedRegistrationForm = Form.create({ name: 'register' })(RegistrationForm);
+const WrappedRegistrationForm = Form.create({ name: 'register' })(FormList);
 
-ReactDOM.render(<WrappedRegistrationForm />, mountNode);
+export default WrappedRegistrationForm;
