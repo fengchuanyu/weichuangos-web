@@ -27,12 +27,23 @@ export default [
         name: 'project',
         routes: [
           {
-            path: '/project/add',//二级目录
+            path: '/project/add',//二级目录项目编辑
             name: 'add',
             icon: 'setting',
             component: './project/add',
           },
-          
+          {
+            path: '/project/list',//二级目录列表
+            name: 'list',
+            icon: 'ordered-list',
+            component: './project/list',
+          },
+          {
+            path: '/project/projectteam',//二级目录项目组
+            name: 'projectteam',
+            icon: 'team',
+            component: './project/projectteam',
+          },
         ],
       },
       {

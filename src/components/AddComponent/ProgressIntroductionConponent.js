@@ -1,13 +1,38 @@
-import React, { Component } from 'react'
-import { Input } from 'antd';
-const { TextArea } = Input;
+import 'braft-editor/dist/index.css'
+import React from 'react'
+import BraftEditor from 'braft-editor'
 
-export default class ProgressIntroductionConponent extends Component {
-  render() {
+export default class ProgressIntroductionConponent extends React.Component {
+
+  state = {
+    editorState: BraftEditor.createEditorState(null)
+  }
+
+  
+  render () {
+    var styleInput = {
+      height: '200px' ,
+      background:'#ffffff',
+    }
+    var styleTool = {
+      background:'#ffffff',    
+      height:'100px'
+    }
+    // var styleEditor = {
+    //   width:'468px',
+    // }
     return (
-      <div>
-        <TextArea rows={4} />
-      </div>
+      <BraftEditor 
+      // style = {styleEditor}
+      controlBarStyle = {styleTool}
+      contentStyle={styleInput} 
+      value={this.state.editorStste} 
+      onChange={this.handleChange}/>
     )
   }
+
+  handleChange = (editorStste) => {
+    this.setState({ editorStste })
+  }
+
 }
