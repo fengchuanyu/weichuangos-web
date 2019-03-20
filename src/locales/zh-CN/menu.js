@@ -44,6 +44,8 @@ export default {
   'menu.project.add': '项目编辑',
   'menu.project.list': '列表',
   'menu.project.projectteam': '项目组',
+  'menu.worker':'OA员工管理',
+  'menu.worker.addmodification':'增加/删除'
 
 
 };
