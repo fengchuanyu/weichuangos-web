@@ -42,6 +42,8 @@ export default {
   // -----------------咱们的代码------------------------------------------------
   'menu.project': '项目',
   'menu.project.add': '项目编辑',
+  'menu.project.list': '列表',
+  'menu.project.projectteam': '项目组',
 
 
 };
