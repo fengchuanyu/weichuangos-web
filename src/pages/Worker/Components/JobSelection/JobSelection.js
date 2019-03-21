@@ -3,7 +3,7 @@
  * @LastEditors: Why-WU
  * @Description:岗位选择
  * @Date: 2019-03-20 15:16:22
- * @LastEditTime: 2019-03-20 16:31:02
+ * @LastEditTime: 2019-03-22 01:44:36
  * label值不能相同
  */
 
@@ -49,7 +49,7 @@ class JobSelection extends React.Component {
   render() {
     return (
       <div>
-        <Cascader style={{ width: '30%' }} options={options} placeholder="选择岗位" />
+        <Cascader style={{ width: '30%' }} options={options} placeholder="选择岗位"  />
       </div>
     );
   }

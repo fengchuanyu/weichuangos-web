@@ -47,6 +47,25 @@ export default [
         ],
       },
       {
+        path:'/worker',
+        icon:'project',
+        name:'worker',
+        routes:[
+          {
+            path:'/worker/addmodification',
+            name:'addmodification',
+            icon:'setting',
+            component:'./worker/addmodification'
+          },
+          {
+            path:'/worker/workerlist',
+            name:'workerlist',
+            icon:'setting',
+            component:'./worker/workerlist'
+          }
+        ]
+      },
+      {
         component: '404',
       },
     ],
