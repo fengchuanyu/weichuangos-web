@@ -4,6 +4,7 @@ import AddListComponent from '@/components/AddComponent/AddListComponent'
 import {
     Button, Modal, Form, Input, Radio,
   } from 'antd';
+import { runInThisContext } from 'vm';
   
   const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
     // eslint-disable-next-line
@@ -15,10 +16,20 @@ import {
         }
       }
       componentDidMount(){
-        console.log(this.props);
+        console.log(this.props.newCur);
+        
         this.setState({
           curList:this.props.newCur
         })
+      }
+      setActive(item){
+        this.props.Active(item);
+      }
+      setItem(item,value){
+        this.props.Item(item,value)
+      }
+      del(item){
+        this.props.Del(item)
       }
       render() {
         const {
@@ -42,7 +53,7 @@ import {
                 )}
               </Form.Item>
             </Form>
-            <AddListComponent TagList={this.state.curList}/>
+            <AddListComponent TagList={this.state.curList} Active={this.setActive.bind(this)} Item={this.setItem.bind(this)} Del={this.del.bind(this)}/>
           </Modal>
         );
       }
@@ -77,7 +88,15 @@ import {
     saveFormRef = (formRef) => {
       this.formRef = formRef;
     }
-  
+    setActive(item){
+      this.props.Active(item);
+    }
+    setItem(item,value){
+      this.props.Item(item,value);
+    }
+    del(item){
+      this.props.Del(item);
+    }
     render() {
 
       return (
@@ -88,7 +107,10 @@ import {
             visible={this.state.visible}
             onCancel={this.handleCancel}
             onCreate={this.handleCreate}   
-            newCur={this.props.newList}         
+            newCur={this.props.newList} 
+            Active={this.setActive.bind(this)}   
+            Item={this.setItem.bind(this)}
+            Del={this.del.bind(this)}
           />
         </span>
       );
