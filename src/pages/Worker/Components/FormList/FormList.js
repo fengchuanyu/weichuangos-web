@@ -3,7 +3,7 @@
  * @LastEditors: Why-WU
  * @Description: 这是OA员工管理中“增加/删除”的表单组件
  * @Date: 2019-03-19 22:48:25
- * @LastEditTime: 2019-03-22 02:36:34
+ * @LastEditTime: 2019-03-22 10:21:11
  */
 
 import {
@@ -26,7 +26,8 @@ import moment from 'moment';
 import HomeAdd from '@/pages/Worker/Components/HomeAdd/HomeAdd'; //家庭住址
 import JobSelection from '@/pages/Worker/Components/JobSelection/JobSelection'; //岗位选择
 import Departments from '../Departments/Departments'; //部门
-import Card from '../Card/Card';
+import PhotoUpload from '@/pages/Worker/Components/PhotoUpload/PhotoUpload';
+import { relative } from 'path';
 
 const { Option } = Select;
 const AutoCompleteOption = AutoComplete.Option;
@@ -100,6 +101,12 @@ class FormList extends React.Component {
             ],
           })(<Input style={{ width: '30%' }} />)}
         </Form.Item>
+
+        <Form.Item style={{ position: 'absolute', top: 20 + '%', left: 80 + '%' }}>
+          <PhotoUpload/>
+          (照片大小不能超过200M)
+        </Form.Item>
+
         <Form.Item label="性别">
           <Cascader style={{ width: '30%' }} options={sex} placeholder="性别" />
         </Form.Item>
@@ -128,7 +135,7 @@ class FormList extends React.Component {
                 message: '请输入正确的身份证号码',
               },
             ],
-          })(<Input placeholder="请输入身份证号码" />)}
+          })(<Input placeholder="请输入身份证号码" style={{ width: '30%' }} />)}
         </Form.Item>
 
         <Form.Item label="出生日期">
