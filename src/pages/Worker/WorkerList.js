@@ -417,11 +417,11 @@ class TableList extends PureComponent {
           payload: {
             key: selectedRows.map(row => row.key),
           },
-          callback: () => {
-            this.setState({
-              selectedRows: [],
-            });
-          },
+          // callback: () => {
+          //   this.setState({
+          //     selectedRows: [],
+          //   });
+          // },
         });
         break;
       default:
