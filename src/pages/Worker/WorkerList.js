@@ -25,7 +25,7 @@ import {
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
-import styles from './TableList.less';
+import styles from './Components/WorkerList.less';
 
 const FormItem = Form.Item;
 const { Step } = Steps;
@@ -686,5 +686,4 @@ class TableList extends PureComponent {
     );
   }
 }
-
 export default TableList;
