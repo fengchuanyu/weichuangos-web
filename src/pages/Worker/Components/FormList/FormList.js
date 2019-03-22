@@ -3,7 +3,7 @@
  * @LastEditors: Why-WU
  * @Description: 这是OA员工管理中“增加/删除”的表单组件
  * @Date: 2019-03-19 22:48:25
- * @LastEditTime: 2019-03-22 10:21:11
+ * @LastEditTime: 2019-03-22 13:37:59
  */
 
 import {
@@ -26,7 +26,8 @@ import moment from 'moment';
 import HomeAdd from '@/pages/Worker/Components/HomeAdd/HomeAdd'; //家庭住址
 import JobSelection from '@/pages/Worker/Components/JobSelection/JobSelection'; //岗位选择
 import Departments from '../Departments/Departments'; //部门
-import PhotoUpload from '@/pages/Worker/Components/PhotoUpload/PhotoUpload';
+import PhotoUpload from '@/pages/Worker/Components/PhotoUpload/PhotoUpload'; //图片上传
+import Number from '@/pages/Worker/Components/Number/Number'
 import { relative } from 'path';
 
 const { Option } = Select;
