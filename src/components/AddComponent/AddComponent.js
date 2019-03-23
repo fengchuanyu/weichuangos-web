@@ -22,6 +22,13 @@ import { runInThisContext } from 'vm';
           curList:this.props.newCur
         })
       }
+      componentWillReceiveProps(nextProps){
+        console.log(nextProps);
+        this.setState({
+          curList:nextProps.newCur
+        })
+        
+      }
       setActive(item){
         this.props.Active(item);
       }
