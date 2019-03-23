@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import InputSelectComponent from '@/components/AddComponent/InputSelectComponent';
 import AddComponent from '@/components/AddComponent/AddComponent'
+import ChangeComponent from '@/components/AddComponent/ChangeComponent'
 export default class ProjectType extends Component {
   constructor(props){
     super(props);
@@ -52,16 +53,13 @@ export default class ProjectType extends Component {
         })
     this.setState({
       list:temp
-    },()=>{
-      console.log(this.state.list);
-      
     })
   }
   render() {
     return (
       <div>
         <InputSelectComponent newValues={this.state.list}/>
-        <AddComponent getValues={this.getValue} newList={this.state.list} Active={this.setActive.bind(this)} Item={this.setItem.bind(this)} Del={this.del.bind(this)}/> 
+        <AddComponent getValues={this.getValue}  newList={this.state.list} Active={this.setActive.bind(this)} Item={this.setItem.bind(this)} Del={this.del.bind(this)}/>
       </div>
     )
   }

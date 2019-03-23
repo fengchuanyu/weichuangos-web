@@ -11,33 +11,9 @@ import { runInThisContext } from 'vm';
     class extends React.Component {
       constructor(props){
         super(props);
-        this.state={
-          curList:[]
-        }
-      }
-      componentDidMount(){
-        console.log(this.props.newCur);
-        
-        this.setState({
-          curList:this.props.newCur
-        })
-      }
-      componentWillReceiveProps(nextProps){
-        console.log(nextProps);
-        this.setState({
-          curList:nextProps.newCur
-        })
         
       }
-      setActive(item){
-        this.props.Active(item);
-      }
-      setItem(item,value){
-        this.props.Item(item,value)
-      }
-      del(item){
-        this.props.Del(item)
-      }
+      
       render() {
         const {
           visible, onCancel, onCreate, form,
@@ -46,21 +22,12 @@ import { runInThisContext } from 'vm';
         return (
           <Modal
             visible={visible}
-            title="添加项目"
+            title="修改项目"
             okText="Create"
             onCancel={onCancel}
-            onOk={onCreate}
+            // onOk={onCreate}
           >
-            <Form layout="vertical">
-              <Form.Item label="项目类别">
-                {getFieldDecorator('title', {
-                  rules: [{ required: true, message: '请输入项目名称！' }],
-                })(
-                  <Input />
-                )}
-              </Form.Item>
-            </Form>
-            <AddListComponent TagList={this.state.curList} Active={this.setActive.bind(this)} Item={this.setItem.bind(this)} Del={this.del.bind(this)}/>
+            
           </Modal>
         );
       }
@@ -89,35 +56,23 @@ import { runInThisContext } from 'vm';
         }
         this.setState({ visible: false});
         form.resetFields();
-        this.props.getValues(values.title);      
       });
     }
     saveFormRef = (formRef) => {
       this.formRef = formRef;
     }
-    setActive(item){
-      this.props.Active(item);
-    }
-    setItem(item,value){
-      this.props.Item(item,value);
-    }
-    del(item){
-      this.props.Del(item);
-    }
+    
     render() {
 
       return (
         <span>
-          <Button type="primary" onClick={this.showModal}>添加项目</Button>
+          <Button type="primary" onClick={this.showModal}>修改项目</Button>
           <CollectionCreateForm
             wrappedComponentRef={this.saveFormRef}
             visible={this.state.visible}
             onCancel={this.handleCancel}
-            onCreate={this.handleCreate}   
-            newCur={this.props.newList} 
-            Active={this.setActive.bind(this)}   
-            Item={this.setItem.bind(this)}
-            Del={this.del.bind(this)}
+            // onCreate={this.handleCreate}   
+            
           />
         </span>
       );
