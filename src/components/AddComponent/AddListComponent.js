@@ -3,14 +3,25 @@ import { List, Typography } from 'antd';
 import { Button } from 'antd';
 import { Tag } from 'antd';
 import styles from './AddList.less'
-import {Form, Input} from 'antd';
-export default class AddListComponent extends Component {
+import {Form, Input,Checkbox,} from 'antd';
+const AddListComponent = Form.create({ name: 'form_in_modal' })(
+ class  extends Component {
   constructor(props){
     super(props);
     this.state = {
         list:[],
-        value:""
+        value:"",
+        checkNick: false,
     }
+}
+handleSubmit = (item,value,e) => {
+  this.props.form.validateFields((err, values) => {
+    if (err) {
+      return;
+    }else{
+      this.props.Item(item,value);
+    }
+  });
 }
 componentDidMount(){
   this.setState({
@@ -26,24 +37,35 @@ setActive(item){
   this.props.Active(item);
 }
 changeValue=(item,e)=>{
-  if(e.target.value==item.title){
+  if(e.target.value==''){
+    console.log(e.target.value);
     this.setState({
       value:item.title
     }) 
   }else{
+    console.log(e.target.value);
     this.setState({
       value:e.target.value
     })  
   }
 }
 setItem(item,value){
-  this.props.Item(item,value)
+  if(value==item.title){
+    this.props.Item(item,item.title);
+  }else{
+    this.props.Item(item,value);
+  }
+  
 }
 del(item){
   
   this.props.Del(item);
 }
   render() {
+    const {
+      visible, onCancel, onCreate, form,
+    } = this.props;
+    const { getFieldDecorator } = form;
     return (
       <div>
         <List
@@ -52,11 +74,28 @@ del(item){
           dataSource={this.state.list}
           renderItem={item => (<List.Item className={styles.listItem}  key={item.id}>
             <div className={item.isActive?styles.none:styles.active}><Tag color="#108ee9">{item.title}</Tag><Button color="#1890ff" onClick={()=>this.setActive(item)}>修改</Button><Button type="danger" onClick={()=>this.del(item)}>删除</Button></div>
-            <div className={item.isActive?styles.active:styles.addList}><Input type="text" onChange={this.changeValue.bind(this,item)} /><Button color="#1890ff" icon="check"  shape="circle" onClick={()=>this.setItem(item,this.state.value)} className={styles.inline}></Button></div>
+            <div className={item.isActive?styles.active:styles.addList} zIndex="99999">
+            <Form>
+              <Form.Item>
+                {getFieldDecorator('note', {
+                  rules: [{ required: true, message: '项目名称不能为空' }],
+                })(
+                  <Input type="text"  onChange={this.changeValue.bind(this,item)} />
+                )}
+              </Form.Item>
+              <Form.Item>
+                <Button type="primary" htmlType="submit" color="#1890ff" icon="check"  shape="circle" onClick={()=>this.handleSubmit(item,this.state.value)} className={styles.inline}></Button>
+              </Form.Item>
+            </Form>
+            </div>
           </List.Item>)}
-
+          
         />
       </div>
     )
   }
 }
+
+);
+export default AddListComponent;
+
