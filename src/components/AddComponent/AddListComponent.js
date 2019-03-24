@@ -38,24 +38,14 @@ setActive(item){
 }
 changeValue=(item,e)=>{
   if(e.target.value==''){
-    console.log(e.target.value);
     this.setState({
       value:item.title
     }) 
   }else{
-    console.log(e.target.value);
     this.setState({
       value:e.target.value
     })  
   }
-}
-setItem(item,value){
-  if(value==item.title){
-    this.props.Item(item,item.title);
-  }else{
-    this.props.Item(item,value);
-  }
-  
 }
 del(item){
   
@@ -74,7 +64,7 @@ del(item){
           dataSource={this.state.list}
           renderItem={item => (<List.Item className={styles.listItem}  key={item.id}>
             <div className={item.isActive?styles.none:styles.active}><Tag color="#108ee9">{item.title}</Tag><Button color="#1890ff" onClick={()=>this.setActive(item)}>修改</Button><Button type="danger" onClick={()=>this.del(item)}>删除</Button></div>
-            <div className={item.isActive?styles.active:styles.addList} zIndex="99999">
+            <div className={item.isActive?styles.listActive:styles.addList}>
             <Form>
               <Form.Item>
                 {getFieldDecorator('note', {
