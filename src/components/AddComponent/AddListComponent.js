@@ -14,7 +14,7 @@ const AddListComponent = Form.create({ name: 'form_in_modal' })(
         checkNick: false,
     }
 }
-handleSubmit = (item,value,e) => {
+handleSubmit = (item,value) => {
   this.props.form.validateFields((err, values) => {
     if (err) {
       return;
