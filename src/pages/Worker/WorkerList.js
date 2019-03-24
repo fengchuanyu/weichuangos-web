@@ -22,8 +22,8 @@ import {
   Steps,
   Radio,
 } from 'antd';
-import StandardTable from '@/components/StandardTable';
-import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import StandardTable from '../../components/StandardTable';
+import PageHeaderWrapper from '../../components/PageHeaderWrapper';
 
 import styles from './Components/WorkerList.less';
 
@@ -417,11 +417,11 @@ class TableList extends PureComponent {
           payload: {
             key: selectedRows.map(row => row.key),
           },
-          // callback: () => {
-          //   this.setState({
-          //     selectedRows: [],
-          //   });
-          // },
+          callback: () => {
+            this.setState({
+              selectedRows: [],
+            });
+          },
         });
         break;
       default:
@@ -512,7 +512,7 @@ class TableList extends PureComponent {
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
-            <FormItem label="规则名称">
+            <FormItem label="">
               {getFieldDecorator('name')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
@@ -522,7 +522,7 @@ class TableList extends PureComponent {
               </Button>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="使用状态">
+            <FormItem label="">
               {getFieldDecorator('status')(
                 <Select placeholder="请选择" style={{ width: '100%' }}>
                   <Option value="0">关闭</Option>
@@ -624,7 +624,7 @@ class TableList extends PureComponent {
 
   render() {
     const {
-      rule: { data },
+      // rule: { data },
       loading,
     } = this.props;
     const { selectedRows, modalVisible, updateModalVisible, stepFormValues } = this.state;
@@ -666,7 +666,7 @@ class TableList extends PureComponent {
             <StandardTable
               selectedRows={selectedRows}
               loading={loading}
-              data={data}
+              // data={data}
               columns={this.columns}
               onSelectRow={this.handleSelectRows}
               onChange={this.handleStandardTableChange}
