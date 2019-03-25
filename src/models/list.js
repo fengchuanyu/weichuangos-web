@@ -3,7 +3,7 @@ import { queryFakeList, removeFakeList, addFakeList, updateFakeList } from '@/se
 export default {
   namespace: 'list',
 
-  state: {
+  state: { 
     list: [],
   },
 

@@ -6,7 +6,7 @@ export default {
   state: {
     notice: [],
   },
-
+ 
   effects: {
     *fetchNotice(_, { call, put }) {
       const response = yield call(queryProjectNotice);

@@ -1,4 +1,4 @@
-// 本页面随意修改
+
 import React, { Component } from 'react'
 import {
   Upload, message, Button, Icon,
