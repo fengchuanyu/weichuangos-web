@@ -56,7 +56,8 @@ export default class ProjectType extends Component {
   }
   render() {
     return (
-      <div>
+      <div style={{ marginLeft:25.4+'%',marginBottom:15}}>
+        项目分类：
         <InputSelectComponent newValues={this.state.list}/>
         <AddComponent getValues={this.getValue}  newList={this.state.list} Active={this.setActive.bind(this)} Item={this.setItem.bind(this)} Del={this.del.bind(this)}/>
       </div>

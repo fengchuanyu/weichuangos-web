@@ -15,8 +15,8 @@ export default class InputNameComponent extends Component {
   render() {
     
     return (
-      <div>
-        <Input placeholder="请输入项目编号"
+      <div style={{ marginLeft:25.4+'%',marginBottom:15}}>
+        项目编号：<Input placeholder="请输入项目编号"
         style={{ width: 467 }}
         onChange = {this.inputNum}
           />

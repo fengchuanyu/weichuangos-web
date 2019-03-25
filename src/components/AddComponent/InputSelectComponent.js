@@ -48,7 +48,7 @@ export default class InputSelectComponent extends Component {
       <span>
         <Select
           showSearch
-          style={{ width: 200 }}
+          style={{ width: 380 }}
           placeholder="微信小程序"
           optionFilterProp="children"
           onChange={handleChange}
