@@ -33,12 +33,12 @@ export default class CardComponent extends Component {
             <List
             size="small"
             bordered
-            style={{height: 930}}
+            style={{height: 950}}
             dataSource={datas}
             renderItem={data=> (
             <List.Item key={data.id} className={styles.card}>
               <Card
-                style={{ width: 260,marginLeft:15,marginRight:15 }}
+                style={{ width: 260,marginLeft:10,marginRight:10 }}
                 actions={[<ModalComponent  NowData={this.state.nowData} onClick={this.content.bind(this,data)}/>]}
               >
                 <List
