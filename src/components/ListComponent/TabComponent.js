@@ -2,16 +2,25 @@ import React, { Component } from 'react'
 import { Tabs } from 'antd';
 const TabPane = Tabs.TabPane;
 import FormItemComponent from '@/components/ListComponent/FormItemComponent';
+import styles from './TabComponent.less';
 
-function callback(key) {
-  console.log(key);
-}
 
 export default class TabComponent extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      active:styles.active,
+      none:styles.none
+  }
+  }
   render() {
     return (
+
       <div>
-        <Tabs defaultActiveKey="1" onChange={callback}>
+        <div>
+          <span className={this.state.active}>进行中</span>/<span className={this.state.none}>仓库</span>
+        </div>
+        <Tabs defaultActiveKey="1" >
           <TabPane tab="进行中的任务" key="1">
           <FormItemComponent/>
           </TabPane>
