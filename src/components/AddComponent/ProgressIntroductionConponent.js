@@ -1,38 +1,27 @@
-import 'braft-editor/dist/index.css'
-import React from 'react'
-import BraftEditor from 'braft-editor'
+import ReactQuill from 'react-quill'; 
+import 'react-quill/dist/quill.snow.css';  
+import React from 'react';
+import { Button, notification, Card } from 'antd';
+
 
 export default class ProgressIntroductionConponent extends React.Component {
-
-  state = {
-    editorState: BraftEditor.createEditorState(null)
+  constructor(props) {
+    super(props)
+    this.state = { text: '' } 
+    this.handleChange = this.handleChange.bind(this)
   }
-
   
-  render () {
-    var styleInput = {
-      height: '200px' ,
-      background:'#ffffff',
-    }
-    var styleTool = {
-      background:'#ffffff',    
-      height:'100px'
-    }
-    // var styleEditor = {
-    //   width:'468px',
-    // }
+  handleChange(value) {
+    this.setState({ text: value })
+    console.log(value);
+  }
+  
+  render() {
     return (
-      <BraftEditor 
-      // style = {styleEditor}
-      controlBarStyle = {styleTool}
-      contentStyle={styleInput} 
-      value={this.state.editorStste} 
-      onChange={this.handleChange}/>
+      <ReactQuill value={this.state.text}
+                  onChange={this.handleChange} >
+                  {/* <div  className="my-editing-area"></div> */} 
+      </ReactQuill>
     )
   }
-
-  handleChange = (editorStste) => {
-    this.setState({ editorStste })
-  }
-
 }
