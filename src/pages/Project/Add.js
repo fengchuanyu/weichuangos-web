@@ -10,19 +10,16 @@ import ProgressIntroductionConponent from '@/components/AddComponent/ProgressInt
 import ButtonComponent from '@/components/AddComponent/ButtonComponent';//确认取消按钮
 export default class Add extends Component {
   render() {
-
-    
-
     return (
       <PageHeaderWrapper title="项目编辑">
         <div>
-        项目名称：<InputNameComponent/>
-        项目分类: <ProjectType/>
-        项目编号: <InputNumberComponent/>
-        技术栈:<SelectComponent />
-        其他文件：<OtherdocumentsComponent/>
-        项目介绍：<ProgressIntroductionConponent/>
-        <ButtonComponent/>
+          <InputNameComponent/>
+          <ProjectType/>
+          <InputNumberComponent/>
+          <SelectComponent />
+          <OtherdocumentsComponent/>
+          <ProgressIntroductionConponent/>
+          <ButtonComponent/>
         </div>
       </PageHeaderWrapper>
     )

@@ -10,13 +10,15 @@
 
 import React, { Component } from 'react';
 import FormList from '@/pages/Worker/Components/FormList/FormList';
-
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';//面包屑
 export default class AddModification extends Component {
   render() {
     return (
+      <PageHeaderWrapper title="增加/删除">
       <div>
         <FormList />
       </div>
+      </PageHeaderWrapper>
     );
   }
 }

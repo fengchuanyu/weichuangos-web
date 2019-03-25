@@ -26,10 +26,11 @@ const props = {
 export default class OtherdocumentsComponent extends Component {
   render() {
     return (
-      <div>
+      <div style={{ marginLeft:42+'%',marginBottom:15}}>
         <Upload {...props}>
+              上传文件：
               <Button>
-                  <Icon type="upload" /> 上传文件
+                  <Icon type="upload" />
               </Button>
         </Upload>
       </div>

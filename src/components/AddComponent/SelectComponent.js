@@ -36,10 +36,11 @@ class SelectComponent extends Component{
 
       render(){
           return(
-              <div id="testaa">
+              <div id="testaa" style={{ marginLeft:26.8+'%',marginBottom:15}}>
+              技术栈：
                   <Select
                     mode="multiple"
-                    style={{ width: '100%' }}
+                    style={{ width: 467 }}
                     placeholder="Please select"
                     defaultValue={['ES2015+']}
                     onChange={this.handleChange}
