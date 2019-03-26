@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Select } from 'antd';
 const Option = Select.Option;
 
@@ -14,35 +14,28 @@ function handleFocus() {
   console.log('focus');
 }
 
-
-
-
-
-
 export default class InputSelectComponent extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
-      option:[]
-    }
+    this.state = {
+      option: [],
+    };
   }
-  componentDidMount(){
+  componentDidMount() {
     this.setState({
-      option:this.props.newValues
-    })
+      option: this.props.newValues,
+    });
   }
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     this.setState({
-      option:nextProps.newValues
-    })
+      option: nextProps.newValues,
+    });
   }
-  
-  render() {
-    const children=[];
-    for (let i = 0; i < this.state.option.length; i++) {
 
+  render() {
+    const children = [];
+    for (let i = 0; i < this.state.option.length; i++) {
       children.push(<Option key={i.toString(36) + i}>{this.state.option[i].title}</Option>);
-      
     }
     return (
       <span>
@@ -54,11 +47,13 @@ export default class InputSelectComponent extends Component {
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+          filterOption={(input, option) =>
+            option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
         >
           {children}
         </Select>
       </span>
-    )
+    );
   }
 }
