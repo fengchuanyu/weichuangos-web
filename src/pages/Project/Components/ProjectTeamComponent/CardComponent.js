@@ -61,11 +61,11 @@ export default class CardComponent extends Component {
     }
     return (
       <div>
-        <span>
+        <span style={{position:'relative'}}>
           <span>
-            <span style={{ marginLeft: 390 }}>进行中的项目：</span>
+            <span style={{ position:'relative',top:-5,marginLeft: 350 }}>进行中的项目：</span>
             <Select defaultValue={this.state.nowValue?this.state.nowValue:"全部项目" }
-            style={{ width: 300 }} 
+            style={{ position:'absolute', left:450,top:-10 }} 
             onChange={this.handleChange.bind(this)}
             >
               {children}
@@ -90,25 +90,25 @@ export default class CardComponent extends Component {
           }
           }
               enterButton
-              style={{ width: 300, marginLeft: 90 }}
+              style={{ position:'absolute', left:680,width: 250,top:-10}}
             />
           </span>
         </span>
         <div style={{ background: '#ECECEC', padding: '30px' }}>
           <List
             size="small"
-            bordered
-            style={{height: 930}}
+            bordered={{width:1200}}
+            style={{height: 1050, width:1250}}
             dataSource={this.state.nowDatas}
             renderItem={data=> (
             <List.Item key={data.id} className={styles.card}>
               <Card
-                style={{ width: 260,marginLeft:15,marginRight:15 }}
-                actions={[<Button type="primary" onClick={this.showModal.bind(this,data.data)}>查看详情</Button>]}
+                style={{height:300,width: 363,marginLeft:1,marginRight:1,marginBottom:10}}
+                actions={[<Button style={{bottom:2,height:35,width:300}} type="primary" onClick={this.showModal.bind(this,data.data)}>查看详情</Button>]}
               >
                 <List
                   size="small"
-                  bordered
+                  bordered={{width:400}}
                   dataSource={data.data}
                   renderItem={item => (<List.Item key={item.key}>{item.key}:{item.value}</List.Item>)}
                 />

@@ -12,7 +12,7 @@ export default class SelectComponent extends Component {
       <div>
         <span>
           <span>
-            <span style={{ marginLeft: 390 }}>进行中的项目：</span>
+            <span>进行中的项目：</span>
             <Select defaultValue="lucy" style={{ width: 300 }} onChange={handleChange}>
               <Option value="jack">正在进行的项目1</Option>
               <Option value="lucy">正在进行的项目2</Option>
