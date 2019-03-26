@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Modal, Button,List} from 'antd';
-const data=[{key:"组长:",value:"ehrthbt"},{key:"组员:",value:"htrhtr"},{key:"组内人数:",value:"htrhtr"},{key:"报选项目:",value:"htrhtr"},{key:"项目报选时间:",value:"htrhtr"}]
+const data=[{key:"组长",value:""},{key:"组员",value:""},{key:"组内人数",value:""},{key:"报选项目",value:""},{key:"项目报选时间",value:""}]
 export default class ModalComponent extends Component {
     constructor(props){
         super(props);
@@ -45,8 +45,8 @@ export default class ModalComponent extends Component {
 //   }
   render() {
     return (
-      <div>
-        <Button type="primary" onClick={this.showModal}>
+      <div style={{height:10}}>
+        <Button type="primary" onClick={this.showModal} style={{bottom:2,height:35,width:300}}>
           查看详情
         </Button>
         <Modal
