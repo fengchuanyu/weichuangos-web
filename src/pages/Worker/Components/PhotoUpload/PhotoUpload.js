@@ -3,7 +3,7 @@
  * @LastEditors: Why-WU
  * @Description: 用户头像上传
  * @Date: 2019-03-22 09:14:54
- * @LastEditTime: 2019-03-22 10:13:28
+ * @LastEditTime: 2019-03-26 09:06:08
  */
 
 
@@ -24,7 +24,7 @@ function beforeUpload(file) {
   if (!isLt200M) {
     message.error('图片不能大于200MB!');
   }
-  return isJPG && isLt2M;
+  return isJPG && isLt200M;
 }
 
 class Avatar extends React.Component {
