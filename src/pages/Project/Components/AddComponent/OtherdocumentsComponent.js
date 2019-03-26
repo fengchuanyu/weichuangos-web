@@ -1,8 +1,5 @@
-
-import React, { Component } from 'react'
-import {
-  Upload, message, Button, Icon,
-} from 'antd';
+import React, { Component } from 'react';
+import { Upload, message, Button, Icon } from 'antd';
 
 const props = {
   name: 'file',
@@ -12,7 +9,7 @@ const props = {
   },
   onChange(info) {
     if (info.file.status !== 'uploading') {
-      console.log(info.file.name);  // 文件名
+      console.log(info.file.name); // 文件名
       // console.log( info.fileList);
     }
     if (info.file.status === 'done') {
@@ -26,14 +23,14 @@ const props = {
 export default class OtherdocumentsComponent extends Component {
   render() {
     return (
-      <div style={{ marginLeft:42+'%',marginBottom:15}}>
+      <div style={{ marginLeft: 42 + '%', marginBottom: 15 }}>
         <Upload {...props}>
-              上传文件：
-              <Button>
-                  <Icon type="upload" />
-              </Button>
+          上传文件：
+          <Button>
+            <Icon type="upload" />
+          </Button>
         </Upload>
       </div>
-    )
+    );
   }
 }
