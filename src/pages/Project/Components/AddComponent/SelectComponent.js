@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import AddComponent from '@/components/AddComponent/AddComponent'
+import AddComponent from './AddComponent'
 import { Select } from 'antd';
 
 const Option = Select.Option;

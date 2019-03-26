@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import AddListComponent from '@/components/AddComponent/AddListComponent'
+import AddListComponent from './AddListComponent'
 import {
     Button, Modal, Form, Input, Radio,
   } from 'antd';

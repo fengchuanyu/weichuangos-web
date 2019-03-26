@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import InputSelectComponent from '@/components/AddComponent/InputSelectComponent';
-import AddComponent from '@/components/AddComponent/AddComponent'
+import InputSelectComponent from './InputSelectComponent';
+import AddComponent from './AddComponent'
 export default class ProjectType extends Component {
   constructor(props){
     super(props);
