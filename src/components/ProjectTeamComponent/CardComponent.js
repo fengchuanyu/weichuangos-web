@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Col, Row ,Avatar,Icon,List} from 'antd';
-import ModalComponent from './ModalComponent'
+import { Card, Col, Row ,Avatar,Icon,List,Button,Modal} from 'antd';
 import styles from './Card.less'
 const data=[{key:"组长:",value:"ehrthbt"},{key:"组员:",value:"htrhtr"},{key:"组内人数:",value:"htrhtr"},{key:"报选项目:",value:"htrhtr"},{key:"项目报选时间:",value:"htrhtr"}]
 const data1=[{key:"组长:",value:"gegvgrtn"},{key:"组员:",value:"gegvgrtn"},{key:"组内人数:",value:"gegvgrtn"},{key:"报选项目:",value:"gegvgrtn"},{key:"项目报选时间:",value:"gegvgrtn"}]
@@ -13,48 +12,70 @@ export default class CardComponent extends Component {
   constructor(props){
     super(props);
     this.state={
+      visible: false,
       nowData:[]
     }
   }
-  content(data){
-    console.log(123);
+  showModal = (data) => {
+    console.log(data);
     
     this.setState({
+      visible: true,
       nowData:data
-    })
+    });
+  }
+
+  handleOk = (e) => {
+    this.setState({
+      visible: false,
+      
+    });
+  }
+
+  handleCancel = (e) => {
+    this.setState({
+      visible: false,
+    });
   }
   render() {
-    const { Meta } = Card;
     return (
       <div>
         <div style={{ background: '#ECECEC', padding: '30px' }}>
-    
-      
-            <List
-            size="small"
-            bordered
-            style={{height: 930}}
-            dataSource={datas}
-            renderItem={data=> (
-            <List.Item key={data.id} className={styles.card}>
-              <Card
-                style={{ width: 260,marginLeft:15,marginRight:15 }}
-                actions={[<ModalComponent  NowData={this.state.nowData} onClick={this.content.bind(this,data)}/>]}
-              >
-                <List
-                  size="small"
-                  bordered
-                  dataSource={data.data}
-                  renderItem={item => (<List.Item key={item.key}>{item.key}:{item.value}</List.Item>)}
-                />
-              </Card>
-            </List.Item>
-            )}
-          />
-      
-       
-
-  </div>,
+        <List
+          size="small"
+          bordered
+          style={{height: 930}}
+          dataSource={datas}
+          renderItem={data=> (
+          <List.Item key={data.id} className={styles.card}>
+            <Card
+              style={{ width: 260,marginLeft:15,marginRight:15 }}
+              actions={[<Button type="primary" onClick={this.showModal.bind(this,data.data)}>查看详情</Button>]}
+            >
+              <List
+                size="small"
+                bordered
+                dataSource={data.data}
+                renderItem={item => (<List.Item key={item.key}>{item.key}:{item.value}</List.Item>)}
+              />
+            </Card>
+          </List.Item>
+          )}
+        />
+      </div>
+      <Modal
+          title="Basic Modal"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        >
+          <List
+                size="small"
+                bordered
+                dataSource={this.state.nowData}
+                renderItem={item => (<List.Item key={item.key}>{item.key}:{item.value}</List.Item>)}
+            />
+        </Modal>
       </div>
     )
   }
