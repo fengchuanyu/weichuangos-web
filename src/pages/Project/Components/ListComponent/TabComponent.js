@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Tabs } from 'antd';
 const TabPane = Tabs.TabPane;
-import FormItemComponent from '@/components/ListComponent/FormItemComponent';
+import FormItemComponent from './FormItemComponent';
 import styles from './TabComponent.less';
 
 
