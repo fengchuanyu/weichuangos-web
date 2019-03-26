@@ -3,12 +3,26 @@
  * @LastEditors: Why-WU
  * @Description: 生成员工编号
  * @Date: 2019-03-20 22:54:11
- * @LastEditTime: 2019-03-21 23:53:43
+ * @LastEditTime: 2019-03-26 11:10:27
  */
 
 
 import React, { Component } from 'react';
 import { Input } from 'antd';
+
+var num = createUUID(7, 10);
+function createUUID(len, radix) {
+    var chars = '0123456789'.split('');
+    var uuid = [], i;
+    radix = radix || chars.length;
+    if(len){
+      for (i = 0; i < len; i++){
+          uuid[i] = chars[0 | Math.random()*radix];
+      } 
+    }
+    return uuid.join('');
+}
+console.log('test'+num);
 
 
 class Number extends React.Component {

@@ -3,7 +3,7 @@
  * @LastEditors: Why-WU
  * @Description: 这是OA员工管理中“增加/删除”的表单组件
  * @Date: 2019-03-19 22:48:25
- * @LastEditTime: 2019-03-22 13:37:59
+ * @LastEditTime: 2019-03-26 09:37:31
  */
 
 import {
@@ -103,7 +103,7 @@ class FormList extends React.Component {
           })(<Input style={{ width: '30%' }} />)}
         </Form.Item>
 
-        <Form.Item style={{ position: 'absolute', top: 20 + '%', left: 80 + '%' }}>
+        <Form.Item style={{ position: 'absolute', top: 25 + '%', left: 80 + '%' }}>
           <PhotoUpload/>
           (照片大小不能超过200M)
         </Form.Item>
