@@ -8,11 +8,17 @@ import SelectComponent from './components/AddComponent/SelectComponent'; //技�
 import OtherdocumentsComponent from './components/AddComponent/OtherdocumentsComponent'; //上传文件
 import ProgressIntroductionConponent from './components/AddComponent/ProgressIntroductionConponent'; //项目介绍
 import ButtonComponent from './components/AddComponent/ButtonComponent'; //确认取消按钮
+import { Button } from 'antd';
+// import router from 'umi/router';//路由引用
 export default class Add extends Component {
+  // click(){
+  //   router.push('/project/list')
+  // } //路由跳转
   render() {
     return (
       <PageHeaderWrapper title="项目编辑">
         <div>
+          {/* <Button onClick={this.click.bind(this)}>OK</Button> */}
           <InputNameComponent />
           <ProjectType />
           <InputNumberComponent />
