@@ -40,8 +40,18 @@ export default class TabComponent extends Component {
           })
         )
       ),
+      nowText: '',
     };
   }
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      listData: nextProps.ListData,
+      nowData: nextProps.ListData,
+      storageData: nextProps.StorageData,
+      nowStorage: nextProps.StorageData,
+    });
+  }
+
   click(key) {
     if (key == 1) {
       this.setState({
@@ -83,32 +93,29 @@ export default class TabComponent extends Component {
       });
     }
   }
-  listShowModal = text => {
-    console.log(text);
-
+  showModal = text => {
     this.setState({
       visible: true,
+      nowText: text,
     });
   };
-
-  storageShowModal = text => {
-    console.log(text);
-
-    this.setState({
-      visible: true,
-    });
-  };
-  HandleOk = e => {
+  handleOk = e => {
     this.setState({
       visible: false,
     });
   };
 
-  HandleCancel = e => {
+  handleCancel = e => {
     this.setState({
       visible: false,
     });
   };
+  listDelList(text) {
+    this.props.listDel(text);
+  }
+  storageDelList(text) {
+    this.props.storageDel(text);
+  }
   render() {
     const listChildren = [];
     const storageChildren = [];
@@ -138,16 +145,14 @@ export default class TabComponent extends Component {
         key: 'action',
         render: (text, record) => (
           <span>
-            <Button type="primary" onClick={this.listShowModal.bind(this, text)}>
+            <Button type="primary" onClick={this.showModal.bind(this, text)}>
               查看详情
             </Button>
-            <div style={{ position: 'relative', left: 350, top: -15 }}>
-              <a href="javascript:;">修改{record.name}</a>
-              <Divider type="vertical" />
-              <a href="javascript:;" onClick={this.delListt}>
-                删除
-              </a>
-            </div>
+            <a href="javascript:;">修改{record.name}</a>
+            <Divider type="vertical" />
+            <a href="javascript:;" onClick={this.listDelList.bind(this, text)}>
+              删除
+            </a>
           </span>
         ),
       },
@@ -164,12 +169,12 @@ export default class TabComponent extends Component {
         key: 'action',
         render: (text, record) => (
           <span>
-            <Button type="primary" onClick={this.storageShowModal.bind(this, text)}>
+            <Button type="primary" onClick={this.showModal.bind(this, text)}>
               查看详情
             </Button>
             <a href="javascript:;">修改{record.name}</a>
             <Divider type="vertical" />
-            <a href="javascript:;" onClick={this.delListt}>
+            <a href="javascript:;" onClick={this.storageDelList.bind(this, text)}>
               删除
             </a>
           </span>
@@ -274,12 +279,7 @@ export default class TabComponent extends Component {
           onOk={this.handleOk}
           onCancel={this.handleCancel}
         >
-          {/* <List
-            size="small"
-            bordered
-            dataSource={this.state.storageData}
-            renderItem={item => (<List.Item>{item}</List.Item>)}
-          /> */}
+          <p>{this.state.nowText.title}</p>
         </Modal>
       </div>
     );
