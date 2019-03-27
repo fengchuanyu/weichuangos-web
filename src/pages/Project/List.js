@@ -92,11 +92,27 @@ export default class List extends Component {
       storageData: storageData,
     };
   }
+  listDel(text){
+    this.setState({
+      listData:this.state.listData.filter((item)=>{
+        return item.id!=text.id;
+      })
+    })
+    
+  }
+  storageDel(text){
+    this.setState({
+      storageData:this.state.storageData.filter((item)=>{
+        return item.id!=text.id;
+      })
+    })
+    
+  }
   render() {
     return (
       <PageHeaderWrapper title="列表">
         <div>
-          <TabComponent ListData={this.state.listData} StorageData={this.state.storageData} />
+          <TabComponent ListData={this.state.listData} StorageData={this.state.storageData} listDel={this.listDel.bind(this)} storageDel={this.storageDel.bind(this)}/>
         </div>
       </PageHeaderWrapper>
     );

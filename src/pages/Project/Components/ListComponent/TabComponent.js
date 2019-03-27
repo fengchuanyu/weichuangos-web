@@ -43,6 +43,15 @@ export default class TabComponent extends Component {
       nowText: '',
     };
   }
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      listData:nextProps.ListData,
+      nowData:nextProps.ListData,
+      storageData:nextProps.StorageData,
+      nowStorage:nextProps.StorageData,
+    })
+  }
+  
   click(key) {
     if (key == 1) {
       this.setState({
@@ -101,8 +110,12 @@ export default class TabComponent extends Component {
       visible: false,
     });
   };
-  delList(text) {
-    this.props.Del(text);
+  listDelList(text) {
+    this.props.listDel(text);
+  }
+  storageDelList(text) {
+    
+    this.props.storageDel(text);
   }
   render() {
     const listChildren = [];
@@ -138,7 +151,7 @@ export default class TabComponent extends Component {
             </Button>
             <a href="javascript:;">修改{record.name}</a>
             <Divider type="vertical" />
-            <a href="javascript:;" onClick={this.delList.bind(this, text)}>
+            <a href="javascript:;" onClick={this.listDelList.bind(this, text)}>
               删除
             </a>
           </span>
@@ -162,7 +175,7 @@ export default class TabComponent extends Component {
             </Button>
             <a href="javascript:;">修改{record.name}</a>
             <Divider type="vertical" />
-            <a href="javascript:;" onClick={this.delList.bind(this, text, record)}>
+            <a href="javascript:;" onClick={this.storageDelList.bind(this,text)}>
               删除
             </a>
           </span>
