@@ -1,51 +1,29 @@
 import React, { Component } from 'react';
-import { Tabs, Select, Input,} from 'antd';
-const TabPane = Tabs.TabPane;
-import FormItemComponent from './FormItemComponent';
+import { Tabs, Select, Input,Table, Divider, Tag, Modal,Button,Radio,List} from 'antd';
 import styles from './TabComponent.less';
-import { Button, Radio, Icon } from 'antd';
-import { List, Avatar } from 'antd';
 const Option = Select.Option;
 const Search = Input.Search;
-import { Table, Divider, Tag } from 'antd';
-function handleChange(value) {
-  console.log(`selected ${value}`);
-}
-/*  列表配置*/
-const columns = [{
-  dataIndex: 'name',
-  key: 'name',
-  
-},  {
-  key: 'action',
-  render: () => (
-    <span style={{ }}>
-      <a href="javascript:;">修改</a>
-      <Divider type="vertical" />
-      <a href="javascript:;">删除</a>
-    </span>
-  ),
-}];
-const data = [{
-  key: '1',
-  name: 'John Brown',
-}, {
-  key: '2',
-  name: 'Jim Green', 
-}, {
-  key: '3',
-  name: 'Joe Black',
-}];
-  /*  列表配置*/
+const TabPane = Tabs.TabPane;
 export default class TabComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       active: styles.active,
       none: styles.none,
-      value1: 10,
-      value2: 1000,
+      value1: this.props.ListData.length,
+      value2: this.props.StorageData.length,
       size: 'large',
+      visible: false,
+      listData:this.props.ListData,
+      nowData:this.props.ListData,
+      storageData:this.props.StorageData,
+      nowStorage:this.props.StorageData,
+      listType:Array.from(new Set(this.props.ListData.concat({title:"全部项目",id:this.props.ListData.length,isActive:false}).map((item)=>{
+        return item.title;
+      }))),
+      storageType:Array.from(new Set(this.props.StorageData.concat({title:"全部项目",id:this.props.StorageData.length,isActive:false}).map((item)=>{
+        return item.title;
+      }))),
     };
   }
   click(key) {
@@ -61,8 +39,103 @@ export default class TabComponent extends Component {
       });
     }
   }
+  handleChange(value) {
+    console.log(value);
+    if(value!="全部项目"){
+      this.setState({
+        nowData:this.state.listData.filter((item)=>{
+          return item.title==value;
+        })
+      })
+    }else{
+      this.setState({
+        nowData:this.state.listData
+      })
+    }
+  }
+  storageHandleChange(value) {
+    console.log(value);
+    if(value!="全部项目"){
+      this.setState({
+        nowStorage:this.state.listData.filter((item)=>{
+          return item.title==value;
+        })
+      })
+    }else{
+      this.setState({
+        nowStorage:this.state.listData
+      })
+    }
+  }
+  listShowModal = (text) => {
+    console.log(text);
+    
+    this.setState({
+      visible: true,
+    });
+  }
+
+  storageShowModal = (text) => {
+    console.log(text);
+    
+    this.setState({
+      visible: true,
+    });
+  }
+  HandleOk = (e) => {
+    this.setState({
+      visible: false,
+    });
+  }
+
+  HandleCancel = (e) => {
+    this.setState({
+      visible: false,
+    });
+  }
   render() {
-    const size = this.state.size;
+    const listChildren = [];
+    const storageChildren=[];
+    for (let i = 0; i < this.state.listType.length; i++) {
+      listChildren.push(<Option key={this.state.listType[i]} value={this.state.listType[i]}>{this.state.listType[i]}</Option>);
+    }
+    for (let i = 0; i < this.state.storageType.length; i++) {
+      storageChildren.push(<Option key={this.state.storageType[i]} value={this.state.storageType[i]}>{this.state.storageType[i]}</Option>);
+    }
+    const columns1 =[{
+      title: '项目名称',
+      dataIndex: 'title',
+      key:'title',
+      render: text => <a href="javascript:;">{text}</a>,
+    },{
+      title: 'Action',
+      key: 'action',
+      render: (text, record) => (
+        <span>
+          <Button type="primary" onClick={this.listShowModal.bind(this,text)}>查看详情</Button>
+          <a href="javascript:;">修改{record.name}</a>
+          <Divider type="vertical" />
+          <a href="javascript:;" onClick={this.delListt}>删除</a>
+        </span>
+      ),
+    }];
+    const columns2 =[{
+      title: '项目名称',
+      dataIndex: 'title',
+      key:'title',
+      render: text => <a href="javascript:;">{text}</a>,
+    },{
+      title: 'Action',
+      key: 'action',
+      render: (text, record) => (
+        <span>
+          <Button type="primary" onClick={this.storageShowModal.bind(this,text)}>查看详情</Button>
+          <a href="javascript:;">修改{record.name}</a>
+          <Divider type="vertical" />
+          <a href="javascript:;" onClick={this.delListt}>删除</a>
+        </span>
+      ),
+    }];
     return (
       <div>
         <div style={{ marginLeft: 45 + '%' }}>
@@ -72,7 +145,43 @@ export default class TabComponent extends Component {
         <div>
           <Tabs defaultActiveKey="1" onTabClick={this.click.bind(this)}>
             <TabPane tab="进行中的任务" key="1">
-              <FormItemComponent />
+            <div>
+                <span className={styles.rwlb}>任务列表</span>
+                <span className={styles.qbrw}>全部任务/({this.state.value2})</span>
+                <span className={styles.rwss}>任务筛选：</span>
+                <Select
+                  defaultValue={this.state.listType[3]}
+                  style={{ width: 230, height: 20, fontSize: 13 + 'px' }}
+                  onChange={this.handleChange.bind(this)}
+                >
+                  {listChildren}
+                </Select>
+                <Search
+                  placeholder=" search "
+                  onSearch={value => {
+                    {if(value!=""){
+                        this.setState({
+                          nowData:this.state.listData.filter((item)=>{
+                            return item.title.indexOf(value)!=-1;
+                          })
+                        })
+                      }else{
+                        this.setState({
+                          nowData:this.state.listData
+                        })
+                      }
+                    }
+                }}
+                  style={{ width: 270, height: 33, fontSize: 14 + 'px',marginLeft:1+"%" }}
+                />
+              </div>
+              <Button
+                type="dashed"
+                size={this.state.size}
+                style={{ width: 100 + '%', height: 33, marginTop: 10 }}
+              >+ 添加
+              </Button>
+              <Table columns={columns1} dataSource={this.state.nowData} />
             </TabPane>
             <TabPane tab="仓库中的任务" key="2">
               <div>
@@ -80,30 +189,54 @@ export default class TabComponent extends Component {
                 <span className={styles.qbrw}>全部任务/({this.state.value2})</span>
                 <span className={styles.rwss}>任务筛选：</span>
                 <Select
-                  defaultValue="vue"
+                  defaultValue={this.state.storageType[3]}
                   style={{ width: 230, height: 20, fontSize: 13 + 'px' }}
-                  onChange={handleChange}
+                  onChange={this.storageHandleChange.bind(this)}
                 >
-                  <Option value="vue">vue</Option>
-                  <Option value="webpack">webpack</Option>
-                  <Option value="react">react</Option>
+                  {storageChildren}
                 </Select>
                 <Search
                   placeholder=" search "
-                  onSearch={value => console.log(value)}
+                  onSearch={value => {
+                    {if(value!=""){
+                        this.setState({
+                          nowStorage:this.state.storageData.filter((item)=>{
+                            return item.title.indexOf(value)!=-1;
+                          })
+                        })
+                      }else{
+                        this.setState({
+                          nowStorage:this.state.storageData
+                        })
+                      }
+                    }
+                }}
                   style={{ width: 270, height: 33, fontSize: 14 + 'px',marginLeft:1+"%" }}
                 />
               </div>
               <Button
                 type="dashed"
-                size={size}
+                size={this.state.size}
                 style={{ width: 100 + '%', height: 33, marginTop: 10 }}
               >+ 添加
               </Button>
-              <Table columns={columns} dataSource={data} />
-            </TabPane>
+              <Table columns={columns2} dataSource={this.state.nowStorage} />
+              </TabPane>
           </Tabs>
         </div>
+        <Modal
+          title="项目详情"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        >
+          {/* <List
+            size="small"
+            bordered
+            dataSource={this.state.storageData}
+            renderItem={item => (<List.Item>{item}</List.Item>)}
+          /> */}
+        </Modal>
       </div>
     );
   }
