@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tabs, Select, Input } from 'antd';
+import { Tabs, Select, Input,} from 'antd';
 const TabPane = Tabs.TabPane;
 import FormItemComponent from './FormItemComponent';
 import styles from './TabComponent.less';
@@ -7,27 +7,36 @@ import { Button, Radio, Icon } from 'antd';
 import { List, Avatar } from 'antd';
 const Option = Select.Option;
 const Search = Input.Search;
+import { Table, Divider, Tag } from 'antd';
 function handleChange(value) {
   console.log(`selected ${value}`);
 }
-const listData = [];
-for (let i = 0; i < 23; i++) {
-  listData.push({
-    // href: 'http://ant.design',
-    title: `ant design part ${i}`,
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-    // description: '456',
-    content: '789',
-  });
-}
-
-const IconText = ({ type, text }) => (
-  <span>
-    <Icon type={type} style={{ marginRight: 8 }} />
-    {text}
-  </span>
-);
-
+/*  列表配置*/
+const columns = [{
+  dataIndex: 'name',
+  key: 'name',
+  
+},  {
+  key: 'action',
+  render: () => (
+    <span style={{ }}>
+      <a href="javascript:;">修改</a>
+      <Divider type="vertical" />
+      <a href="javascript:;">删除</a>
+    </span>
+  ),
+}];
+const data = [{
+  key: '1',
+  name: 'John Brown',
+}, {
+  key: '2',
+  name: 'Jim Green', 
+}, {
+  key: '3',
+  name: 'Joe Black',
+}];
+  /*  列表配置*/
 export default class TabComponent extends Component {
   constructor(props) {
     super(props);
@@ -82,29 +91,16 @@ export default class TabComponent extends Component {
                 <Search
                   placeholder=" search "
                   onSearch={value => console.log(value)}
-                  style={{ width: 270, height: 33, fontSize: 14 + 'px', marginLeft: 3 + '%' }}
+                  style={{ width: 270, height: 33, fontSize: 14 + 'px',marginLeft:1+"%" }}
                 />
               </div>
               <Button
                 type="dashed"
                 size={size}
                 style={{ width: 100 + '%', height: 33, marginTop: 10 }}
-              >
-                + 添加
+              >+ 添加
               </Button>
-              <List
-                itemLayout="vertical"
-                size="large"
-                pagination={{
-                  onChange: page => {
-                    console.log(page);
-                  },
-                  pageSize: 3,
-                }}
-                dataSource={listData}
-                renderItem={item => <List.Item key={item.title}> {item.content}</List.Item>}
-              />
-              ,
+              <Table columns={columns} dataSource={data} />
             </TabPane>
           </Tabs>
         </div>
