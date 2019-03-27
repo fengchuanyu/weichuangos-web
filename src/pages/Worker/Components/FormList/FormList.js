@@ -3,7 +3,7 @@
  * @LastEditors: Why-WU
  * @Description: 这是OA员工管理中“增加/删除”的表单组件
  * @Date: 2019-03-19 22:48:25
- * @LastEditTime: 2019-03-26 09:37:31
+ * @LastEditTime: 2019-03-26 12:27:03
  */
 
 import {
@@ -27,7 +27,7 @@ import HomeAdd from '@/pages/Worker/Components/HomeAdd/HomeAdd'; //家庭住址
 import JobSelection from '@/pages/Worker/Components/JobSelection/JobSelection'; //岗位选择
 import Departments from '../Departments/Departments'; //部门
 import PhotoUpload from '@/pages/Worker/Components/PhotoUpload/PhotoUpload'; //图片上传
-import Number from '@/pages/Worker/Components/Number/Number'
+import Number from '@/pages/Worker/Components/Number/Number' //生成员工编号
 import { relative } from 'path';
 
 const { Option } = Select;
@@ -92,7 +92,7 @@ class FormList extends React.Component {
     };
 
     return (
-      <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+      <Form {...formItemLayout} onSubmit={this.handleSubmit} style={{position:"relative"}}>
         <Form.Item label="姓名">
           {getFieldDecorator('name', {
             rules: [
@@ -103,7 +103,7 @@ class FormList extends React.Component {
           })(<Input style={{ width: '30%' }} />)}
         </Form.Item>
 
-        <Form.Item style={{ position: 'absolute', top: 25 + '%', left: 80 + '%' }}>
+        <Form.Item style={{ position: 'absolute', top: 1 + '%', left: 70 + '%' }}>
           <PhotoUpload/>
           (照片大小不能超过200M)
         </Form.Item>
