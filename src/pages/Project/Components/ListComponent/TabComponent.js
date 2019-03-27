@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tabs, Select, Input,Table, Divider, Tag, Modal,Button,Radio,List} from 'antd';
+import { Tabs, Select, Input, Table, Divider, Tag, Modal, Button, Radio, List } from 'antd';
 import styles from './TabComponent.less';
 const Option = Select.Option;
 const Search = Input.Search;
@@ -14,17 +14,33 @@ export default class TabComponent extends Component {
       value2: this.props.StorageData.length,
       size: 'large',
       visible: false,
-      listData:this.props.ListData,
-      nowData:this.props.ListData,
-      storageData:this.props.StorageData,
-      nowStorage:this.props.StorageData,
-      listType:Array.from(new Set(this.props.ListData.concat({title:"全部项目",id:this.props.ListData.length,isActive:false}).map((item)=>{
-        return item.title;
-      }))),
-      storageType:Array.from(new Set(this.props.StorageData.concat({title:"全部项目",id:this.props.StorageData.length,isActive:false}).map((item)=>{
-        return item.title;
-      }))),
-      nowText:"",
+      listData: this.props.ListData,
+      nowData: this.props.ListData,
+      storageData: this.props.StorageData,
+      nowStorage: this.props.StorageData,
+      listType: Array.from(
+        new Set(
+          this.props.ListData.concat({
+            title: '全部项目',
+            id: this.props.ListData.length,
+            isActive: false,
+          }).map(item => {
+            return item.title;
+          })
+        )
+      ),
+      storageType: Array.from(
+        new Set(
+          this.props.StorageData.concat({
+            title: '全部项目',
+            id: this.props.StorageData.length,
+            isActive: false,
+          }).map(item => {
+            return item.title;
+          })
+        )
+      ),
+      nowText: '',
     };
   }
   click(key) {
@@ -42,95 +58,117 @@ export default class TabComponent extends Component {
   }
   handleChange(value) {
     console.log(value);
-    if(value!="全部项目"){
+    if (value != '全部项目') {
       this.setState({
-        nowData:this.state.listData.filter((item)=>{
-          return item.title==value;
-        })
-      })
-    }else{
+        nowData: this.state.listData.filter(item => {
+          return item.title == value;
+        }),
+      });
+    } else {
       this.setState({
-        nowData:this.state.listData
-      })
+        nowData: this.state.listData,
+      });
     }
   }
   storageHandleChange(value) {
     console.log(value);
-    if(value!="全部项目"){
+    if (value != '全部项目') {
       this.setState({
-        nowStorage:this.state.listData.filter((item)=>{
-          return item.title==value;
-        })
-      })
-    }else{
+        nowStorage: this.state.listData.filter(item => {
+          return item.title == value;
+        }),
+      });
+    } else {
       this.setState({
-        nowStorage:this.state.listData
-      })
+        nowStorage: this.state.listData,
+      });
     }
   }
-  showModal = (text) => {
+  showModal = text => {
     this.setState({
       visible: true,
-      nowText:text,
+      nowText: text,
     });
-  }
-  handleOk = (e) => {
+  };
+  handleOk = e => {
     this.setState({
       visible: false,
     });
-  }
+  };
 
-  handleCancel = (e) => {
+  handleCancel = e => {
     this.setState({
       visible: false,
     });
-  }
-  delList(text){
+  };
+  delList(text) {
     this.props.Del(text);
   }
   render() {
     const listChildren = [];
-    const storageChildren=[];
+    const storageChildren = [];
     for (let i = 0; i < this.state.listType.length; i++) {
-      listChildren.push(<Option key={this.state.listType[i]} value={this.state.listType[i]}>{this.state.listType[i]}</Option>);
+      listChildren.push(
+        <Option key={this.state.listType[i]} value={this.state.listType[i]}>
+          {this.state.listType[i]}
+        </Option>
+      );
     }
     for (let i = 0; i < this.state.storageType.length; i++) {
-      storageChildren.push(<Option key={this.state.storageType[i]} value={this.state.storageType[i]}>{this.state.storageType[i]}</Option>);
+      storageChildren.push(
+        <Option key={this.state.storageType[i]} value={this.state.storageType[i]}>
+          {this.state.storageType[i]}
+        </Option>
+      );
     }
-    const columns1 =[{
-      title: '项目名称',
-      dataIndex: 'title',
-      key:'title',
-      render: text => <a href="javascript:;">{text}</a>,
-    },{
-      title: 'Action',
-      key: 'action',
-      render: (text, record) => (
-        <span>
-          <Button type="primary" onClick={this.showModal.bind(this,text)} >查看详情</Button>
-          <a href="javascript:;">修改{record.name}</a>
-          <Divider type="vertical" />
-          <a href="javascript:;" onClick={this.delList.bind(this,text)}>删除</a>
-        </span>
-      ),
-    }];
-    const columns2 =[{
-      title: '项目名称',
-      dataIndex: 'title',
-      key:'title',
-      render: text => <a href="javascript:;">{text}</a>,
-    },{
-      title: 'Action',
-      key: 'action',
-      render: (text, record) => (
-        <span>
-          <Button type="primary" onClick={this.showModal.bind(this,text)} >查看详情</Button>
-          <a href="javascript:;">修改{record.name}</a>
-          <Divider type="vertical" />
-          <a href="javascript:;" onClick={this.delList.bind(this,text,record)}>删除</a>
-        </span>
-      ),
-    }];
+    const columns1 = [
+      {
+        title: '项目名称',
+        dataIndex: 'title',
+        key: 'title',
+        render: text => <a href="javascript:;">{text}</a>,
+      },
+      {
+        title: 'Action',
+        key: 'action',
+        render: (text, record) => (
+          <span>
+            <Button type="primary" onClick={this.showModal.bind(this, text)}>
+              查看详情
+            </Button>
+            <a href="javascript:;">修改{record.name}</a>
+            <Divider type="vertical" />
+            <a href="javascript:;" onClick={this.delList.bind(this, text)}>
+              删除
+            </a>
+          </span>
+        ),
+      },
+    ];
+    const columns2 = [
+      {
+        title: '项目名称',
+        dataIndex: 'title',
+        key: 'title',
+        render: text => <a href="javascript:;">{text}</a>,
+      },
+      {
+        title: 'Action',
+        key: 'action',
+        render: (text, record) => (
+          <span>
+            <Button type="primary" onClick={this.showModal.bind(this, text)}>
+              查看详情
+            </Button>
+            <a href="javascript:;">修改{record.name}</a>
+            <Divider type="vertical" />
+            <a href="javascript:;" onClick={this.delList.bind(this, text, record)}>
+              删除
+            </a>
+          </span>
+        ),
+      },
+    ];
     return (
       <div>
         <div style={{ marginLeft: 45 + '%' }}>
@@ -140,7 +178,7 @@ export default class TabComponent extends Component {
         <div>
           <Tabs defaultActiveKey="1" onTabClick={this.click.bind(this)}>
             <TabPane tab="进行中的任务" key="1">
-            <div>
+              <div>
                 <span className={styles.rwlb}>任务列表</span>
                 <span className={styles.qbrw}>全部任务/({this.state.value2})</span>
                 <span className={styles.rwss}>任务筛选：</span>
@@ -154,27 +192,29 @@ export default class TabComponent extends Component {
                 <Search
                   placeholder=" search "
                   onSearch={value => {
-                    {if(value!=""){
+                    {
+                      if (value != '') {
                         this.setState({
-                          nowData:this.state.listData.filter((item)=>{
-                            return item.title.indexOf(value)!=-1;
-                          })
-                        })
-                      }else{
+                          nowData: this.state.listData.filter(item => {
+                            return item.title.indexOf(value) != -1;
+                          }),
+                        });
+                      } else {
                         this.setState({
-                          nowData:this.state.listData
-                        })
+                          nowData: this.state.listData,
+                        });
                       }
                     }
-                }}
-                  style={{ width: 270, height: 33, fontSize: 14 + 'px',marginLeft:1+"%" }}
+                  }}
+                  style={{ width: 270, height: 33, fontSize: 14 + 'px', marginLeft: 1 + '%' }}
                 />
               </div>
               <Button
                 type="dashed"
                 size={this.state.size}
                 style={{ width: 100 + '%', height: 33, marginTop: 10 }}
-              >+ 添加
+              >
+                + 添加
               </Button>
               <Table columns={columns1} dataSource={this.state.nowData} />
             </TabPane>
@@ -193,30 +233,32 @@ export default class TabComponent extends Component {
                 <Search
                   placeholder=" search "
                   onSearch={value => {
-                    {if(value!=""){
+                    {
+                      if (value != '') {
                         this.setState({
-                          nowStorage:this.state.storageData.filter((item)=>{
-                            return item.title.indexOf(value)!=-1;
-                          })
-                        })
-                      }else{
+                          nowStorage: this.state.storageData.filter(item => {
+                            return item.title.indexOf(value) != -1;
+                          }),
+                        });
+                      } else {
                         this.setState({
-                          nowStorage:this.state.storageData
-                        })
+                          nowStorage: this.state.storageData,
+                        });
                       }
                     }
-                }}
-                  style={{ width: 270, height: 33, fontSize: 14 + 'px',marginLeft:1+"%" }}
+                  }}
+                  style={{ width: 270, height: 33, fontSize: 14 + 'px', marginLeft: 1 + '%' }}
                 />
               </div>
               <Button
                 type="dashed"
                 size={this.state.size}
                 style={{ width: 100 + '%', height: 33, marginTop: 10 }}
-              >+ 添加
+              >
+                + 添加
               </Button>
               <Table columns={columns2} dataSource={this.state.nowStorage} />
-              </TabPane>
+            </TabPane>
           </Tabs>
         </div>
         <Modal
