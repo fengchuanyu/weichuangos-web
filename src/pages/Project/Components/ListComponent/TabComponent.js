@@ -40,21 +40,18 @@ export default class TabComponent extends Component {
           })
         )
       ),
-<<<<<<< HEAD
       nowText: '',
-=======
->>>>>>> 90e723a9a2122a16bb666e8bb791783ce4e1565a
     };
   }
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     this.setState({
-      listData:nextProps.ListData,
-      nowData:nextProps.ListData,
-      storageData:nextProps.StorageData,
-      nowStorage:nextProps.StorageData,
-    })
+      listData: nextProps.ListData,
+      nowData: nextProps.ListData,
+      storageData: nextProps.StorageData,
+      nowStorage: nextProps.StorageData,
+    });
   }
-  
+
   click(key) {
     if (key == 1) {
       this.setState({
@@ -96,55 +93,29 @@ export default class TabComponent extends Component {
       });
     }
   }
-<<<<<<< HEAD
   showModal = text => {
-=======
-  listShowModal = text => {
-    console.log(text);
-
->>>>>>> 90e723a9a2122a16bb666e8bb791783ce4e1565a
     this.setState({
       visible: true,
       nowText: text,
     });
   };
-<<<<<<< HEAD
   handleOk = e => {
-=======
-
-  storageShowModal = text => {
-    console.log(text);
-
-    this.setState({
-      visible: true,
-    });
-  };
-  HandleOk = e => {
->>>>>>> 90e723a9a2122a16bb666e8bb791783ce4e1565a
     this.setState({
       visible: false,
     });
   };
 
-<<<<<<< HEAD
   handleCancel = e => {
-=======
-  HandleCancel = e => {
->>>>>>> 90e723a9a2122a16bb666e8bb791783ce4e1565a
     this.setState({
       visible: false,
     });
   };
-<<<<<<< HEAD
   listDelList(text) {
     this.props.listDel(text);
   }
   storageDelList(text) {
-    
     this.props.storageDel(text);
   }
-=======
->>>>>>> 90e723a9a2122a16bb666e8bb791783ce4e1565a
   render() {
     const listChildren = [];
     const storageChildren = [];
@@ -174,7 +145,6 @@ export default class TabComponent extends Component {
         key: 'action',
         render: (text, record) => (
           <span>
-<<<<<<< HEAD
             <Button type="primary" onClick={this.showModal.bind(this, text)}>
               查看详情
             </Button>
@@ -183,18 +153,6 @@ export default class TabComponent extends Component {
             <a href="javascript:;" onClick={this.listDelList.bind(this, text)}>
               删除
             </a>
-=======
-            <Button type="primary" onClick={this.listShowModal.bind(this, text)}>
-              查看详情
-            </Button>
-            <div style={{ position: 'relative', left: 350, top: -15 }}>
-              <a href="javascript:;">修改{record.name}</a>
-              <Divider type="vertical" />
-              <a href="javascript:;" onClick={this.delListt}>
-                删除
-              </a>
-            </div>
->>>>>>> 90e723a9a2122a16bb666e8bb791783ce4e1565a
           </span>
         ),
       },
@@ -211,20 +169,12 @@ export default class TabComponent extends Component {
         key: 'action',
         render: (text, record) => (
           <span>
-<<<<<<< HEAD
             <Button type="primary" onClick={this.showModal.bind(this, text)}>
-=======
-            <Button type="primary" onClick={this.storageShowModal.bind(this, text)}>
->>>>>>> 90e723a9a2122a16bb666e8bb791783ce4e1565a
               查看详情
             </Button>
             <a href="javascript:;">修改{record.name}</a>
             <Divider type="vertical" />
-<<<<<<< HEAD
-            <a href="javascript:;" onClick={this.storageDelList.bind(this,text)}>
-=======
-            <a href="javascript:;" onClick={this.delListt}>
->>>>>>> 90e723a9a2122a16bb666e8bb791783ce4e1565a
+            <a href="javascript:;" onClick={this.storageDelList.bind(this, text)}>
               删除
             </a>
           </span>
