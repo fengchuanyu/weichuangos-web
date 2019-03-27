@@ -5,7 +5,7 @@ export default class ButtonComponent extends Component {
     return (
       <div style={{ marginTop: 70, marginLeft: 39 + '%' }}>
         <Button icon="check-circle" style={{ marginRight: 50 }}>
-          确认
+          提交
         </Button>
         <Button icon="close-circle">取消</Button>
       </div>

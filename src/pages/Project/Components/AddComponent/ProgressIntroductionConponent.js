@@ -2,6 +2,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import React from 'react';
 import { Button, notification, Card, Divider } from 'antd';
+import styles from './ProgressIntroductionConponent.less';
 
 export default class ProgressIntroductionConponent extends React.Component {
   constructor(props) {
@@ -17,8 +18,9 @@ export default class ProgressIntroductionConponent extends React.Component {
 
   render() {
     return (
-      <div style={{ weight: 400 }}>
-        <ReactQuill value={this.state.text} onChange={this.handleChange}>
+      <div style={{marginLeft:26+'%'}}>
+        <span>项目描述:</span>
+        <ReactQuill  value={this.state.text} onChange={this.handleChange}>
           {/* <div  className="my-editing-area"></div> */}
         </ReactQuill>
       </div>

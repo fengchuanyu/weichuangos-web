@@ -63,9 +63,9 @@ export default class CardComponent extends Component {
       <div>
         <span style={{position:'relative'}}>
           <span>
-            <span style={{ position:'relative',top:-5,marginLeft: 350 }}>进行中的项目：</span>
+            <span style={{ position:'relative',top:-5,marginLeft: 300 }}>进行中的项目：</span>
             <Select defaultValue={this.state.nowValue?this.state.nowValue:"全部项目" }
-            style={{ position:'absolute', left:450,top:-10 }} 
+            style={{ position:'absolute', left:400,top:-10 }} 
             onChange={this.handleChange.bind(this)}
             >
               {children}

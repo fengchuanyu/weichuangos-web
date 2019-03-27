@@ -12,7 +12,7 @@ const parent = [
   'Webpack',
   'antd',
   'node',
-  'ES2015+',
+  'ES6',
   'dva',
   'koa',
   'UmiJS',
@@ -49,13 +49,13 @@ class SelectComponent extends Component {
 
   render() {
     return (
-      <div id="testaa" style={{ marginLeft: 26.8 + '%', marginBottom: 15 }}>
+      <div id="testaa" style={{ marginLeft: 26.6 + '%', marginBottom: 15 }}>
         技术栈：
         <Select
           mode="multiple"
           style={{ width: 467 }}
           placeholder="Please select"
-          defaultValue={['ES2015+']}
+          defaultValue={['ES6']}
           onChange={this.handleChange}
           onBlur={this.upLoad} //why
         >
