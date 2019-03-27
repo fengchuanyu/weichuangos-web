@@ -42,7 +42,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
         <Modal
           visible={visible}
           title="添加项目"
-          okText="Create"
+          okText="确定"
           onCancel={onCancel}
           onOk={onCreate}
         >
