@@ -24,6 +24,7 @@ export default class TabComponent extends Component {
       storageType:Array.from(new Set(this.props.StorageData.concat({title:"全部项目",id:this.props.StorageData.length,isActive:false}).map((item)=>{
         return item.title;
       }))),
+      nowText:"",
     };
   }
   click(key) {
@@ -67,31 +68,25 @@ export default class TabComponent extends Component {
       })
     }
   }
-  listShowModal = (text) => {
-    console.log(text);
-    
+  showModal = (text) => {
     this.setState({
       visible: true,
+      nowText:text,
     });
   }
-
-  storageShowModal = (text) => {
-    console.log(text);
-    
-    this.setState({
-      visible: true,
-    });
-  }
-  HandleOk = (e) => {
+  handleOk = (e) => {
     this.setState({
       visible: false,
     });
   }
 
-  HandleCancel = (e) => {
+  handleCancel = (e) => {
     this.setState({
       visible: false,
     });
+  }
+  delList(text){
+    this.props.Del(text);
   }
   render() {
     const listChildren = [];
@@ -112,10 +107,10 @@ export default class TabComponent extends Component {
       key: 'action',
       render: (text, record) => (
         <span>
-          <Button type="primary" onClick={this.listShowModal.bind(this,text)}>查看详情</Button>
+          <Button type="primary" onClick={this.showModal.bind(this,text)} >查看详情</Button>
           <a href="javascript:;">修改{record.name}</a>
           <Divider type="vertical" />
-          <a href="javascript:;" onClick={this.delListt}>删除</a>
+          <a href="javascript:;" onClick={this.delList.bind(this,text)}>删除</a>
         </span>
       ),
     }];
@@ -129,10 +124,10 @@ export default class TabComponent extends Component {
       key: 'action',
       render: (text, record) => (
         <span>
-          <Button type="primary" onClick={this.storageShowModal.bind(this,text)}>查看详情</Button>
+          <Button type="primary" onClick={this.showModal.bind(this,text)} >查看详情</Button>
           <a href="javascript:;">修改{record.name}</a>
           <Divider type="vertical" />
-          <a href="javascript:;" onClick={this.delListt}>删除</a>
+          <a href="javascript:;" onClick={this.delList.bind(this,text,record)}>删除</a>
         </span>
       ),
     }];
@@ -230,12 +225,7 @@ export default class TabComponent extends Component {
           onOk={this.handleOk}
           onCancel={this.handleCancel}
         >
-          {/* <List
-            size="small"
-            bordered
-            dataSource={this.state.storageData}
-            renderItem={item => (<List.Item>{item}</List.Item>)}
-          /> */}
+          <p>{this.state.nowText.title}</p>
         </Modal>
       </div>
     );
