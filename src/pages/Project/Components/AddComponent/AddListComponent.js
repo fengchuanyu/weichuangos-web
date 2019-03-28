@@ -34,7 +34,7 @@ const AddListComponent = Form.create({ name: 'form_in_modal' })(
       });
     }
     setActive(item) {
-      this.props.Active(item);
+      this.props.Item(item);
     }
     changeValue = (item, e) => {
       if (e.target.value == '') {

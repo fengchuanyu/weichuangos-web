@@ -61,8 +61,8 @@ export default class CardComponent extends Component {
     }
     return (
       <div>
-        <span style={{position:'relative'}}>
-          <span>
+        <div style={{position:'relative'}}>
+          <div>
             <span style={{ position:'relative',top:-5,marginLeft: 300 }}>进行中的项目：</span>
             <Select defaultValue={this.state.nowValue?this.state.nowValue:"全部项目" }
             style={{ position:'absolute', left:400,top:-10 }} 
@@ -70,8 +70,8 @@ export default class CardComponent extends Component {
             >
               {children}
             </Select>
-          </span>
-          <span>
+          </div>
+          <div>
             <Search
               placeholder="请输入"
               onSearch={value => {
@@ -92,8 +92,8 @@ export default class CardComponent extends Component {
               enterButton
               style={{ position:'absolute', left:680,width: 250,top:-10}}
             />
-          </span>
-        </span>
+          </div>
+        </div>
         <div style={{ background: '#ECECEC', padding: '30px' }}>
           <List
             size="small"

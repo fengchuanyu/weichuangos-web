@@ -17,10 +17,12 @@ export default class ProjectType extends Component {
   getValue(value) {
     let obj = {};
     obj.title = value;
-    obj.id = this.state.nowId++;
+    obj.id = this.state.nowId+1;
     obj.isActive = false;
     let newArray = this.state.list;
     newArray.push(obj);
+    console.log(newArray);
+    
     this.setState({
       list: newArray,
       nowId: this.state.nowId++,
@@ -54,8 +56,11 @@ export default class ProjectType extends Component {
     temp = temp.filter(function(x) {
       return x.id != item.id;
     });
+    console.log(temp);
+    
     this.setState({
       list: temp,
+      
     });
   }
   render() {
