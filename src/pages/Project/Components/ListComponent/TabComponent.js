@@ -192,7 +192,7 @@ export default class TabComponent extends Component {
           <span className={this.state.none}>仓库({this.state.value2})</span>
         </div>
         <div>
-          <Tabs defaultActiveKey="1" onTabClick={this.click.bind(this)}>
+          <Tabs defaultActiveKey="1" onTabClick={this.click.bind(this)} className={styles.menu}>
             <TabPane tab="进行中的任务" key="1">
               <div>
                 <span className={styles.rwlb}>任务列表</span>

@@ -77,6 +77,7 @@ class AddComponent extends React.Component {
     this.setState({ visible: false });
   };
 
+  
   handleCreate = () => {
     const form = this.formRef.props.form;
     form.validateFields((err, values) => {

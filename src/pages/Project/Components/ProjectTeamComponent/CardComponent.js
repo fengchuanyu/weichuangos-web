@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-
 import { Card, Col, Row, Avatar, Icon, List, Button, Modal, Select, Input } from 'antd';
 import styles from './Card.less';
 const Search = Input.Search;
@@ -116,10 +115,10 @@ export default class CardComponent extends Component {
                   size="small"
                   className={styles.card}
                   grid={{ gutter: 24, lg: 3, md: 2, sm: 1, xs: 1 }}
-                  style={{ height: 220, width: 330, marginLeft: 1, marginRight: 1 }}
+                  style={{ height: 250, width: 330, marginLeft: 1, marginRight: 1 }}
                   actions={[
                     <Button
-                      style={{ bottom: 2, height: 37, width: 300 }}
+                      style={{height:37,width:300}}
                       type="primary"
                       onClick={this.showModal.bind(this, data.data)}
                     >
