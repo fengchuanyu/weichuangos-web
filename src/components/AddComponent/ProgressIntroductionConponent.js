@@ -19,9 +19,11 @@ export default class ProgressIntroductionConponent extends React.Component {
   render() {
     return (
       <ReactQuill value={this.state.text}
-                  onChange={this.handleChange} >
+                  onChange={this.handleChange}
+                  >
                   {/* <div  className="my-editing-area"></div> */} 
       </ReactQuill>
     )
   }
-}
+} 
+/*onBlur={this.handleChange}*/

@@ -16,14 +16,14 @@ import { runInThisContext } from 'vm';
         }
       }
       componentDidMount(){
-        console.log(this.props.newCur);
+        console.log(this.props.newCur);//数组
         
         this.setState({
           curList:this.props.newCur
         })
       }
       componentWillReceiveProps(nextProps){
-        console.log(nextProps);
+        // console.log(nextProps);
         this.setState({
           curList:nextProps.newCur
         })

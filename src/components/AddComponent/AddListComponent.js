@@ -32,6 +32,7 @@ componentWillReceiveProps(nextProps){
   this.setState({
     list:nextProps.TagList,
   })
+  
 }
 setActive(item){
   this.props.Active(item);

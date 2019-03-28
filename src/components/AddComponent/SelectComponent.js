@@ -14,26 +14,21 @@ class SelectComponent extends Component{
       constructor(props){
         super(props);
         this.state = {
-          test:'',
+          skillStack:'',
+          skillStackArray:[],
         }
       }
       handleChange=(value) => {
-        // console.log(`selected ${value}`);
+        console.log(`${value}`);
         this.setState({
-          test:`${value}`
+          skillStack:`${value}`,
+          skillStackArray:value
         })
-        // console.log(test);
+        this.props.TransmitProjectStack(this.state.skillStack); 
+        this.props.TransmitProjectStackArray(this.state.skillStackArray);
+        console.log(this.state.skillStack)
+        console.log(this.state.skillStackArray)
       }
-
-      upLoad =(value) => {
-        console.log(value);
-        this.setState({
-          test : `${value}`
-        })
-      }
-      
-
-
       render(){
           return(
               <div id="testaa">
@@ -42,9 +37,8 @@ class SelectComponent extends Component{
                     style={{ width: '100%' }}
                     placeholder="Please select"
                     defaultValue={['ES2015+']}
-                    onChange={this.handleChange}
-                    onBlur = {this.upLoad} //why
-                >   
+                    onChange={this.handleChange} //why
+                  >   
                     {children}
                 </Select>
               </div>

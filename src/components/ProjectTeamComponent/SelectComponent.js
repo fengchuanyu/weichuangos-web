@@ -19,7 +19,6 @@ export default class SelectComponent extends Component {
             </Select>
 
         </span><input/>
-        ,
       </div>
     )
   }
