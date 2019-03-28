@@ -43,6 +43,13 @@ class TabComponent extends React.Component {
         )
       ),
       nowText: '',
+      type: Array.from(
+        new Set(
+          this.props.StorageData.map(item => {
+            return item.title;
+          })
+        )
+      ),
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -107,16 +114,28 @@ class TabComponent extends React.Component {
       nowText: text,
     });
   };
-  handleOk = e => {
+  listHandleOk = e => {
     this.setState({
-      visible: false,
+      listVisible: false,
     });
   };
-
-  handleCancel = e => {
+  storageHandleOk = e => {
     this.setState({
-      visible: false,
+      storageVisible: false,
     });
+    this.props.form.resetFields();
+  };
+
+  listHandleCancel = e => {
+    this.setState({
+      listVisible:false,
+    });
+  };
+  storageHandleCancel = e => {
+    this.setState({
+      storageVisible:false,
+    });
+    this.props.form.resetFields();
   };
   listDelList(text) {
     this.props.listDel(text);
@@ -127,9 +146,12 @@ class TabComponent extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
+      if (err) {
+        return;
       }
+      this.setState({
+        storageVisible:false
+      })
     });
   };
 
@@ -142,6 +164,7 @@ class TabComponent extends React.Component {
   render() {
     const listChildren = [];
     const storageChildren = [];
+    const project =[];
     for (let i = 0; i < this.state.listType.length; i++) {
       listChildren.push(
         <Option key={this.state.listType[i]} value={this.state.listType[i]}>
@@ -153,6 +176,13 @@ class TabComponent extends React.Component {
       storageChildren.push(
         <Option key={this.state.storageType[i]} value={this.state.storageType[i]}>
           {this.state.storageType[i]}
+        </Option>
+      );
+    }
+    for (let i = 0; i < this.state.type.length; i++) {
+      project.push(
+        <Option key={this.state.type[i]} value={this.state.type[i]}>
+          {this.state.type[i]}
         </Option>
       );
     }
@@ -305,57 +335,64 @@ class TabComponent extends React.Component {
         <Modal
           title="项目详情"
           visible={this.state.listVisible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
+          onOk={this.listHandleOk}
+          onCancel={this.listHandleCancel}
         >
           <p>{this.state.nowText.title}</p>
         </Modal>
         <Modal
           title="项目发布"
           visible={this.state.storageVisible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
+          onOk={this.handleSubmit}
+          onCancel={this.storageHandleCancel}
         >
           <Form labelCol={{ span: 5 }} wrapperCol={{ span: 12 }} onSubmit={this.handleSubmit}>
             <Form.Item
-              label="Note"
+              label="队伍个数"
             >
-              {getFieldDecorator('note', {
+              {getFieldDecorator('允许参加项目队伍个数', {
                 rules: [{ required: true, message: '请填写允许参加项目的队伍个数' }],
+                // initialValue:'12'
               })(
-                <Input />
+                <Input 
+                placeholder="填写允许参加项目的队伍个数"
+                />
               )}
             </Form.Item>
             <Form.Item
-              label="Note"
+              label="项目管理人"
             >
-              {getFieldDecorator('note', {
+              {getFieldDecorator('项目管理人', {
                 rules: [{ required: true, message: '请填写项目管理人' }],
+                // initialValue:'xxx'
               })(
-              <Input />
+              <Input 
+                placeholder="填写项目管理人"
+              />
               )}
             </Form.Item>
             <Form.Item
-              label="Gender"
+              label="技术栈"
             >
-              {getFieldDecorator('gender', {
+              {getFieldDecorator('技术栈', {
                 rules: [{ required: true, message: '请选择技术栈' }],
+                // initialValue:'Vue'
               })(
                 <Select
                   placeholder="选择一个技术栈"
                   onChange={this.handleSelectChange}
                 >
-                  {storageChildren}
+                  {project}
                 </Select>
               )}
             </Form.Item>
-            <Form.Item
+            {/* <Form.Item
               wrapperCol={{ span: 12, offset: 5 }}
             >
               <Button type="primary" htmlType="submit">
                 Submit
               </Button>
-            </Form.Item>
+            </Form.Item> */}
           </Form>
         </Modal>
       </div>
