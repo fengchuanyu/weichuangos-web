@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Tabs, Select, Input, Table, Divider, Tag, Modal, Button, Radio, List } from 'antd';
+import { Tabs, Select, Input, Table, Divider, Tag, Modal, Button, Radio, List,Form } from 'antd';
 import styles from './TabComponent.less';
 const Option = Select.Option;
 const Search = Input.Search;
 const TabPane = Tabs.TabPane;
-export default class TabComponent extends Component {
+
+class TabComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +14,8 @@ export default class TabComponent extends Component {
       value1: this.props.ListData.length,
       value2: this.props.StorageData.length,
       size: 'large',
-      visible: false,
+      listVisible:false,
+      storageVisible:false,
       listData: this.props.ListData,
       nowData: this.props.ListData,
       storageData: this.props.StorageData,
@@ -41,6 +43,13 @@ export default class TabComponent extends Component {
         )
       ),
       nowText: '',
+      type: Array.from(
+        new Set(
+          this.props.StorageData.map(item => {
+            return item.title;
+          })
+        )
+      ),
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -93,32 +102,69 @@ export default class TabComponent extends Component {
       });
     }
   }
-  showModal = text => {
+  listShowModal = text => {
     this.setState({
-      visible: true,
+      listVisible: true,
       nowText: text,
     });
   };
-  handleOk = e => {
+  storageShowModal = text => {
     this.setState({
-      visible: false,
+      storageVisible: true,
+      nowText: text,
     });
   };
-
-  handleCancel = e => {
+  listHandleOk = e => {
     this.setState({
-      visible: false,
+      listVisible: false,
     });
+  };
+  storageHandleOk = e => {
+    this.setState({
+      storageVisible: false,
+    });
+    this.props.form.resetFields();
+  };
+
+  listHandleCancel = e => {
+    this.setState({
+      listVisible:false,
+    });
+  };
+  storageHandleCancel = e => {
+    this.setState({
+      storageVisible:false,
+    });
+    this.props.form.resetFields();
   };
   listDelList(text) {
     this.props.listDel(text);
-  }
+  };
   storageDelList(text) {
     this.props.storageDel(text);
-  }
+  };
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (err) {
+        return;
+      }
+      this.setState({
+        storageVisible:false
+      })
+    });
+  };
+
+  handleSelectChange = (value) => {
+    console.log(value);
+    this.props.form.setFieldsValue({
+      note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
+    });
+  };
   render() {
     const listChildren = [];
     const storageChildren = [];
+    const project =[];
     for (let i = 0; i < this.state.listType.length; i++) {
       listChildren.push(
         <Option key={this.state.listType[i]} value={this.state.listType[i]}>
@@ -130,6 +176,13 @@ export default class TabComponent extends Component {
       storageChildren.push(
         <Option key={this.state.storageType[i]} value={this.state.storageType[i]}>
           {this.state.storageType[i]}
+        </Option>
+      );
+    }
+    for (let i = 0; i < this.state.type.length; i++) {
+      project.push(
+        <Option key={this.state.type[i]} value={this.state.type[i]}>
+          {this.state.type[i]}
         </Option>
       );
     }
@@ -152,7 +205,7 @@ export default class TabComponent extends Component {
               删除
             </a>
             <Divider type="vertical" />
-            <a href="javascript:;" onClick={this.showModal.bind(this, text)}>
+            <a href="javascript:;" onClick={this.listShowModal.bind(this, text)}>
               查看详情
             </a>
           </div>
@@ -178,13 +231,15 @@ export default class TabComponent extends Component {
               删除
             </a>
             <Divider type="vertical" />
-            <a href="javascript:;" onClick={this.showModal.bind(this, text)}>
-              查看详情
+            <a href="javascript:;" onClick={this.storageShowModal.bind(this, text)}>
+              项目发布
             </a>
           </span>
         ),
       },
     ];
+    const { visible, onCancel, onCreate, form } = this.props;
+    const { getFieldDecorator } = form;
     return (
       <div>
         <div style={{ marginLeft: 45 + '%' }}>
@@ -279,13 +334,70 @@ export default class TabComponent extends Component {
         </div>
         <Modal
           title="项目详情"
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
+          visible={this.state.listVisible}
+          onOk={this.listHandleOk}
+          onCancel={this.listHandleCancel}
         >
           <p>{this.state.nowText.title}</p>
+        </Modal>
+        <Modal
+          title="项目发布"
+          visible={this.state.storageVisible}
+          onOk={this.handleSubmit}
+          onCancel={this.storageHandleCancel}
+        >
+          <Form labelCol={{ span: 5 }} wrapperCol={{ span: 12 }} onSubmit={this.handleSubmit}>
+            <Form.Item
+              label="队伍个数"
+            >
+              {getFieldDecorator('允许参加项目队伍个数', {
+                rules: [{ required: true, message: '请填写允许参加项目的队伍个数' }],
+                // initialValue:'12'
+              })(
+                <Input 
+                placeholder="填写允许参加项目的队伍个数"
+                />
+              )}
+            </Form.Item>
+            <Form.Item
+              label="项目管理人"
+            >
+              {getFieldDecorator('项目管理人', {
+                rules: [{ required: true, message: '请填写项目管理人' }],
+                // initialValue:'xxx'
+              })(
+              <Input 
+                placeholder="填写项目管理人"
+              />
+              )}
+            </Form.Item>
+            <Form.Item
+              label="技术栈"
+            >
+              {getFieldDecorator('技术栈', {
+                rules: [{ required: true, message: '请选择技术栈' }],
+                // initialValue:'Vue'
+              })(
+                <Select
+                  placeholder="选择一个技术栈"
+                  onChange={this.handleSelectChange}
+                >
+                  {project}
+                </Select>
+              )}
+            </Form.Item>
+            {/* <Form.Item
+              wrapperCol={{ span: 12, offset: 5 }}
+            >
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item> */}
+          </Form>
         </Modal>
       </div>
     );
   }
 }
+
+export default Form.create({ name: 'form_in_modal' })(TabComponent)
