@@ -1,7 +1,9 @@
 //列表页面-------------------------------------------------------------------------
 import React, { Component } from 'react';
+import { Card } from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper'; //面包屑
 import TabComponent from './components/ListComponent/TabComponent'; //分页表
+import { formatMessage, FormattedMessage } from 'umi/locale';
 const list = [
   { title: '微信小程序', id: 1, isActive: false },
   { title: '移动端开发', id: 2, isActive: false },
@@ -92,28 +94,33 @@ export default class List extends Component {
       storageData: storageData,
     };
   }
-  listDel(text){
+  listDel(text) {
     this.setState({
-      listData:this.state.listData.filter((item)=>{
-        return item.id!=text.id;
-      })
-    })
-    
+      listData: this.state.listData.filter(item => {
+        return item.id != text.id;
+      }),
+    });
   }
-  storageDel(text){
+  storageDel(text) {
     this.setState({
-      storageData:this.state.storageData.filter((item)=>{
-        return item.id!=text.id;
-      })
-    })
-    
+      storageData: this.state.storageData.filter(item => {
+        return item.id != text.id;
+      }),
+    });
   }
   render() {
     return (
       <PageHeaderWrapper title="列表">
-        <div>
-          <TabComponent ListData={this.state.listData} StorageData={this.state.storageData} listDel={this.listDel.bind(this)} storageDel={this.storageDel.bind(this)}/>
-        </div>
+        <Card bordered={false}>
+          <div>
+            <TabComponent
+              ListData={this.state.listData}
+              StorageData={this.state.storageData}
+              listDel={this.listDel.bind(this)}
+              storageDel={this.storageDel.bind(this)}
+            />
+          </div>
+        </Card>
       </PageHeaderWrapper>
     );
   }

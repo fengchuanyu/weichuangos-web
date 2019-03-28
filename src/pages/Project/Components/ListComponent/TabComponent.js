@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Tabs, Select, Input, Table, Divider, Tag, Modal, Button, Radio, List } from 'antd';
+import { Tabs, Select, Input, Table, Divider, Tag, Modal, Button, Radio, List,Form } from 'antd';
 import styles from './TabComponent.less';
 const Option = Select.Option;
 const Search = Input.Search;
 const TabPane = Tabs.TabPane;
-export default class TabComponent extends Component {
+
+class TabComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +14,8 @@ export default class TabComponent extends Component {
       value1: this.props.ListData.length,
       value2: this.props.StorageData.length,
       size: 'large',
-      visible: false,
+      listVisible:false,
+      storageVisible:false,
       listData: this.props.ListData,
       nowData: this.props.ListData,
       storageData: this.props.StorageData,
@@ -93,9 +95,15 @@ export default class TabComponent extends Component {
       });
     }
   }
-  showModal = text => {
+  listShowModal = text => {
     this.setState({
-      visible: true,
+      listVisible: true,
+      nowText: text,
+    });
+  };
+  storageShowModal = text => {
+    this.setState({
+      storageVisible: true,
       nowText: text,
     });
   };
@@ -112,10 +120,25 @@ export default class TabComponent extends Component {
   };
   listDelList(text) {
     this.props.listDel(text);
-  }
+  };
   storageDelList(text) {
     this.props.storageDel(text);
-  }
+  };
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+      }
+    });
+  };
+
+  handleSelectChange = (value) => {
+    console.log(value);
+    this.props.form.setFieldsValue({
+      note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
+    });
+  };
   render() {
     const listChildren = [];
     const storageChildren = [];
@@ -143,17 +166,16 @@ export default class TabComponent extends Component {
       {
         title: 'Action',
         key: 'action',
-        align:'right',
+        align: 'right',
         render: (text, record) => (
           <div>
-            
             <a href="javascript:;">修改{record.name}</a>
             <Divider type="vertical" />
             <a href="javascript:;" onClick={this.listDelList.bind(this, text)}>
               删除
             </a>
             <Divider type="vertical" />
-            <a href="javascript:;" onClick={this.showModal.bind(this, text)}>
+            <a href="javascript:;" onClick={this.listShowModal.bind(this, text)}>
               查看详情
             </a>
           </div>
@@ -170,20 +192,24 @@ export default class TabComponent extends Component {
       {
         title: 'Action',
         key: 'action',
+        align: 'right',
         render: (text, record) => (
           <span>
-            <Button type="primary" onClick={this.showModal.bind(this, text)}>
-              查看详情
-            </Button>
             <a href="javascript:;">修改{record.name}</a>
             <Divider type="vertical" />
             <a href="javascript:;" onClick={this.storageDelList.bind(this, text)}>
               删除
             </a>
+            <Divider type="vertical" />
+            <a href="javascript:;" onClick={this.storageShowModal.bind(this, text)}>
+              项目发布
+            </a>
           </span>
         ),
       },
     ];
+    const { visible, onCancel, onCreate, form } = this.props;
+    const { getFieldDecorator } = form;
     return (
       <div>
         <div style={{ marginLeft: 45 + '%' }}>
@@ -278,13 +304,63 @@ export default class TabComponent extends Component {
         </div>
         <Modal
           title="项目详情"
-          visible={this.state.visible}
+          visible={this.state.listVisible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
         >
           <p>{this.state.nowText.title}</p>
         </Modal>
+        <Modal
+          title="项目发布"
+          visible={this.state.storageVisible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        >
+          <Form labelCol={{ span: 5 }} wrapperCol={{ span: 12 }} onSubmit={this.handleSubmit}>
+            <Form.Item
+              label="Note"
+            >
+              {getFieldDecorator('note', {
+                rules: [{ required: true, message: '请填写允许参加项目的队伍个数' }],
+              })(
+                <Input />
+              )}
+            </Form.Item>
+            <Form.Item
+              label="Note"
+            >
+              {getFieldDecorator('note', {
+                rules: [{ required: true, message: '请填写项目管理人' }],
+              })(
+              <Input />
+              )}
+            </Form.Item>
+            <Form.Item
+              label="Gender"
+            >
+              {getFieldDecorator('gender', {
+                rules: [{ required: true, message: '请选择技术栈' }],
+              })(
+                <Select
+                  placeholder="选择一个技术栈"
+                  onChange={this.handleSelectChange}
+                >
+                  {storageChildren}
+                </Select>
+              )}
+            </Form.Item>
+            <Form.Item
+              wrapperCol={{ span: 12, offset: 5 }}
+            >
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
+        </Modal>
       </div>
     );
   }
 }
+
+export default Form.create({ name: 'form_in_modal' })(TabComponent)
