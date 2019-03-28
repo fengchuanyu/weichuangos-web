@@ -37,6 +37,7 @@ export default class InputSelectComponent extends Component {
     for (let i = 0; i < this.state.option.length; i++) {
       children.push(<Option key={i.toString(36) + i}>{this.state.option[i].title}</Option>);
     }
+
     return (
       <span>
         <Select

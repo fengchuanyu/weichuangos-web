@@ -124,3 +124,12 @@ export async function queryNotices(params = {}) {
 export async function getFakeCaptcha(mobile) {
   return request(`/api/captcha?mobile=${mobile}`);
 }
+
+
+
+export async function getProjectName(str) {   //str为参数
+  return request('/api/getProjectName',{      //接口地址
+    method: 'POST',
+    body: str,
+  });
+}
