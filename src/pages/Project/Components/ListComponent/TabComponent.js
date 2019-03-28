@@ -166,10 +166,9 @@ class TabComponent extends React.Component {
       {
         title: 'Action',
         key: 'action',
-        align:'right',
+        align: 'right',
         render: (text, record) => (
           <div>
-            
             <a href="javascript:;">修改{record.name}</a>
             <Divider type="vertical" />
             <a href="javascript:;" onClick={this.listDelList.bind(this, text)}>
@@ -193,15 +192,17 @@ class TabComponent extends React.Component {
       {
         title: 'Action',
         key: 'action',
+        align: 'right',
         render: (text, record) => (
           <span>
-            <Button type="primary" onClick={this.showModal.bind(this, text)}>
-            项目发布
-            </Button>
             <a href="javascript:;">修改{record.name}</a>
             <Divider type="vertical" />
             <a href="javascript:;" onClick={this.storageDelList.bind(this, text)}>
               删除
+            </a>
+            <Divider type="vertical" />
+            <a href="javascript:;" onClick={this.showModal.bind(this, text)}>
+              查看详情
             </a>
           </span>
         ),
