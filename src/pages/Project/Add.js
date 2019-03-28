@@ -10,18 +10,18 @@ import OtherdocumentsComponent from './components/AddComponent/OtherdocumentsCom
 import ProgressIntroductionConponent from './components/AddComponent/ProgressIntroductionConponent'; //项目介绍
 import ButtonComponent from './components/AddComponent/ButtonComponent'; //确认取消按钮
 import { Button } from 'antd';
-// import router from 'umi/router';//路由引用
+import router from 'umi/router';//路由引用
 const name = "123"
 export default class Add extends Component {
-  // click(){
-  //   router.push('/project/list',)
-  // } //路由跳转
+  click(){
+    router.push('/project/list',)
+  } //路由跳转
   render() {
     return (
       <PageHeaderWrapper title="项目编辑">
         <Card bordered={false}>
           <div>
-            {/* <Button onClick={this.click.bind(this)}>OK</Button> */}
+            <Button onClick={this.click.bind(this)}>OK</Button>
             <InputNameComponent />
             <ProjectType />
             <InputNumberComponent />

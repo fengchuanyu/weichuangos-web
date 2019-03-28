@@ -5,6 +5,8 @@ const Option = Select.Option;
 const Search = Input.Search;
 const TabPane = Tabs.TabPane;
 import router from 'umi/router';//路由引用
+import { classNames } from 'classnames';
+import ProjectTeam from './../../ProjectTeam';
 
 class TabComponent extends React.Component {
   constructor(props) {
@@ -148,7 +150,10 @@ class TabComponent extends React.Component {
   listModify(){
     
     router.push('/project/add');
-  }//router
+  }//router   
+  listProTeam(){
+    router.push('/project/projectteam');
+  }                      
   storageDelList(text) {
     this.props.storageDel(text);
   };
@@ -162,7 +167,7 @@ class TabComponent extends React.Component {
         storageVisible:false
         
       })
-      router.push('/project/projectteam');
+      
     });
   };
 
@@ -236,6 +241,7 @@ class TabComponent extends React.Component {
         align: 'right',
         render: (text, record) => (
           <span>
+            <a href="javascript:;" className={styles.guohua} onClick={this.listProTeam.bind(this)}>项目队伍</a> 
             <a href="javascript:;" onClick={this.listModify.bind(this)}>修改{record.name}</a>
             <Divider type="vertical" />
             <a href="javascript:;" onClick={this.storageDelList.bind(this, text)}>
