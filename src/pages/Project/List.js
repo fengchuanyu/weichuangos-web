@@ -86,12 +86,14 @@ const storageData = [
   { title: '移动端开发', id: 44, isActive: false },
   { title: 'Vue', id: 45, isActive: false },
 ];
+
 export default class List extends Component {
   constructor(props) {
     super(props);
     this.state = {
       listData: list,
       storageData: storageData,
+      
     };
   }
   listDel(text) {
@@ -110,7 +112,8 @@ export default class List extends Component {
   }
   render() {
     return (
-      <PageHeaderWrapper title="列表">
+      
+      <PageHeaderWrapper title={name}>
         <Card bordered={false}>
           <div>
             <TabComponent

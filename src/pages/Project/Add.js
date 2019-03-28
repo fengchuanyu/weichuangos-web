@@ -11,9 +11,10 @@ import ProgressIntroductionConponent from './components/AddComponent/ProgressInt
 import ButtonComponent from './components/AddComponent/ButtonComponent'; //确认取消按钮
 import { Button } from 'antd';
 // import router from 'umi/router';//路由引用
+const name = "123"
 export default class Add extends Component {
   // click(){
-  //   router.push('/project/list')
+  //   router.push('/project/list',)
   // } //路由跳转
   render() {
     return (
