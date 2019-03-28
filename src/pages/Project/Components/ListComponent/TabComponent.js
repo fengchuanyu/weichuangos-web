@@ -175,7 +175,7 @@ class TabComponent extends React.Component {
               删除
             </a>
             <Divider type="vertical" />
-            <a href="javascript:;" onClick={this.showModal.bind(this, text)}>
+            <a href="javascript:;" onClick={this.listShowModal.bind(this, text)}>
               查看详情
             </a>
           </div>
@@ -201,8 +201,8 @@ class TabComponent extends React.Component {
               删除
             </a>
             <Divider type="vertical" />
-            <a href="javascript:;" onClick={this.showModal.bind(this, text)}>
-              查看详情
+            <a href="javascript:;" onClick={this.storageShowModal.bind(this, text)}>
+              项目发布
             </a>
           </span>
         ),
