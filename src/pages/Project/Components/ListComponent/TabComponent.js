@@ -4,6 +4,9 @@ import styles from './TabComponent.less';
 const Option = Select.Option;
 const Search = Input.Search;
 const TabPane = Tabs.TabPane;
+import router from 'umi/router';//路由引用
+import { classNames } from 'classnames';
+import ProjectTeam from './../../ProjectTeam';
 
 class TabComponent extends React.Component {
   constructor(props) {
@@ -140,6 +143,17 @@ class TabComponent extends React.Component {
   listDelList(text) {
     this.props.listDel(text);
   };
+  
+  listAdd(){
+    router.push('/project/add');
+  };
+  listModify(){
+    
+    router.push('/project/add');
+  }//router   
+  listProTeam(){
+    router.push('/project/projectteam');
+  }                      
   storageDelList(text) {
     this.props.storageDel(text);
   };
@@ -151,7 +165,9 @@ class TabComponent extends React.Component {
       }
       this.setState({
         storageVisible:false
+        
       })
+      
     });
   };
 
@@ -199,7 +215,7 @@ class TabComponent extends React.Component {
         align: 'right',
         render: (text, record) => (
           <div>
-            <a href="javascript:;">修改{record.name}</a>
+            <a href="javascript:;" onClick={this.listModify.bind(this)}>修改{record.name}</a>
             <Divider type="vertical" />
             <a href="javascript:;" onClick={this.listDelList.bind(this, text)}>
               删除
@@ -225,7 +241,8 @@ class TabComponent extends React.Component {
         align: 'right',
         render: (text, record) => (
           <span>
-            <a href="javascript:;">修改{record.name}</a>
+            <a href="javascript:;" className={styles.guohua} onClick={this.listProTeam.bind(this)}>项目队伍</a> 
+            <a href="javascript:;" onClick={this.listModify.bind(this)}>修改{record.name}</a>
             <Divider type="vertical" />
             <a href="javascript:;" onClick={this.storageDelList.bind(this, text)}>
               删除
@@ -280,13 +297,7 @@ class TabComponent extends React.Component {
                   style={{ width: 270, height: 33, fontSize: 14 + 'px', marginLeft: 1 + '%' }}
                 />
               </div>
-              <Button
-                type="dashed"
-                size={this.state.size}
-                style={{ width: 100 + '%', height: 33, marginTop: 10 }}
-              >
-                + 添加
-              </Button>
+              
               <Table columns={columns1} dataSource={this.state.nowData} />
             </TabPane>
             <TabPane tab="仓库中的任务" key="2">
@@ -325,6 +336,7 @@ class TabComponent extends React.Component {
                 type="dashed"
                 size={this.state.size}
                 style={{ width: 100 + '%', height: 33, marginTop: 10 }}
+                onClick={this.listAdd.bind(this)}
               >
                 + 添加
               </Button>

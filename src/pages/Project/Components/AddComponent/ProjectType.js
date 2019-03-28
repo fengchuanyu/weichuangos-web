@@ -19,7 +19,7 @@ export default class ProjectType extends Component {
     obj.title = value;
     obj.id = this.state.nowId+1;
     obj.isActive = false;
-    let newArray = this.state.list;
+    let newArray = this.state.list;   
     newArray.push(obj);
     console.log(newArray);
     

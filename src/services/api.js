@@ -133,3 +133,12 @@ export async function getProjectName(str) {   //str为参数
     body: str,
   });
 }
+
+export async function submitProject(str) {   //str为参数
+  return request('/api/submitProject',{      //接口地址
+    method: 'POST',
+    body: str,
+  });
+}
+
+
