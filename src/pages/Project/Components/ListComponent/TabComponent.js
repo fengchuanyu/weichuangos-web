@@ -143,17 +143,20 @@ export default class TabComponent extends Component {
       {
         title: 'Action',
         key: 'action',
+        align:'right',
         render: (text, record) => (
-          <span>
-            <Button type="primary" onClick={this.showModal.bind(this, text)}>
-              查看详情
-            </Button>
+          <div>
+            
             <a href="javascript:;">修改{record.name}</a>
             <Divider type="vertical" />
             <a href="javascript:;" onClick={this.listDelList.bind(this, text)}>
               删除
             </a>
-          </span>
+            <Divider type="vertical" />
+            <a href="javascript:;" onClick={this.showModal.bind(this, text)}>
+              查看详情
+            </a>
+          </div>
         ),
       },
     ];
