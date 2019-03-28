@@ -14,14 +14,14 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
       };
     }
     componentDidMount() {
-      console.log(this.props.newCur);
+      // console.log(this.props.newCur);
 
       this.setState({
         curList: this.props.newCur,
       });
     }
     componentWillReceiveProps(nextProps) {
-      console.log(nextProps);
+      // console.log(nextProps);
       this.setState({
         curList: nextProps.newCur,
       });
