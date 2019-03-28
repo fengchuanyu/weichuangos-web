@@ -13,16 +13,31 @@ import { Button } from 'antd';
 // import router from 'umi/router';//路由引用
 const name = "123"
 export default class Add extends Component {
+
   // click(){
-  //   router.push('/project/list',)
-  // } //路由跳转
+  //   router.push('/project/list')
+  // } //路由跳转.
+
+  constructor(props){
+    super(props);
+    this.state = {
+      InputName : '',
+    }
+  }
+
+  ReceiveInputName = (props) =>{
+    this.setState({
+      InputName:props,
+    })
+  }
+
   render() {
     return (
       <PageHeaderWrapper title="项目编辑">
         <Card bordered={false}>
           <div>
             {/* <Button onClick={this.click.bind(this)}>OK</Button> */}
-            <InputNameComponent />
+            <InputNameComponent TransmitInputName = {this.ReceiveInputName}/>
             <ProjectType />
             <InputNumberComponent />
             <SelectComponent />
