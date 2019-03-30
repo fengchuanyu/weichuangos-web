@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import { Input } from 'antd';
 export default class InputNameComponent extends Component {
-  constructor(props) {
+  constructor(props){
     super(props);
     this.state = {
-      numTest: '',
-    };
+      getProjectNumber:''
+    }
   }
 
-  inputNum(value) {
-    console.log(value);
-  }
+  inputNum = (event) => {
+    this.setState({
+      getProjectNumber:event.target.value
+    })
+    this.props.TransmitProjectNumber(this.state.getProjectNumber); 
+  };
 
   render() {
     return (

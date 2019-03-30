@@ -19,14 +19,55 @@ export default class Add extends Component {
 
   constructor(props){
     super(props);
-    this.state = {
-      InputName : '',
+    this.state={
+      proName:'',
+      proClass:'',
+      proClassArray:[],
+      proNumber:'',
+      proStack:'',
+      proStackArray:[],
+      proIntroduction:'',
     }
   }
-
-  ReceiveInputName = (props) =>{
+  ReceiveProjectName = (props) => {   
     this.setState({
-      InputName:props,
+      proName:props
+    });
+  }
+
+  ReceiveProjectNumber = (props) => {
+    this.setState({
+      proNumber:props
+    });
+  }
+
+  ReceiveProjectStack = (props) => {
+    this.setState({
+      proStack:props
+    })
+  }
+
+  ReceiveProjectStackArray = (props) =>{
+    this.setState({
+      proStackArray:props
+    })
+  }
+
+  ReceiveProjectClassType = (props) => {
+    this.setState({
+      proClass:props
+    })
+  }
+
+  ReceiveProjectTypeArray = (props) => {
+    this.setState({
+      proClassArray:props
+    })
+  }
+
+  ReceiveIntroduce = (props) =>{
+    this.setState({
+      proIntroduction:props
     })
   }
 
@@ -36,13 +77,28 @@ export default class Add extends Component {
         <Card bordered={false}>
           <div>
             {/* <Button onClick={this.click.bind(this)}>OK</Button> */}
-            <InputNameComponent TransmitInputName = {this.ReceiveInputName}/>
-            <ProjectType />
-            <InputNumberComponent />
-            <SelectComponent />
+            <InputNameComponent 
+              TransmitInputName = {this.ReceiveProjectName}/>
+            <ProjectType 
+              TransmitProjectClassType = {this.ReceiveProjectClassType}
+              TransmitProjectTypeArray = {this.ReceiveProjectTypeArray}/>
+            <InputNumberComponent 
+              TransmitProjectNumber = {this.ReceiveProjectNumber}/>
+            <SelectComponent 
+              TransmitProjectStack = {this.ReceiveProjectStack}
+              TransmitProjectStackArray = {this.ReceiveProjectStackArray}/>
             <OtherdocumentsComponent />
-            <ProgressIntroductionConponent />
-            <ButtonComponent />
+            <ProgressIntroductionConponent 
+              TransmitIntroduce = {this.ReceiveIntroduce}/>
+            <ButtonComponent 
+              PropsProjectName = {this.state.proName}
+              PropsProjectNumber = {this.state.proNumber}
+              PropsProjectStack = {this.state.proStack}
+              PropsProjectStackArray = {this.state.proStackArray}
+              PropsProjectClassType = {this.state.proClass}
+              PropsProjectTypeArray = {this.state.proClassArray}
+              PropsIntroduce = {this.state.proIntroduction}
+            />
           </div>
         </Card>
       </PageHeaderWrapper>

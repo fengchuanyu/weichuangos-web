@@ -10,15 +10,51 @@ import  { connect } from 'dva';
 })
 
 export default class ButtonComponent extends Component {
- 
-  submit = () =>{
-    const { dispatch } = this.props;
-    dispatch({
-      type:'subpro/submitPro',
-      payload:{test:'sssss'}
-    })
+
+  constructor(props){
+    super(props)
+    this.state={
+      proName:'',
+      proClass:'',
+      proClassArray:[],
+      proNumber:'',
+      proStack:'',
+      proStackArray:[],
+      proIntroduction:'',
+    }
   }
 
+
+  submit = () =>{
+    if(this.state.proName!='' && this.state.proClass!=[] && this.state.proNumber!='' &&
+       this.state.proStack != [] && this.state.proIntroduction!=''){
+          const { dispatch } = this.props;
+          dispatch({
+            type:'subpro/submitPro',
+            payload:{test:'sssss'}
+         })
+      }else {
+        // alert('false')
+      }
+  }
+
+  reset = () =>{
+
+  }
+
+  componentWillReceiveProps(nextProps){
+    console.log(nextProps)
+    this.setState({
+      proName : nextProps.PropsProjectName,
+      proNumber : nextProps.PropsProjectNumber,
+      proStack : nextProps.PropsProjectStack,
+      proStackArray : nextProps.PropsProjectStackArray,
+      proClass : nextProps.PropsProjectClassType,
+      proClassArray : nextProps.PropsProjectTypeArray,
+      proIntroduction : nextProps.PropsIntroduce
+      })
+      // console.log(this.state.proNumber)
+  }
 
   render() {
     return (
@@ -27,7 +63,7 @@ export default class ButtonComponent extends Component {
           onClick = {this.submit}>
           提交
         </Button>
-        <Button icon="close-circle">取消</Button>
+        <Button icon="close-circle" onClick = {this.reset}>取消</Button>
       </div>
     );
   }
