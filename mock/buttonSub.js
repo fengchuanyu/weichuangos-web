@@ -1,11 +1,15 @@
 
 function postSubmit (req,res){
     let str = '';
-    str+=req.param('test');
+    // str+=req.param('test');
     return res.json({
-        tempStamp:12346551,
-        status:403,
-        returnNum:str
+        proName:'sdsa ',
+        proClass:'sad as',
+        proClassArray:[],
+        proNumber:'',
+        proStack:'',
+        proStackArray:[],
+        proIntroduction:'',
     })
 }
 

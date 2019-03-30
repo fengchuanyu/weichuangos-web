@@ -11,6 +11,7 @@ export default class ProjectType extends Component {
         { title: 'Vue', id: 3, isActive: false },
       ],
       nowId: 3,
+      projectClassValue:''
     };
     this.getValue = this.getValue.bind(this);
   }
@@ -27,6 +28,7 @@ export default class ProjectType extends Component {
       list: newArray,
       nowId: this.state.nowId++,
     });
+    this.props.TransmitProjectTypeArray(this.state.list);
   }
   setActive(item) {
     let temp = this.state.list;
@@ -38,6 +40,7 @@ export default class ProjectType extends Component {
     this.setState({
       list: temp,
     });
+    this.props.TransmitProjectTypeArray(this.state.list);
   }
   setItem(item, value) {
     let temp = this.state.list;
@@ -50,24 +53,36 @@ export default class ProjectType extends Component {
     this.setState({
       list: temp,
     });
+    this.props.TransmitProjectTypeArray(this.state.list);
   }
   del(item) {
     let temp = this.state.list;
     temp = temp.filter(function(x) {
       return x.id != item.id;
     });
-    console.log(temp);
+    // console.log(temp);
     
     this.setState({
       list: temp,
-      
     });
+    this.props.TransmitProjectTypeArray(this.state.list);
   }
+
+  Temp = (props) =>{  //获取子组件的value【input select】
+    this.setState({
+      projectClassValue:props
+    })
+    this.props.TransmitProjectClassType(this.state.projectClassValue)
+    this.props.TransmitProjectTypeArray(this.state.list);
+  }
+
   render() {
     return (
       <div style={{ marginLeft: 25.4 + '%', marginBottom: 15 }}>
         项目分类：
-        <InputSelectComponent newValues={this.state.list} />
+        <InputSelectComponent 
+          newValues={this.state.list}
+          TransmitProjectType = {this.Temp} />
         <AddComponent
           getValues={this.getValue}
           newList={this.state.list}

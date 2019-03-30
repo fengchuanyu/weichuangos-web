@@ -317,6 +317,14 @@ const getActivities = [
   },
 ];
 
+
+const getInformation = [
+  {
+    
+  }
+]
+
+
 function getFakeCaptcha(req, res) {
   return res.json('captcha-xxx');
 }
@@ -333,4 +341,6 @@ export default {
   'GET /api/fake_list': getFakeList,
   'POST /api/fake_list': postFakeList,
   'GET /api/captcha': getFakeCaptcha,
+
+  'GET /api/home': getInformation,
 };
