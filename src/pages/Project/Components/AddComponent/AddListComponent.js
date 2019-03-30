@@ -72,7 +72,7 @@ const AddListComponent = Form.create({ name: 'form_in_modal' })(
                 </div>
                 <div className={item.isActive ? styles.listActive : styles.addList}>
                   <Form>
-                    <Form.Item>
+                    <Form.Item className={styles.attention}>
                       {getFieldDecorator('note', {
                         rules: [{ required: true, message: '项目名称不能为空' }],
                       })(<Input type="text" onChange={this.changeValue.bind(this, item)} />)}
