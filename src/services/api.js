@@ -142,3 +142,9 @@ export async function submitProject(str) {   //str为参数
 }
 
 
+export async function queryUnderway() {   //请求进行中仓库
+  return request(`/api/underway`);
+}
+
+
+
