@@ -104,7 +104,7 @@ export default class CardComponent extends Component {
             />
           </div>
         </div>
-        <div>
+        <div className={styles.lista}>
           <List
             size="small"
             
@@ -114,16 +114,14 @@ export default class CardComponent extends Component {
                 <Card
                   size="small"
                   className={styles.card}
-                  grid={{ gutter: 24, lg: 3, md: 2, sm: 1, xs: 1 }}
                   style={{ height: 250, width: 330, marginLeft: 1, marginRight: 1 }}
                   actions={[
                     <Button
-                      style={{height:37,width:300}}
+                      
+                      block
                       type="primary"
                       onClick={this.showModal.bind(this, data.data)}
-                    >
-                      查看详情
-                    </Button>,
+                    >查看详情</Button>,
                   ]}
                 >
                   <List

@@ -263,7 +263,7 @@ class TabComponent extends React.Component {
           <span className={this.state.active}>进行中({this.state.value1})</span>/
           <span className={this.state.none}>仓库({this.state.value2})</span>
         </div>
-        <div>
+        <div className={styles.tab1}>
           <Tabs defaultActiveKey="1" onTabClick={this.click.bind(this)} className={styles.menu}>
             <TabPane tab="进行中的任务" key="1">
               <div>
