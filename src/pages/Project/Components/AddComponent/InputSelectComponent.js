@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 import { Select } from 'antd';
+
 const Option = Select.Option;
 
-function handleChange(value) {
-  console.log(`selected ${value}`);
-}
 
-function handleBlur() {
-  console.log('blur');
-}
-
-function handleFocus() {
-  console.log('focus');
-}
 
 export default class InputSelectComponent extends Component {
   constructor(props) {
@@ -32,6 +23,11 @@ export default class InputSelectComponent extends Component {
     });
   }
 
+  handleBlur = (value) => {
+    this.props.TransmitProjectType(value);
+  }
+  
+
   render() {
     const children = [];
     for (let i = 0; i < this.state.option.length; i++) {
@@ -45,9 +41,7 @@ export default class InputSelectComponent extends Component {
           style={{ width: 380 }}
           placeholder="微信小程序"
           optionFilterProp="children"
-          onChange={handleChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
+          onBlur={this.handleBlur}
           filterOption={(input, option) =>
             option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
           }

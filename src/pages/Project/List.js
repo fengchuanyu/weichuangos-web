@@ -4,6 +4,8 @@ import { Card } from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper'; //面包屑
 import TabComponent from './components/ListComponent/TabComponent'; //分页表
 import { formatMessage, FormattedMessage } from 'umi/locale';
+import { connect }  from 'dva'
+
 const list = [
   { title: '微信小程序', id: 1, isActive: false },
   { title: '移动端开发', id: 2, isActive: false },
@@ -87,6 +89,14 @@ const storageData = [
   { title: 'Vue', id: 45, isActive: false },
 ];
 
+@connect((underWay) => {
+  return ({
+    underWay, 
+  })
+})
+
+
+
 export default class List extends Component {
   constructor(props) {
     super(props);
@@ -96,6 +106,16 @@ export default class List extends Component {
       
     };
   }
+
+  componentDidMount(){
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'Underway/fetch',  
+      payload:{
+}
+    });    
+  }
+
   listDel(text) {
     this.setState({
       listData: this.state.listData.filter(item => {

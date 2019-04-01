@@ -13,7 +13,7 @@ export default class ProgressIntroductionConponent extends React.Component {
 
   handleChange(value) {
     this.setState({ text: value });
-    console.log(value);
+    this.props.TransmitIntroduce(this.state.text)
   }
 
   render() {

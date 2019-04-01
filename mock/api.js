@@ -317,6 +317,8 @@ const getActivities = [
   },
 ];
 
+
+
 function getFakeCaptcha(req, res) {
   return res.json('captcha-xxx');
 }
