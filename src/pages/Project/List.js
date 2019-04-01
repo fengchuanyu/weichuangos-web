@@ -89,8 +89,6 @@ const storageData = [
   { title: 'Vue', id: 45, isActive: false },
 ];
 
-<<<<<<< HEAD
-=======
 @connect((underWay) => {
   return ({
     underWay, 
@@ -99,7 +97,6 @@ const storageData = [
 
 
 
->>>>>>> newhl
 export default class List extends Component {
   constructor(props) {
     super(props);
