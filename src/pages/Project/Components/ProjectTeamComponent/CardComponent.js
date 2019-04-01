@@ -82,6 +82,7 @@ export default class CardComponent extends Component {
           </div>
           <div>
             <Search
+              className={'cardinput'}
               placeholder="请输入"
               onSearch={value => {
                 {
