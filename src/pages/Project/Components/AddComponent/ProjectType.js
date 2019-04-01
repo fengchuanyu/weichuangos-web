@@ -25,7 +25,7 @@ export default class ProjectType extends Component {
     
     this.setState({
       list: newArray,
-      nowId: this.state.nowId++,
+      nowId: this.state.nowId+1,
     });
   }
   setActive(item) {

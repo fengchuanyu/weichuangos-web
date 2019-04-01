@@ -94,7 +94,7 @@ export default class CardComponent extends Component {
                     });
                   } else {
                     this.setState({
-                      nowDatas: this.state.nowDatas,
+                      nowDatas: this.state.datas,
                     });
                   }
                 }
@@ -104,14 +104,13 @@ export default class CardComponent extends Component {
             />
           </div>
         </div>
-        <div style={{ background: '#ECECEC', padding: '30px' }}>
+        <div>
           <List
             size="small"
-            bordered={{ width: 900 }}
-            style={{ height: 900, width: 1250 }}
+            
             dataSource={this.state.nowDatas}
             renderItem={data => (
-              <List.Item key={data.id} className={styles.card}>
+              <List.Item key={data.id} className={styles.card} style={{width:33+"%"}}>
                 <Card
                   size="small"
                   className={styles.card}
