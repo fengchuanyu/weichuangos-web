@@ -26,13 +26,9 @@ export default class ProjectType extends Component {
     
     this.setState({
       list: newArray,
-<<<<<<< HEAD
-      nowId: this.state.nowId+1,
-=======
       nowId: this.state.nowId++,
     },()=>{
       this.props.TransmitProjectTypeArray(this.state.list);
->>>>>>> newhl
     });
   }
   setActive(item) {
