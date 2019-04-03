@@ -11,10 +11,13 @@ export default class InputNameComponent extends Component {
   }
 
   getProjectName = (event) => {
+    console.log(event.target.value)
     this.setState({
       projectName:event.target.value
+    },()=>{
+      this.props.TransmitInputName(this.state.projectName)
     })
-    this.props.TransmitInputName(this.state.projectName)
+    
     // console.log(this.state.projectName)
   }
 

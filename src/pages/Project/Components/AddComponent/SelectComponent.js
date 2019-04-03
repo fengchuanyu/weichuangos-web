@@ -38,11 +38,11 @@ class SelectComponent extends Component {
     this.setState({
       skillStack:`${value}`,
       skillStackArray:value
+    },()=>{
+      this.props.TransmitProjectStack(this.state.skillStack);   
+      this.props.TransmitProjectStackArray(this.state.skillStackArray);
     });
-    this.props.TransmitProjectStack(this.state.skillStack); 
-    this.props.TransmitProjectStackArray(this.state.skillStackArray);
-    console.log(this.state.skillStack)
-    console.log(this.state.skillStackArray)
+    
   };
 
   // upLoad = value => {

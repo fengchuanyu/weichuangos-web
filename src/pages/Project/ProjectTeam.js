@@ -3,60 +3,65 @@ import React, { Component } from 'react';
 import { Card } from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper'; //面包屑
 import CardComponent from './components/ProjectTeamComponent/CardComponent'; //栅格卡片
-const data = [
-  { key: '组长:', value: 'ehrthbt' },
-  { key: '组员:', value: 'htrhtr' },
-  { key: '组内人数:', value: 'htrhtr' },
-  { key: '报选项目:', value: '微信小程序' },
-  { key: '项目报选时间:', value: 'htrhtr' },
-];
-const data1 = [
-  { key: '组长:', value: 'gegvgrtn' },
-  { key: '组员:', value: 'gegvgrtn' },
-  { key: '组内人数:', value: 'gegvgrtn' },
-  { key: '报选项目:', value: '移动端开发' },
-  { key: '项目报选时间:', value: 'gegvgrtn' },
-];
-const data2 = [
-  { key: '组长:', value: 'ukiumiukmu' },
-  { key: '组员:', value: 'ukiumiukmu' },
-  { key: '组内人数:', value: 'ukiumiukmu' },
-  { key: '报选项目:', value: 'Vue' },
-  { key: '项目报选时间:', value: 'ukiumiukmu' },
-];
-const datas = [
-  { id: 1, data: data },
-  { id: 2, data: data1 },
-  { id: 3, data: data2 },
-  { id: 4, data: data },
-  { id: 5, data: data },
-  { id: 6, data: data },
-  { id: 7, data: data },
-  { id: 8, data: data },
-  { id: 9, data: data },
-];
-const list = [
-  { title: '微信小程序', id: 1, isActive: false },
-  { title: '移动端开发', id: 2, isActive: false },
-  { title: 'Vue', id: 3, isActive: false },
-];
+
+import { connect } from 'dva';
+
+
+let flag = 0;
+@connect((projectTeam) => {
+  return ({
+    projectTeam, 
+  })
+})
+
+
 export default class ProjectTeam extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      datas: datas,
-      list: list,
+      datas: [],
+      list: [],
+      test:1
     };
   }
-  render() {
+  componentDidMount(){
+     const { dispatch } = this.props;
+    dispatch({
+      type:"projectTeam/getProjectTeamInfo",
+      payload:{}
+    }) 
+    flag = 0;
+  }
+
+  componentWillReceiveProps(){
+    let _this = this;
+    // console.log(flag++);
+    // console.log(this.props.projectTeam.projectTeam.list.datas);
+    if(this.props.projectTeam.projectTeam.list.datas){
+        this.setState({
+        datas:this.props.projectTeam.projectTeam.list.datas,
+        list:this.props.projectTeam.projectTeam.list.list,
+        test : ++this.state.test  
+      },()=>{
+        console.log(this.state)
+      })
+    }
+  }
+
+  render() { 
     return (
       <PageHeaderWrapper title="项目组">
-        <Card bordered={false}>
           <div>
-            <CardComponent Datas={this.state.datas} List={this.state.list} />
+            <CardComponent  Datas={this.state.datas} List={this.state.list} Test = {this.state.test}/>
           </div>
-        </Card>
       </PageHeaderWrapper>
     );
   }
 }
+/*Datas={this.state.datas} List={this.state.list}
+const { dispatch } = this.props;
+    dispatch({
+      type:"projectTeam/getProjectTeamInfo",
+      payload:{}
+    }) 
+*/ 

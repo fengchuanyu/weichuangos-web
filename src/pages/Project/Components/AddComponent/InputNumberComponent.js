@@ -11,8 +11,10 @@ export default class InputNameComponent extends Component {
   inputNum = (event) => {
     this.setState({
       getProjectNumber:event.target.value
+    },()=>{
+      this.props.TransmitProjectNumber(this.state.getProjectNumber); 
     })
-    this.props.TransmitProjectNumber(this.state.getProjectNumber); 
+  
   };
 
   render() {

@@ -127,12 +127,7 @@ export async function getFakeCaptcha(mobile) {
 
 
 
-export async function getProjectName(str) {   //str为参数
-  return request('/api/getProjectName',{      //接口地址
-    method: 'POST',
-    body: str,
-  });
-}
+
 
 export async function submitProject(str) {   //str为参数
   return request('/api/submitProject',{      //接口地址
@@ -146,5 +141,17 @@ export async function queryUnderway() {   //请求进行中仓库
   return request(`/api/underway`);
 }
 
+export async function getProjectTeam(str) {   //str为参数
+  return request('/api/getProjectTeam',{      //接口地址
+    method: 'POST',
+    body: str,
+  });
+}
 
+export async function getProjectList(str) {   //str为参数
+  return request('/api/getProjectList',{ //接口地址
+    method: 'POST',
+    body: str,  // 参数
+  });
+}
 

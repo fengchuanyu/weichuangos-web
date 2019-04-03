@@ -27,8 +27,9 @@ export default class ProjectType extends Component {
     this.setState({
       list: newArray,
       nowId: this.state.nowId++,
+    },()=>{
+      this.props.TransmitProjectTypeArray(this.state.list);
     });
-    this.props.TransmitProjectTypeArray(this.state.list);
   }
   setActive(item) {
     let temp = this.state.list;
@@ -39,8 +40,9 @@ export default class ProjectType extends Component {
     }
     this.setState({
       list: temp,
+    },()=>{
+       this.props.TransmitProjectTypeArray(this.state.list);
     });
-    this.props.TransmitProjectTypeArray(this.state.list);
   }
   setItem(item, value) {
     let temp = this.state.list;
@@ -52,8 +54,9 @@ export default class ProjectType extends Component {
     }
     this.setState({
       list: temp,
+    },()=>{
+      this.props.TransmitProjectTypeArray(this.state.list);
     });
-    this.props.TransmitProjectTypeArray(this.state.list);
   }
   del(item) {
     let temp = this.state.list;
@@ -64,16 +67,19 @@ export default class ProjectType extends Component {
     
     this.setState({
       list: temp,
+    },()=>{
+      this.props.TransmitProjectTypeArray(this.state.list);
     });
-    this.props.TransmitProjectTypeArray(this.state.list);
+    
   }
 
   Temp = (props) =>{  //获取子组件的value【input select】
     this.setState({
       projectClassValue:props
-    })
-    this.props.TransmitProjectClassType(this.state.projectClassValue)
-    this.props.TransmitProjectTypeArray(this.state.list);
+    },()=>{
+      this.props.TransmitProjectClassType(this.state.projectClassValue)
+      this.props.TransmitProjectTypeArray(this.state.list);
+    }) 
   }
 
   render() {
