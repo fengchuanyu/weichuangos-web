@@ -4,6 +4,8 @@ import { Card } from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper'; //面包屑
 import TabComponent from './components/ListComponent/TabComponent'; //分页表
 import { formatMessage, FormattedMessage } from 'umi/locale';
+
+
 import { connect }  from 'dva'
 
 const list = [
@@ -89,9 +91,10 @@ const storageData = [
   { title: 'Vue', id: 45, isActive: false },
 ];
 
-@connect((underWay) => {
+
+@connect((projectList) => {
   return ({
-    underWay, 
+    projectList, 
   })
 })
 
@@ -103,18 +106,33 @@ export default class List extends Component {
     this.state = {
       listData: list,
       storageData: storageData,
-      
     };
   }
 
-  componentDidMount(){
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'Underway/fetch',  
-      payload:{
-}
-    });    
+
+
+  componentWillMount(){
+    // const { dispatch } = this.props;
+    // dispatch({
+    //   type : 'projectList/getProjectListInfo',
+    //   payload :'',
+    // })
+    // console.log(this.props)
+    console.log('componentWillMount')
   }
+
+  componentDidMount(){
+    console.log('componentDidMount')
+  }
+
+  componentWillReceiveProps(){
+    console.log('componentWillReceiveProps')
+  }
+
+  componentWillUpdate(){
+    console.log('componentWillUpdatey')
+  }
+
 
   listDel(text) {
     this.setState({

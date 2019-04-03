@@ -24,13 +24,12 @@ export default class ButtonComponent extends Component {
     }
   }
 
-
- 
-
   reset = () =>{
 
   }
-
+  componentDidUpdate(){
+    console.log(this.props)
+  }
   componentWillReceiveProps(nextProps){
     console.log(nextProps)
     this.setState({
@@ -42,13 +41,15 @@ export default class ButtonComponent extends Component {
       proClassArray : nextProps.PropsProjectTypeArray,
       proIntroduction : nextProps.PropsIntroduce
       })
-      // console.log(this.state.proNumber)
+      // console.log(nextProps)
+
   }
 
   submit = () =>{
     if(this.state.proName!='' && this.state.proClass!=[] && this.state.proNumber!='' &&
        this.state.proStack != [] && this.state.proIntroduction!=''){
           const { dispatch } = this.props;
+          console.log(this.props)
           dispatch({
             type:'subpro/submitPro',
               payload:{
@@ -59,7 +60,7 @@ export default class ButtonComponent extends Component {
                 sendStack:this.state.proStack,
                 sendStackArray:this.state.proStackArray,
                 sendIntroduction:this.state.proIntroduction,
-          }
+          } 
          })
       }else {
         alert('false')

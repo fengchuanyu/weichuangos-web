@@ -12,20 +12,37 @@ export default class CardComponent extends Component {
       list: [],
       datas: [],
       nowDatas: [],
+      TEXT:[]
     };
   }
-  componentDidMount() {
+  componentWillReceiveProps(pro){
+    // this.props 记录上一次的
+    //nextprops 会进行新旧记录比对，然后修改.
     this.setState({
-      list: this.props.List.concat({
+      list: pro.List.concat({
         title: '全部项目',
-        id: this.props.List.length,
+        id: pro.List.length,
         isActive: false,
       }),
-      datas: this.props.Datas,
-      nowDatas: this.props.Datas,
+      datas: pro.Datas,
+      nowDatas: pro.Datas,
     });
   }
-  showModal = data => {
+  // componentDidMount() {
+  //   console.log('didmount')
+  //   // this.setState({
+  //   //   TEXT:this.props.Text,
+  //   //   list: this.props.List.concat({
+  //   //     title: '全部项目',
+  //   //     id: this.props.List.length,
+  //   //     isActive: false,
+  //   //   }),
+  //   //   datas: this.props.Datas,
+  //   //   nowDatas: this.props.Datas,
+  //   // });
+  // }
+
+  showModal = data => {  //是否显示详情页
     console.log(data);
 
     this.setState({
@@ -60,9 +77,10 @@ export default class CardComponent extends Component {
   }
   render() {
     const children = [];
+    // 获取全部项目类型
     for (let i = 0; i < this.state.list.length; i++) {
       children.push(
-        <Option key={this.state.list[i].id} value={this.state.list[i].title}>
+        <Option key={this.state.list[i].id} value={this.state.list[i].title}>  
           {this.state.list[i].title}
         </Option>
       );
@@ -80,7 +98,7 @@ export default class CardComponent extends Component {
               {children}
             </Select>
           </div>
-          <div>
+          {/* <div>
             <Search
               className={'cardinput'}
               placeholder="请输入"
@@ -102,7 +120,7 @@ export default class CardComponent extends Component {
               enterButton
               style={{ position: 'absolute', left: 680, width: 250, top: -10 }}
             />
-          </div>
+          </div> */}
         </div>
         <div className={styles.lista}>
           <List

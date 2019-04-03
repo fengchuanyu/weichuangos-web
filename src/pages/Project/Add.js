@@ -30,6 +30,7 @@ export default class Add extends Component {
     }
   }
   ReceiveProjectName = (props) => {   
+    console.log(props)
     this.setState({
       proName:props
     });

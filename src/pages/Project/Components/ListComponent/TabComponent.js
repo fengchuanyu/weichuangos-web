@@ -14,8 +14,8 @@ class TabComponent extends React.Component {
     this.state = {
       active: styles.active,
       none: styles.none,
-      value1: this.props.ListData.length,
-      value2: this.props.StorageData.length,
+      value1: this.props.ListData.length,   //进行中任务的个数
+      value2: this.props.StorageData.length, //仓库里....
       size: 'large',
       listVisible:false,
       storageVisible:false,
