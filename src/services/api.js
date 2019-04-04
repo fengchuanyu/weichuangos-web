@@ -148,7 +148,7 @@ export async function getProjectTeam(str) {   //str为参数
   });
 }
 
-export async function getProjectList(str) {   //str为参数
+export async function getProjectList(str) {   // 请求 进行中/仓库
   return request('/api/getProjectList',{ //接口地址
     method: 'POST',
     body: str,  // 参数

@@ -14,53 +14,59 @@ class TabComponent extends React.Component {
     this.state = {
       active: styles.active,
       none: styles.none,
-      value1: this.props.ListData.length,   //进行中任务的个数
-      value2: this.props.StorageData.length, //仓库里....
+      value1: 0,   //进行中任务的个数
+      value2: 0, //仓库里....
       size: 'large',
-      listVisible:false,
+      listVisible:false,   // 进行中是否显示的状态
       storageVisible:false,
-      listData: this.props.ListData,
-      nowData: this.props.ListData,
-      storageData: this.props.StorageData,
-      nowStorage: this.props.StorageData,
+      listData:[],
+      nowData: [],
+      nowProInfo : [],
+      storageData: [],
+      nowStorage: [],
+      listType:[],     //进行中用于筛选的项目类型
+      storageType: [],   //仓库中用于筛选的项目类型
+      nowText: '',
+      type:[]
+    };
+  }
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      nowProInfo : nextProps.ProjectInfo,
+      listData: nextProps.ListData,
+      nowData: nextProps.ListData,
+      storageData: nextProps.StorageData,
+      nowStorage: nextProps.StorageData,
+      value1: nextProps.ListData.length,   //进行中任务的个数
+      value2: nextProps.StorageData.length, //仓库里....
       listType: Array.from(
         new Set(
-          this.props.ListData.concat({
-            title: '全部项目',
-            id: this.props.ListData.length,
+          nextProps.ListData.concat({
+            proClass: '全部项目',
+            id: nextProps.ListData.length,
             isActive: false,
           }).map(item => {
-            return item.title;
+            return item.proClass;
           })
         )
       ),
       storageType: Array.from(
         new Set(
-          this.props.StorageData.concat({
-            title: '全部项目',
-            id: this.props.StorageData.length,
-            isActive: false,
+          nextProps.StorageData.concat({
+            proClass: '全部项目',
+            id: nextProps.StorageData.length,
           }).map(item => {
-            return item.title;
+            return item.proClass;    //只能返回一个值， 仅用于筛选
           })
         )
       ),
-      nowText: '',
       type: Array.from(
         new Set(
-          this.props.StorageData.map(item => {
-            return item.title;
+          nextProps.StorageData.map(item => {
+            return item.proClass;
           })
         )
       ),
-    };
-  }
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      listData: nextProps.ListData,
-      nowData: nextProps.ListData,
-      storageData: nextProps.StorageData,
-      nowStorage: nextProps.StorageData,
     });
   }
 
@@ -95,20 +101,22 @@ class TabComponent extends React.Component {
     console.log(value);
     if (value != '全部项目') {
       this.setState({
-        nowStorage: this.state.listData.filter(item => {
+        nowStorage: this.state.storageData.filter(item => {
           return item.title == value;
         }),
       });
     } else {
       this.setState({
-        nowStorage: this.state.listData,
+        nowStorage: this.state.storageData,
       });
     }
   }
-  listShowModal = text => {
+  listShowModal = text => {    //显示详情里的内容发送一个请求   请求的是  当前项目里的内容
     this.setState({
       listVisible: true,
       nowText: text,
+    },()=>{
+      console.log(text)
     });
   };
   storageShowModal = text => {
@@ -165,9 +173,7 @@ class TabComponent extends React.Component {
       }
       this.setState({
         storageVisible:false
-        
       })
-      
     });
   };
 
@@ -203,20 +209,22 @@ class TabComponent extends React.Component {
       );
     }
     const columns1 = [
+      // dataIndex 项目名称  
       {
         title: '项目名称',
-        dataIndex: 'title',
-        key: 'title',
+        dataIndex: 'proName',
+        key: 'proName',
         render: text => <a href="javascript:;">{text}</a>,
       },
       {
         title: 'Action',
         key: 'action',
         align: 'right',
+        // diveder 竖线
         render: (text, record) => (
           <div>
-            <a href="javascript:;" onClick={this.listModify.bind(this)}>修改{record.name}</a>
-            <Divider type="vertical" />
+            <a href="javascript:;" onClick={this.listModify.bind(this)}>修改</a>
+            <Divider type="vertical" />  
             <a href="javascript:;" onClick={this.listDelList.bind(this, text)}>
               删除
             </a>
@@ -231,8 +239,8 @@ class TabComponent extends React.Component {
     const columns2 = [
       {
         title: '项目名称',
-        dataIndex: 'title',
-        key: 'title',
+        dataIndex: 'proName',
+        key: 'proName',
         render: text => <a href="javascript:;">{text}</a>,
       },
       {
@@ -268,10 +276,10 @@ class TabComponent extends React.Component {
             <TabPane tab="进行中的任务" key="1">
               <div>
                 <span className={styles.rwlb}>任务列表</span>
-                <span className={styles.qbrw}>全部任务/({this.state.value2})</span>
+                {/* <span className={styles.qbrw}>全部任务/({this.state.value2})</span> */}
                 <span className={styles.rwss}>任务筛选：</span>
                 <Select
-                  defaultValue={this.state.listType[3]}
+                  defaultValue={this.state.listType[this.state.listType.length-1]}
                   style={{ width: 230, height: 20, fontSize: 13 + 'px' }}
                   onChange={this.handleChange.bind(this)}
                 >
@@ -297,16 +305,16 @@ class TabComponent extends React.Component {
                   style={{ width: 270, height: 33, fontSize: 14 + 'px', marginLeft: 1 + '%' }}
                 />
               </div>
-              
-              <Table columns={columns1} dataSource={this.state.nowData} />
+              {/* dataSourse是项目详情 */}
+              <Table columns={columns1} dataSource={this.state.nowData} />  
             </TabPane>
             <TabPane tab="仓库中的任务" key="2">
               <div>
                 <span className={styles.rwlb}>任务列表</span>
-                <span className={styles.qbrw}>全部任务/({this.state.value2})</span>
+                {/* <span className={styles.qbrw}>全部任务/({this.state.value2})</span> */}
                 <span className={styles.rwss}>任务筛选：</span>
                 <Select
-                  defaultValue={this.state.storageType[3]}
+                  defaultValue={this.state.storageType[this.state.storageType.length-1]}
                   style={{ width: 230, height: 20, fontSize: 13 + 'px' }}
                   onChange={this.storageHandleChange.bind(this)}
                 >
@@ -350,7 +358,12 @@ class TabComponent extends React.Component {
           onOk={this.listHandleOk}
           onCancel={this.listHandleCancel}
         >
-          <p>{this.state.nowText.title}</p>
+          <p>项目名称：{this.state.nowText.proName}</p>
+          <p>项目类型：{this.state.nowText.proClass}</p>
+          <p>项目编号：{this.state.nowText.proNum}</p>
+          <p>应用技术栈：{this.state.nowText.proStack}</p>
+          <p>项目描述：{this.state.nowText.proInfo}</p>  
+          {/* 怎么解析带标签的字符串 */}
         </Modal>
         <Modal
           title="项目发布"

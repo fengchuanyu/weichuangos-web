@@ -16,7 +16,7 @@ export default {
         });
       }
     },
-      reducers: {
+    reducers: {
       queryList(state, action) {
         return {
           ...state,

@@ -7,7 +7,7 @@ import CardComponent from './components/ProjectTeamComponent/CardComponent'; //æ
 import { connect } from 'dva';
 
 
-let flag = 0;
+
 @connect((projectTeam) => {
   return ({
     projectTeam, 
@@ -21,7 +21,6 @@ export default class ProjectTeam extends Component {
     this.state = {
       datas: [],
       list: [],
-      test:1
     };
   }
   componentDidMount(){
@@ -30,20 +29,15 @@ export default class ProjectTeam extends Component {
       type:"projectTeam/getProjectTeamInfo",
       payload:{}
     }) 
-    flag = 0;
   }
 
   componentWillReceiveProps(){
     let _this = this;
-    // console.log(flag++);
-    // console.log(this.props.projectTeam.projectTeam.list.datas);
     if(this.props.projectTeam.projectTeam.list.datas){
         this.setState({
         datas:this.props.projectTeam.projectTeam.list.datas,
         list:this.props.projectTeam.projectTeam.list.list,
-        test : ++this.state.test  
       },()=>{
-        console.log(this.state)
       })
     }
   }
