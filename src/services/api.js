@@ -174,3 +174,9 @@ export async function postCommit(str) {   // 删除storage列表里的内容
   });
 }
 
+export async function getReviseInfo(str) {   //str为参数
+  return request('/api/getReviseInfo',{      //接口地址
+    method: 'POST',
+    body: str,
+  });
+}

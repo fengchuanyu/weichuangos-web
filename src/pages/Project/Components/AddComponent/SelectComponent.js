@@ -34,6 +34,19 @@ class SelectComponent extends Component {
       skillStackArray:[],
     };
   }
+
+  componentWillReceiveProps(nextProps){
+    console.log(typeof(nextProps.ReviseProjectStackArray) )  // typeof ....
+
+    console.log(Object.prototype.toString.call(nextProps.ReviseProjectStackArray))
+    console.log(nextProps.ReviseProjectStackArray)
+    this.setState({
+      // skillStackArray:nextProps.ReviseProjectStackArray.split(","),
+    },()=>{
+      console.log(this.state.skillStackArray)
+    })
+  }
+
   handleChange = value => {
     this.setState({
       skillStack:`${value}`,
@@ -45,12 +58,6 @@ class SelectComponent extends Component {
     
   };
 
-  // upLoad = value => {
-  //   console.log(value);
-  //   this.setState({
-  //     test: `${value}`,
-  //   });
-  // };
 
   render() {
     return (
@@ -60,7 +67,7 @@ class SelectComponent extends Component {
           mode="multiple"
           style={{ width: 467 }}
           placeholder="Please select"
-          defaultValue={['ES6']}
+          defaultValue={this.state.skillStackArray}
           onChange={this.handleChange}
           onBlur={this.upLoad} //why
         >

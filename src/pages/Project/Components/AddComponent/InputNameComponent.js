@@ -10,6 +10,12 @@ export default class InputNameComponent extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      projectName:nextProps.ReviseInputName,
+    })
+  }
+
   getProjectName = (event) => {
     console.log(event.target.value)
     this.setState({
@@ -17,15 +23,13 @@ export default class InputNameComponent extends Component {
     },()=>{
       this.props.TransmitInputName(this.state.projectName)
     })
-    
-    // console.log(this.state.projectName)
   }
 
   render() {
     return (
       <div style={{ marginLeft: 25.4 + '%', marginBottom: 15 }}>
         项目名称：
-        <Input style={{ width: 467 }} placeholder="给目标起个名字" onChange = {this.getProjectName}/>
+        <Input style={{ width: 467 }} placeholder="给目标起个名字" onChange = {this.getProjectName} value = {this.state.projectName}/>
       </div>
     );
   }

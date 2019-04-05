@@ -15,6 +15,15 @@ export default class ProgressIntroductionConponent extends React.Component {
     this.setState({ text: value });
     this.props.TransmitIntroduce(this.state.text)
   }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      text:nextProps.ReviseIntroduce,
+    },()=>{
+      console.log(this.state.text)
+    })
+  }
+
 // ant design --> 社区 -->精选组件 --> 富文本编辑器 --> reactQuill  /    braft-editor
   render() {
     return (

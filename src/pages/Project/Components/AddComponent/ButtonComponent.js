@@ -27,11 +27,10 @@ export default class ButtonComponent extends Component {
   reset = () =>{
 
   }
-  componentDidUpdate(){
-    console.log(this.props)
-  }
+  // componentDidUpdate(){
+  //   console.log(this.props)
+  // }
   componentWillReceiveProps(nextProps){
-    console.log(nextProps)
     this.setState({
       proName : nextProps.PropsProjectName,
       proNumber : nextProps.PropsProjectNumber,
