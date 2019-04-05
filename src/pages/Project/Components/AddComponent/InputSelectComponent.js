@@ -10,6 +10,7 @@ export default class InputSelectComponent extends Component {
     super(props);
     this.state = {
       option: [],
+      proClass:''
     };
   }
   componentDidMount() {
@@ -20,10 +21,12 @@ export default class InputSelectComponent extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       option: nextProps.newValues,
+      proClass: nextProps.ProClass
     });
   }
 
   handleBlur = (value) => {
+    console.log(value)
     this.props.TransmitProjectType(value);
   }
   
@@ -31,7 +34,7 @@ export default class InputSelectComponent extends Component {
   render() {
     const children = [];
     for (let i = 0; i < this.state.option.length; i++) {
-      children.push(<Option key={i.toString(36) + i}>{this.state.option[i].title}</Option>);
+      children.push(<Option key={i.toString(36) + i} value={this.state.option[i].title}>{this.state.option[i].title}</Option>);
     }
 
     return (
@@ -40,6 +43,7 @@ export default class InputSelectComponent extends Component {
           showSearch
           style={{ width: 380 }}
           placeholder="微信小程序"
+          value = {this.state.proClass}
           optionFilterProp="children"
           onBlur={this.handleBlur}
           filterOption={(input, option) =>

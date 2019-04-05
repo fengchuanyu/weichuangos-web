@@ -10,28 +10,28 @@ const list = [    // title  目前是项目类型，需新添加一个变量代�
   },
   { 
     proName : 'test1',
-    proClass : 'class1',
+    proClass : 'class2',
     proNum : '1',
     proStack : 'es6',
     proInfo : '<p>1</p>', id: 2, 
     isActive: false 
   },{ 
     proName : 'test1',
-    proClass : 'class1',
+    proClass : 'class3',
     proNum : '1',
     proStack : 'es6',
     proInfo : 'success', id: 3, 
     isActive: false 
   },{ 
     proName : 'test1',
-    proClass : 'class1',
+    proClass : 'class4',
     proNum : '1',
     proStack : 'es6',
     proInfo : 'success', id: 4, 
     isActive: false 
   },{ 
     proName : 'test1',
-    proClass : 'class1',
+    proClass : 'class5',
     proNum : '1',
     proStack : 'es6',
     proInfo : 'success', id: 5, 
@@ -49,28 +49,28 @@ const storageData = [
     },
     { 
       proName : 'test1',
-      proClass : 'class1',
+      proClass : 'class2',
       proNum : '1',
       proStack : 'es6',
       proInfo : 'success', id: 2, 
       isActive: false 
     },{ 
       proName : 'test1',
-      proClass : 'class1',
+      proClass : 'class3',
       proNum : '1',
       proStack : 'es6',
       proInfo : 'success', id: 3, 
       isActive: false 
     },{ 
       proName : 'test1',
-      proClass : 'class1',
+      proClass : 'class4',
       proNum : '1',
       proStack : 'es6',
       proInfo : 'success', id: 4, 
       isActive: false 
     },{ 
       proName : 'test1',
-      proClass : 'class1',
+      proClass : 'class5',
       proNum : '1',
       proStack : 'es6',
       proInfo : 'success', id: 5, 

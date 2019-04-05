@@ -11,7 +11,8 @@ export default class ProjectType extends Component {
         { title: 'Vue', id: 3, isActive: false },
       ],
       nowId: 3,
-      projectClassValue:''
+      projectClassValue:'',
+      reviseProClass:''
     };
     this.getValue = this.getValue.bind(this);
   }
@@ -82,13 +83,20 @@ export default class ProjectType extends Component {
     }) 
   }
 
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      reviseProClass:nextProps.ReviseProClass,
+    })
+  }
+
   render() {
     return (
       <div style={{ marginLeft: 25.4 + '%', marginBottom: 15 }}>
         项目分类：
         <InputSelectComponent 
           newValues={this.state.list}
-          TransmitProjectType = {this.Temp} />
+          TransmitProjectType = {this.Temp} 
+          ProClass = {this.state.reviseProClass}/>
         <AddComponent
           getValues={this.getValue}
           newList={this.state.list}

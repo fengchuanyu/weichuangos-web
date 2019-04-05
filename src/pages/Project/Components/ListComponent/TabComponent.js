@@ -8,6 +8,7 @@ import router from 'umi/router';//路由引用
 import { classNames } from 'classnames';
 import ProjectTeam from './../../ProjectTeam';
 
+
 class TabComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -88,7 +89,7 @@ class TabComponent extends React.Component {
     if (value != '全部项目') {
       this.setState({
         nowData: this.state.listData.filter(item => {
-          return item.title == value;
+          return item.proClass == value;
         }),
       });
     } else {
@@ -102,7 +103,7 @@ class TabComponent extends React.Component {
     if (value != '全部项目') {
       this.setState({
         nowStorage: this.state.storageData.filter(item => {
-          return item.title == value;
+          return item.proClass == value;
         }),
       });
     } else {
@@ -155,9 +156,16 @@ class TabComponent extends React.Component {
   listAdd(){
     router.push('/project/add');
   };
-  listModify(){
-    
-    router.push('/project/add');
+  listModify(text,e){
+    console.log(text,e)
+   
+    // router.push({
+    //   pathname: '/project/add',
+    //   query: {
+    //     id: text.id,
+    //   },
+    // })
+    router.push('/project/add?id='+text.id);
   }//router   
   listProTeam(){
     router.push('/project/projectteam');
@@ -223,7 +231,7 @@ class TabComponent extends React.Component {
         // diveder 竖线
         render: (text, record) => (
           <div>
-            <a href="javascript:;" onClick={this.listModify.bind(this)}>修改</a>
+            <a href="javascript:;" onClick={this.listModify.bind(this,text)}>修改</a>
             <Divider type="vertical" />  
             <a href="javascript:;" onClick={this.listDelList.bind(this, text)}>
               删除
@@ -250,7 +258,7 @@ class TabComponent extends React.Component {
         render: (text, record) => (
           <span>
             <a href="javascript:;" className={styles.guohua} onClick={this.listProTeam.bind(this)}>项目队伍</a> 
-            <a href="javascript:;" onClick={this.listModify.bind(this)}>修改{record.name}</a>
+            <a href="javascript:;" onClick={this.listModify.bind(this,text)}>修改{record.name}</a>
             <Divider type="vertical" />
             <a href="javascript:;" onClick={this.storageDelList.bind(this, text)}>
               删除
@@ -362,8 +370,8 @@ class TabComponent extends React.Component {
           <p>项目类型：{this.state.nowText.proClass}</p>
           <p>项目编号：{this.state.nowText.proNum}</p>
           <p>应用技术栈：{this.state.nowText.proStack}</p>
-          <p>项目描述：{this.state.nowText.proInfo}</p>  
-          {/* 怎么解析带标签的字符串 */}
+          <p>项目描述：</p>  
+          {/* 怎么解析带标签的字符串<span dangerouslySetInnerHTML = {{_html : this.state.nowText.proInfo}}></span> */}
         </Modal>
         <Modal
           title="项目发布"
