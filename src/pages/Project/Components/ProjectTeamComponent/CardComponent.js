@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import { Card, Col, Row, Avatar, Icon, List, Button, Modal, Select, Input } from 'antd';
 import styles from './Card.less';
 const Search = Input.Search;
+const Option=Select.Option;
 export default class CardComponent extends Component {
   constructor(props) {
     super(props);
@@ -28,19 +29,16 @@ export default class CardComponent extends Component {
       nowDatas: pro.Datas,
     });
   }
-  // componentDidMount() {
-  //   console.log('didmount')
-  //   // this.setState({
-  //   //   TEXT:this.props.Text,
-  //   //   list: this.props.List.concat({
-  //   //     title: '全部项目',
-  //   //     id: this.props.List.length,
-  //   //     isActive: false,
-  //   //   }),
-  //   //   datas: this.props.Datas,
-  //   //   nowDatas: this.props.Datas,
-  //   // });
-  // }
+  componentDidMount() {
+    console.log(this.props);
+    
+    // var nowProName=this.props.location.search.split("=")[1];
+      // this.setState({
+      //   nowDatas: this.state.datas.filter(filterData => {
+      //     return filterData.data[3].value == nowProName;
+      //   }),
+      // });
+  }
 
   showModal = data => {  //是否显示详情页
     console.log(data);

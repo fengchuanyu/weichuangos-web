@@ -128,8 +128,24 @@ function getprojectList(req,res){
         projectinfo
     })
 }
-
-    
+function postDelProjectList(req,res){
+  return res.json({
+    list,
+  })
+}
+function postDelProjectStorage(req,res){
+  return res.json({
+    storageData,
+  })
+}
+function postCommit(req,res){
+  return res.json({
+    storageData,
+  })
+}
 export default {
     'POST /api/getProjectList': getprojectList,
+    'POST /api/postDelProjectList':postDelProjectList,
+    'POST /api/postDelProjectStorage':postDelProjectStorage,
+    'POST /api/postCommit':postCommit,
 };

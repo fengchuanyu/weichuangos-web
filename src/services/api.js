@@ -155,3 +155,22 @@ export async function getProjectList(str) {   // 请求 进行中/仓库
   });
 }
 
+export async function postDelProjectList(str) {   // 删除list列表的内容
+  return request('/api/postDelProjectList',{ //接口地址
+    method: 'POST',
+    body: str,  // 参数
+  });
+}
+export async function postDelProjectStorage(str) {   // 删除storage列表里的内容
+  return request('/api/postDelProjectStorage',{ //接口地址
+    method: 'POST',
+    body: str,  // 参数
+  });
+}
+export async function postCommit(str) {   // 删除storage列表里的内容
+  return request('/api/postCommit',{ //接口地址
+    method: 'POST',
+    body: str,  // 参数
+  });
+}
+

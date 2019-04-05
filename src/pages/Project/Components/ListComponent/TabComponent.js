@@ -7,7 +7,13 @@ const TabPane = Tabs.TabPane;
 import router from 'umi/router';//路由引用
 import { classNames } from 'classnames';
 import ProjectTeam from './../../ProjectTeam';
+import  { connect } from 'dva';
 
+@connect((del) => {
+  return ({
+    del, 
+  })
+})
 class TabComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -27,7 +33,10 @@ class TabComponent extends React.Component {
       listType:[],     //进行中用于筛选的项目类型
       storageType: [],   //仓库中用于筛选的项目类型
       nowText: '',
-      type:[]
+      type:[],
+      setSelect:'',
+      setNum:0,
+      setManager:'',
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -150,6 +159,13 @@ class TabComponent extends React.Component {
   };
   listDelList(text) {
     this.props.listDel(text);
+    const {dispatch} =this.props;
+    dispatch({
+      type:'projectDel/postDelProjectList',
+        payload:{
+          sendListTextId:text.id,
+    } 
+   })
   };
   
   listAdd(){
@@ -158,12 +174,27 @@ class TabComponent extends React.Component {
   listModify(){
     
     router.push('/project/add');
+
   }//router   
-  listProTeam(){
-    router.push('/project/projectteam');
+  listProTeam(text){
+    // router.push({
+    //   pathname:'/project/projectteam',
+    //   query:{
+    //     proName:text.proName
+    //   }
+    // })
+    router.push('/project/projectteam?proName='+text.proName);
+
   }                      
   storageDelList(text) {
     this.props.storageDel(text);
+    const {dispatch} =this.props;
+    dispatch({
+      type:'projectDel/postDelProjectStorage',
+        payload:{
+          sendStorageTextId:text.id,
+    } 
+   })
   };
   handleSubmit = (e) => {
     e.preventDefault();
@@ -175,14 +206,41 @@ class TabComponent extends React.Component {
         storageVisible:false
       })
     });
+    const {dispatch} =this.props;
+    dispatch({
+      type:'commit/postCommit',
+        payload:{
+          commitNum:this.state.setNum,
+          commitManager:this.state.setManager,
+          commitSelect:this.state.setSelect
+    } 
+   })
   };
 
   handleSelectChange = (value) => {
-    console.log(value);
-    this.props.form.setFieldsValue({
-      note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
-    });
+    // console.log(value);
+    // this.props.form.setFieldsValue({
+    //   note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
+    // });
+    this.setState({
+        setSelect:value,
+    })
   };
+  setNum(){
+    this.setState({
+      setNum:event.target.value,
+    })
+  }
+  setNum(){
+    this.setState({
+      setNum:event.target.value,
+    })
+  }
+  setManager(){
+    this.setState({
+      setManager:event.target.value,
+    })
+  }
   render() {
     const listChildren = [];
     const storageChildren = [];
@@ -249,7 +307,7 @@ class TabComponent extends React.Component {
         align: 'right',
         render: (text, record) => (
           <span>
-            <a href="javascript:;" className={styles.guohua} onClick={this.listProTeam.bind(this)}>项目队伍</a> 
+            <a href="javascript:;" className={styles.guohua} onClick={this.listProTeam.bind(this,text)}>项目队伍</a> 
             <a href="javascript:;" onClick={this.listModify.bind(this)}>修改{record.name}</a>
             <Divider type="vertical" />
             <a href="javascript:;" onClick={this.storageDelList.bind(this, text)}>
@@ -380,7 +438,7 @@ class TabComponent extends React.Component {
                 // initialValue:'12'
               })(
                 <Input 
-                placeholder="填写允许参加项目的队伍个数"
+                placeholder="填写允许参加项目的队伍个数" onChange={this.setNum.bind(this)}
                 />
               )}
             </Form.Item>
@@ -392,7 +450,7 @@ class TabComponent extends React.Component {
                 // initialValue:'xxx'
               })(
               <Input 
-                placeholder="填写项目管理人"
+                placeholder="填写项目管理人" onChange={this.setManager.bind(this)}
               />
               )}
             </Form.Item>
@@ -405,7 +463,7 @@ class TabComponent extends React.Component {
               })(
                 <Select
                   placeholder="选择一个技术栈"
-                  onChange={this.handleSelectChange}
+                  onChange={this.handleSelectChange.bind(this)}
                 >
                   {project}
                 </Select>
