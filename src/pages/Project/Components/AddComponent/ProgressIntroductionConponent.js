@@ -19,8 +19,6 @@ export default class ProgressIntroductionConponent extends React.Component {
   componentWillReceiveProps(nextProps){
     this.setState({
       text:nextProps.ReviseIntroduce,
-    },()=>{
-      console.log(this.state.text)
     })
   }
 
@@ -29,9 +27,7 @@ export default class ProgressIntroductionConponent extends React.Component {
     return (
       <div style={{marginLeft:26+'%'}}>
         <span>项目描述:</span>
-        <ReactQuill  value={this.state.text} onChange={this.handleChange}>
-          {/* <div  className="my-editing-area"></div> */}
-        </ReactQuill>
+        <ReactQuill  value={this.state.text} onChange={this.handleChange}></ReactQuill>
       </div>
     );
   }

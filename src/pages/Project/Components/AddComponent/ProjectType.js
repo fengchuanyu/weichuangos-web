@@ -87,7 +87,7 @@ export default class ProjectType extends Component {
     this.setState({
       reviseProClass:nextProps.ReviseProClass,
     })
-  }
+  } 
 
   render() {
     return (

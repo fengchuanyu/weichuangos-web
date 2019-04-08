@@ -36,15 +36,11 @@ class SelectComponent extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    console.log(typeof(nextProps.ReviseProjectStackArray) )  // typeof ....
-
-    console.log(Object.prototype.toString.call(nextProps.ReviseProjectStackArray))
-    console.log(nextProps.ReviseProjectStackArray)
-    this.setState({
-      // skillStackArray:nextProps.ReviseProjectStackArray.split(","),
-    },()=>{
-      console.log(this.state.skillStackArray)
-    })
+    if(typeof(nextProps.ReviseProjectStackArray)=="string"){
+      this.setState({
+        skillStackArray:nextProps.ReviseProjectStackArray.split(","),
+      })
+    }    
   }
 
   handleChange = value => {
@@ -55,7 +51,6 @@ class SelectComponent extends Component {
       this.props.TransmitProjectStack(this.state.skillStack);   
       this.props.TransmitProjectStackArray(this.state.skillStackArray);
     });
-    
   };
 
 
@@ -67,7 +62,7 @@ class SelectComponent extends Component {
           mode="multiple"
           style={{ width: 467 }}
           placeholder="Please select"
-          defaultValue={this.state.skillStackArray}
+          value={this.state.skillStackArray}
           onChange={this.handleChange}
           onBlur={this.upLoad} //why
         >
