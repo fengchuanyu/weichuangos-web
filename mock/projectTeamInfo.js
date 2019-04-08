@@ -1,13 +1,21 @@
 const data = [
+    {key: '项目名称:', value: 'test1'},
     { key: '组长:', value: 'ehrthbt' },
     { key: '组员:', value: 'htrhtr' },
     { key: '组内人数:', value: 'htrhtr' },
     { key: '报选项目:', value: '微信小程序' },
     { key: '项目报选时间:', value: 'htrhtr' },
 ];
-
+const data1 = [
+    {key: '项目名称:', value: 'test2'},
+    { key: '组长:', value: 'ehrthbt' },
+    { key: '组员:', value: 'htrhtr' },
+    { key: '组内人数:', value: 'htrhtr' },
+    { key: '报选项目:', value: '微信小程序' },
+    { key: '项目报选时间:', value: 'htrhtr' },
+];
 const datas = [
-    { id: 1, data: data },
+    { id: 1, data: data1 },
     { id: 2, data: data },
     { id: 3, data: data },
     { id: 4, data: data },
