@@ -21,17 +21,16 @@ export default class ButtonComponent extends Component {
       proStack:'',
       proStackArray:[],
       proIntroduction:'',
+      id:undefined,
     }
   }
 
   reset = () =>{
 
   }
-  // componentDidUpdate(){
-  //   console.log(this.props)
-  // }
   componentWillReceiveProps(nextProps){
     this.setState({
+      id:nextProps.PropsProjectId,
       proName : nextProps.PropsProjectName,
       proNumber : nextProps.PropsProjectNumber,
       proStack : nextProps.PropsProjectStack,
@@ -40,32 +39,47 @@ export default class ButtonComponent extends Component {
       proClassArray : nextProps.PropsProjectTypeArray,
       proIntroduction : nextProps.PropsIntroduce
       })
-      // console.log(nextProps)
-
   }
 
   submit = () =>{
     if(this.state.proName!='' && this.state.proClass!=[] && this.state.proNumber!='' &&
-       this.state.proStack != [] && this.state.proIntroduction!=''){
-          const { dispatch } = this.props;
-          console.log(this.props)
-          dispatch({
-            type:'subpro/submitPro',
-              payload:{
-                sendName:this.state.proName,
-                sendClass:this.state.proClass,
-                sendClassArray:this.state.proClassArray,
-                sendNumber:this.state.proNumber,
-                sendStack:this.state.proStack,
-                sendStackArray:this.state.proStackArray,
-                sendIntroduction:this.state.proIntroduction,
-          } 
-         })
-      }else {
-        alert('false')
-      }
-  }
-
+       this.state.proStackArray != [] && this.state.proIntroduction!=''){
+          if(this.state.id!=undefined){
+              const { dispatch } = this.props;
+              console.log(this.props)
+              dispatch({
+                type:'addsubpro/addSubmitPro',
+                  payload:{
+                    sendId:this.state.id,
+                    sendName:this.state.proName,
+                    sendClass:this.state.proClass,
+                    sendClassArray:this.state.proClassArray,
+                    sendNumber:this.state.proNumber,
+                    sendStack:this.state.proStack,
+                    sendStackArray:this.state.proStackArray,
+                    sendIntroduction:this.state.proIntroduction,
+                  }
+                })
+               }
+               else {
+                const { dispatch } = this.props;
+                dispatch({
+                  type:'subpro/submitPro',
+                    payload:{
+                      sendName:this.state.proName,
+                      sendClass:this.state.proClass,
+                      sendClassArray:this.state.proClassArray,
+                      sendNumber:this.state.proNumber,
+                      sendStack:this.state.proStack,
+                      sendStackArray:this.state.proStackArray,
+                      sendIntroduction:this.state.proIntroduction,
+                    }
+                  })
+               }
+            }else {
+                alert('false');
+              }
+          }
   render() {
     return (
       <div style={{ marginTop: 70, marginLeft: 39 + '%' }}>

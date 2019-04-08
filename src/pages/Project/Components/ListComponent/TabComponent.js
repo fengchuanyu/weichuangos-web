@@ -68,6 +68,8 @@ class TabComponent extends React.Component {
           })
         )
       ),
+    },()=>{
+      console.log(this.state)
     });
   }
 
@@ -85,7 +87,7 @@ class TabComponent extends React.Component {
     }
   }
   handleChange(value) {
-    console.log(value);
+    // console.log(value);
     if (value != '全部项目') {
       this.setState({
         nowData: this.state.listData.filter(item => {
@@ -99,7 +101,7 @@ class TabComponent extends React.Component {
     }
   }
   storageHandleChange(value) {
-    console.log(value);
+    // console.log(value);
     if (value != '全部项目') {
       this.setState({
         nowStorage: this.state.storageData.filter(item => {
@@ -112,12 +114,10 @@ class TabComponent extends React.Component {
       });
     }
   }
-  listShowModal = text => {    //显示详情里的内容发送一个请求   请求的是  当前项目里的内容
+  listShowModal = text => {
     this.setState({
       listVisible: true,
       nowText: text,
-    },()=>{
-      console.log(text)
     });
   };
   storageShowModal = text => {
@@ -300,7 +300,7 @@ class TabComponent extends React.Component {
                       if (value != '') {
                         this.setState({
                           nowData: this.state.listData.filter(item => {
-                            return item.title.indexOf(value) != -1;
+                            return item.proName.indexOf(value) != -1;
                           }),
                         });
                       } else {
@@ -335,7 +335,7 @@ class TabComponent extends React.Component {
                       if (value != '') {
                         this.setState({
                           nowStorage: this.state.storageData.filter(item => {
-                            return item.title.indexOf(value) != -1;
+                            return item.proName.indexOf(value) != -1;
                           }),
                         });
                       } else {
@@ -370,8 +370,8 @@ class TabComponent extends React.Component {
           <p>项目类型：{this.state.nowText.proClass}</p>
           <p>项目编号：{this.state.nowText.proNum}</p>
           <p>应用技术栈：{this.state.nowText.proStack}</p>
-          <p>项目描述：</p>  
-          {/* 怎么解析带标签的字符串<span dangerouslySetInnerHTML = {{_html : this.state.nowText.proInfo}}></span> */}
+          <p>项目描述：<span dangerouslySetInnerHTML = {{__html : this.state.nowText.proInfo}}></span></p>  
+          
         </Modal>
         <Modal
           title="项目发布"

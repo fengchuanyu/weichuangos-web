@@ -36,12 +36,13 @@ export default class Add extends Component {
       proStack:'',
       proStackArray:[],
       proIntroduction:'',
+      id:undefined,
     }
   }
   componentDidMount(){
     flag = 0;
     var selectId = this.props.location.search.split("=")[1];
-    console.log(selectId);
+    // console.log(selectId);
     if(selectId){
       const { dispatch } = this.props;
       dispatch({
@@ -49,6 +50,9 @@ export default class Add extends Component {
         payload:{
           id:selectId,
         },
+      })
+      this.setState({
+        id:selectId
       })
     }
   }
@@ -139,6 +143,7 @@ export default class Add extends Component {
               TransmitIntroduce = {this.ReceiveIntroduce}
               ReviseIntroduce = {this.state.proIntroduction}/>
             <ButtonComponent 
+              PropsProjectId = {this.state.id}
               PropsProjectName = {this.state.proName}
               PropsProjectNumber = {this.state.proNumber}
               PropsProjectStack = {this.state.proStack}

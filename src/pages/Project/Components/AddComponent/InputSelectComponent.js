@@ -18,7 +18,7 @@ export default class InputSelectComponent extends Component {
       option: this.props.newValues,
     });
   }
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) { 
     this.setState({
       option: nextProps.newValues,
       proClass: nextProps.ProClass
@@ -29,7 +29,12 @@ export default class InputSelectComponent extends Component {
     console.log(value)
     this.props.TransmitProjectType(value);
   }
-  
+  selOnChange(val,option){
+
+    this.setState({
+      proClass:val
+    })
+  }
 
   render() {
     const children = [];
@@ -44,11 +49,8 @@ export default class InputSelectComponent extends Component {
           style={{ width: 380 }}
           placeholder="微信小程序"
           value = {this.state.proClass}
-          optionFilterProp="children"
+          onChange = {this.selOnChange.bind(this)}
           onBlur={this.handleBlur}
-          filterOption={(input, option) =>
-            option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-          }
         >
           {children}
         </Select>

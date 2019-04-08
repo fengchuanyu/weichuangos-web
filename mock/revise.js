@@ -13,7 +13,6 @@ function postReviseInfo (req,res){
     })
 }
 
- 
 export default {
     'POST /api/getReviseInfo': postReviseInfo,
   };

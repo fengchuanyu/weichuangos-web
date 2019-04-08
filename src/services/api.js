@@ -161,3 +161,11 @@ export async function getReviseInfo(str) {   //str为参数
     body: str,
   });
 }
+
+export async function getAddProjectInfo(str) {   //str为参数
+  return request('/api/getAddProjectInfo',{      //接口地址
+    method: 'POST',
+    body: str,
+  });
+}
+
