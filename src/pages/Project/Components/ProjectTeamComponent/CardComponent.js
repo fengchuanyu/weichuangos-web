@@ -27,19 +27,28 @@ export default class CardComponent extends Component {
       }),
       datas: pro.Datas,
       nowDatas: pro.Datas,
-    });
+    },()=>{
+      let sHref=window.location.href;
+      if(sHref.indexOf('?')!=-1){
+        let args=sHref.split("?");
+        if(args[0]==sHref){
+          return '';
+        }
+        let arr=args[1].split("=");
+        console.log(arr[1]);
+          this.setState({
+            nowDatas: this.state.datas.filter(filterData => {
+              return filterData.data[0].value == arr[1];
+            }),
+            nowValue:arr[1],
+          },()=>{
+            console.log(this.state.nowDatas);
+            console.log(this.state.nowValue);
+            
+          });
+        }
+        });
   }
-  componentDidMount() {
-    console.log(this.props);
-    
-    // var nowProName=this.props.location.search.split("=")[1];
-      // this.setState({
-      //   nowDatas: this.state.datas.filter(filterData => {
-      //     return filterData.data[3].value == nowProName;
-      //   }),
-      // });
-  }
-
   showModal = data => {  //是否显示详情页
     console.log(data);
 
@@ -142,7 +151,7 @@ export default class CardComponent extends Component {
                 >
                   <List
                     bordered={{ width: 250 }}
-                    dataSource={data.data}
+                    dataSource={data.data.slice(1,data.data.length)}
                     renderItem={item => (
                       <List.Item key={item.key}>
                         {item.key}:{item.value}

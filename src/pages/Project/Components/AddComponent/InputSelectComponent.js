@@ -43,6 +43,7 @@ export default class InputSelectComponent extends Component {
           optionFilterProp="children"
           onBlur={this.handleBlur}
           filterOption={(input, option) =>
+            // console.log(input,option);
             option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
           }
         >
