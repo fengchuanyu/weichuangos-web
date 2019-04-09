@@ -1,5 +1,5 @@
 
-function postSubmit (req,res){
+function postAddSubmit (req,res){
     let str = '';
     // str+=req.param('test');
     return res.json({
@@ -10,10 +10,11 @@ function postSubmit (req,res){
         proStack:'',
         proStackArray:[],
         proIntroduction:'',
+        id:undefined
     })
 }
 
  
 export default {
-    'POST /api/submitProject': postSubmit,
+    'POST /api/getAddProjectInfo': postAddSubmit,
 };
