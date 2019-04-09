@@ -45,16 +45,21 @@ export default class ProjectType extends Component {
     });
   }
   setItem(item, value) {
+    // console.log(item)
     let temp = this.state.list;
     for (let i = 0; i < temp.length; i++) {
       if (temp[i].id == item.id) {
-        temp[i].title = value;
+        // console.log(123);
+        
+        // temp[i].title = value;
         temp[i].isActive = !item.isActive;
+        // console.log(temp[i].isActive);
       }
     }
     this.setState({
       list: temp,
     },()=>{
+      
       this.props.TransmitProjectTypeArray(this.state.list);
     });
   }
@@ -81,7 +86,20 @@ export default class ProjectType extends Component {
       this.props.TransmitProjectTypeArray(this.state.list);
     }) 
   }
-
+ setValue(item,value){
+  let temp = this.state.list;
+  for (let i = 0; i < temp.length; i++) {
+    if (temp[i].id == item.id) {
+      temp[i].title = value;
+      temp[i].isActive = !item.isActive;
+    }
+  }
+  this.setState({
+    list: temp,
+  },()=>{
+    this.props.TransmitProjectTypeArray(this.state.list);
+  });
+ }
   render() {
     return (
       <div style={{ marginLeft: 25.4 + '%', marginBottom: 15 }}>
@@ -95,6 +113,7 @@ export default class ProjectType extends Component {
           Active={this.setActive.bind(this)}
           Item={this.setItem.bind(this)}
           Del={this.del.bind(this)}
+          Value={this.setValue.bind(this)}
         />
       </div>
     );

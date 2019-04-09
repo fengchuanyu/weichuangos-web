@@ -19,19 +19,40 @@ const AddListComponent = Form.create({ name: 'form_in_modal' })(
         if (err) {
           return;
         } else {
-          this.props.Item(item, value);
+          this.props.Value(item, value);
         }
       });
     };
     componentDidMount() {
+      
       this.setState({
         list: this.props.TagList,
       });
     }
     componentWillReceiveProps(nextProps) {
+      console.log(nextProps);
+      
       this.setState({
         list: nextProps.TagList,
-      });
+        reset:nextProps.cReset
+      },()=>{
+        console.log(this.state.list);
+        
+        if(this.state.reset){
+        const form = this.props.form;
+        form.resetFields();
+        let arr = this.state.list.map((item)=>{
+          item.isActive=false;
+          return item;
+          })
+        this.setState({
+          list: arr,
+          reset:false,
+        },()=>{
+          this.props.changeReset(this.state.reset);
+        })
+      }
+    });
     }
     setActive(item) {
       this.props.Item(item);
@@ -75,7 +96,7 @@ const AddListComponent = Form.create({ name: 'form_in_modal' })(
                     <Form.Item className={styles.attention}>
                       {getFieldDecorator('note', {
                         rules: [{ required: true, message: '项目名称不能为空' }],
-                      })(<Input type="text" onChange={this.changeValue.bind(this, item)} />)}
+                      })(<Input type="text" onChange={this.changeValue.bind(this, item)}  value={item.title}/>)}
                     </Form.Item>
                     <Form.Item>
                       <Button

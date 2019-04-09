@@ -11,19 +11,20 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
       super(props);
       this.state = {
         curList: [],
+        reset:false,
       };
     }
     componentDidMount() {
-      // console.log(this.props.newCur);
-
       this.setState({
         curList: this.props.newCur,
       });
     }
     componentWillReceiveProps(nextProps) {
-      // console.log(nextProps);
+      console.log(nextProps);
+      
       this.setState({
         curList: nextProps.newCur,
+        reset:nextProps.Reset,
       });
     }
     setActive(item) {
@@ -34,6 +35,16 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
     }
     del(item) {
       this.props.Del(item);
+    }
+    changeReset=(props)=>{
+      this.setState({
+        reset:props
+      },()=>{
+        this.props.changeReset(this.state.reset)
+      })
+    }
+    setValue(item,value){
+      this.props.Value(item,value);
     }
     render() {
       const { visible, onCancel, onCreate, form } = this.props;
@@ -57,7 +68,10 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
             TagList={this.state.curList}
             Active={this.setActive.bind(this)}
             Item={this.setItem.bind(this)}
+            Value={this.setValue.bind(this)}
             Del={this.del.bind(this)}
+            cReset={this.state.reset}
+            changeReset={this.changeReset}
           />
         </Modal>
       );
@@ -68,23 +82,37 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
 class AddComponent extends React.Component {
   state = {
     visible: false,
+    reset:false,
+    curList:[]
   };
+  // componentWillReceiveProps(nextProps) {
+  //   console.log(nextProps);
+    
+  //   this.setState({
+  //     curList: nextProps.newList,
+  //   });
+  // }
   showModal = () => {
     this.setState({ visible: true });
   };
-
   handleCancel = () => {
-    this.setState({ visible: false });
+    const form = this.formRef.props.form;
+    this.setState({ 
+      visible: false,
+      reset:true, 
+    });
+    form.resetFields();
   };
-
-  
   handleCreate = () => {
     const form = this.formRef.props.form;
     form.validateFields((err, values) => {
       if (err) {
         return;
       }
-      this.setState({ visible: false });
+      this.setState({ 
+        visible: false,
+        reset:true,
+       });
       form.resetFields();
       this.props.getValues(values.title);
     });
@@ -101,6 +129,17 @@ class AddComponent extends React.Component {
   del(item) {
     this.props.Del(item);
   }
+  changeReset=(props)=>{
+    this.setState({
+      reset:props,
+    },()=>{
+      console.log(this.state.reset);     
+
+    })
+  }
+  setValue(item,value){
+    this.props.Value(item,value);
+  }
   render() {
     return (
       <span>
@@ -116,10 +155,13 @@ class AddComponent extends React.Component {
           Active={this.setActive.bind(this)}
           Item={this.setItem.bind(this)}
           Del={this.del.bind(this)}
+          Reset={this.state.reset}
+          Value={this.setValue.bind(this)}
+          changeReset={this.changeReset}
         />
       </span>
     );
   }
 }
 
-export default AddComponent;
+export default Form.create({ name: 'form_in_modal' })(AddComponent);
