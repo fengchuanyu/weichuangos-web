@@ -87,7 +87,6 @@ export default class ProjectType extends Component {
       this.props.TransmitProjectTypeArray(this.state.list);
     }) 
   }
-<<<<<<< HEAD
 
   componentWillReceiveProps(nextProps){
     this.setState({
@@ -95,7 +94,6 @@ export default class ProjectType extends Component {
     })
   }
 
-=======
  setValue(item,value){
   let temp = this.state.list;
   for (let i = 0; i < temp.length; i++) {
@@ -110,7 +108,6 @@ export default class ProjectType extends Component {
     this.props.TransmitProjectTypeArray(this.state.list);
   });
  }
->>>>>>> lxj
   render() {
     return (
       <div style={{ marginLeft: 25.4 + '%', marginBottom: 15 }}>
