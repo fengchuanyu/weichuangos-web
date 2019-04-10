@@ -36,9 +36,14 @@ class SelectComponent extends Component {
   }
 
   componentWillReceiveProps(nextProps){
+    // console.log(nextProps)
     if(typeof(nextProps.ReviseProjectStackArray)=="string"){
       this.setState({
         skillStackArray:nextProps.ReviseProjectStackArray.split(","),
+      })
+    }else {
+      this.setState({
+        skillStackArray:nextProps.ReviseProjectStackArray,
       })
     }    
   }

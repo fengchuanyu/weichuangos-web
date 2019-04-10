@@ -188,3 +188,11 @@ export async function getAddProjectInfo(str) {   //str为参数
   });
 }
 
+export async function getClassTypeList(str) {   //str为参数
+  return request('/api/getClassTypeList',{      //接口地址
+    method: 'POST',
+    body: str,
+  });
+}
+
+

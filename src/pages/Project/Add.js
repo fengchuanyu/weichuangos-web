@@ -12,7 +12,7 @@ import ButtonComponent from './components/AddComponent/ButtonComponent'; //确�
 import { Button } from 'antd';
 
 import  { connect } from 'dva';
-let flag = 0;
+
 @connect((reviseInfo) => {
   return ({
     reviseInfo, 
@@ -39,11 +39,16 @@ export default class Add extends Component {
       id:undefined,
     }
   }
+
+  componentWillUpdate(){
+
+  }
+
   componentDidMount(){
-    flag = 0;
+    // console.log(this.props.location)
     var selectId = this.props.location.search.split("=")[1];
     // console.log(selectId);
-    if(selectId){
+    if(selectId){ 
       const { dispatch } = this.props;
       dispatch({
         type:"reviseInfo/getProjectReviseInfo",
@@ -53,25 +58,52 @@ export default class Add extends Component {
       })
       this.setState({
         id:selectId
+      },()=>{
+        selectId = undefined;
       })
     }
-  }
+    else {
+      this.setState({
+        id:undefined
+      })
+    }
+  } 
 
   componentWillReceiveProps(nextProps){
-    flag++;
-    if(flag == 2){
-      this.setState({
-        proName:nextProps.reviseInfo.reviseInfo.list.proName,
-        proClass:nextProps.reviseInfo.reviseInfo.list.proClass,
-        proClassArray:nextProps.reviseInfo.reviseInfo.list.proClassArray,
-        proNumber:nextProps.reviseInfo.reviseInfo.list.proNumber,
-        proStackArray:nextProps.reviseInfo.reviseInfo.list.proStackArray,
-        proIntroduction:nextProps.reviseInfo.reviseInfo.list.proIntroduction,
-      },()=>{
-        console.log(this.state);
-      })
+    // console.log(nextProps)
+    // console.log(this.props.location)
+    // console.log(this.props.location.search.split("=")[1])
+    // console.log(nextProps.location.search);
+    // console.log(location.href.split("=")[1]);
+    if(nextProps.reviseInfo.reviseInfo.list.proName  && location.href.split("=")[1])
+    {
+      console.log('revise')
+       this.setState({
+          proName:nextProps.reviseInfo.reviseInfo.list.proName,
+          proClass:nextProps.reviseInfo.reviseInfo.list.proClass,
+          proClassArray:nextProps.reviseInfo.reviseInfo.list.proClassArray,
+          proNumber:nextProps.reviseInfo.reviseInfo.list.proNumber,
+          proStackArray:nextProps.reviseInfo.reviseInfo.list.proStackArray,
+          proIntroduction:nextProps.reviseInfo.reviseInfo.list.proIntroduction
+        })  
+    }else if(location.href.split("=")[1]==undefined){
+          // location.href = location.origin+location.pathname
+          this.setState({
+            proName:'',
+            proClass:'',
+            proClassArray:[],
+            proNumber:'',
+            proStack:'',
+            proStackArray:[],
+            proIntroduction:'',
+            id:undefined,
+          },()=>{
+            // console.log(this.state)
+          }) 
+      }    
+     
     }
-  }
+  
 
   ReceiveProjectName = (props) => {   
     console.log(props)
@@ -104,6 +136,7 @@ export default class Add extends Component {
     })
   }
 
+
   ReceiveProjectTypeArray = (props) => {
     this.setState({
       proClassArray:props
@@ -114,7 +147,7 @@ export default class Add extends Component {
     this.setState({
       proIntroduction:props
     })
-  }
+  }/*为什么传参 */
 
   render() {
     return (

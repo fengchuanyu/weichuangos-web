@@ -26,7 +26,16 @@ export default class ButtonComponent extends Component {
   }
 
   reset = () =>{
-
+    this.setState({
+      proName:'',
+      proClass:undefined,
+      proClassArray:[],
+      proNumber:'',
+      proStack:'',
+      proStackArray:[],
+      proIntroduction:'',
+      id:undefined,
+    })
   }
   componentWillReceiveProps(nextProps){
     this.setState({
