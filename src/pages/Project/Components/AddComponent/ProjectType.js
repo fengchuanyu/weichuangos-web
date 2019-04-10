@@ -137,13 +137,8 @@ export default class ProjectType extends Component {
         项目分类：
         <InputSelectComponent 
           newValues={this.state.list}
-<<<<<<< HEAD
           TransmitProjectType = {this.Temp} 
           ProClass = {this.state.reviseProClass}/>
-=======
-          TransmitProjectType = {this.Temp} />
-          
->>>>>>> lxj
         <AddComponent
           getValues={this.getValue}
           newList={this.state.list}
