@@ -107,6 +107,7 @@ export default class ProjectType extends Component {
         <InputSelectComponent 
           newValues={this.state.list}
           TransmitProjectType = {this.Temp} />
+          
         <AddComponent
           getValues={this.getValue}
           newList={this.state.list}

@@ -129,6 +129,7 @@ class AddComponent extends React.Component {
   del(item) {
     this.props.Del(item);
   }
+  
   changeReset=(props)=>{
     this.setState({
       reset:props,

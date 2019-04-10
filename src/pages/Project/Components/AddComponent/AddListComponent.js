@@ -71,6 +71,7 @@ const AddListComponent = Form.create({ name: 'form_in_modal' })(
     del(item) {
       this.props.Del(item);
     }
+    
     render() {
       const { visible, onCancel, onCreate, form } = this.props;
       const { getFieldDecorator } = form;
