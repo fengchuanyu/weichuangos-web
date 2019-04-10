@@ -1,21 +1,36 @@
 import React, { Component } from 'react';
 import InputSelectComponent from './InputSelectComponent';
 import AddComponent from './AddComponent';
+import  { connect } from 'dva';
+
+let flag = 0;
+@connect((classTypeList) => {
+  return ({
+    classTypeList, 
+  })
+})
+
+
 export default class ProjectType extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: [
-        { title: '微信小程序', id: 1, isActive: false },
-        { title: '移动端开发', id: 2, isActive: false },
-        { title: 'Vue', id: 3, isActive: false },
-      ],
+      list: [],
       nowId: 3,
       projectClassValue:'',
       reviseProClass:''
     };
     this.getValue = this.getValue.bind(this);
   }
+
+  componentDidMount(){
+    const { dispatch } = this.props;
+      dispatch({
+        type:'classTypeList/getProjectClassTypeList',
+    })
+    flag = 0;
+  }
+
   getValue(value) {
     let obj = {};
     obj.title = value;
@@ -84,8 +99,16 @@ export default class ProjectType extends Component {
   }
 
   componentWillReceiveProps(nextProps){
+    console.log(nextProps)
+    if(nextProps.classTypeList.classTypeList.list.list){
+      this.setState({
+        list:nextProps.classTypeList.classTypeList.list.list
+      })
+    }
     this.setState({
       reviseProClass:nextProps.ReviseProClass,
+    },()=>{
+      console.log(this.state.reviseProClass)
     })
   } 
 

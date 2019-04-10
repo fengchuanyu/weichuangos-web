@@ -42,7 +42,7 @@ export default class List extends Component {
           listData:this.props.projectList.projectList.list.list,
           storageData:this.props.projectList.projectList.list.storageData
         },()=>{
-          console.log(this.state.storageData)
+          // console.log(this.state.storageData)
         })
     }
   }

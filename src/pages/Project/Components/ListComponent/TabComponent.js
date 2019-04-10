@@ -77,7 +77,7 @@ class TabComponent extends React.Component {
         )
       ),
     },()=>{
-      console.log(this.state)
+      // console.log(this.state)
     });
   }
 
@@ -314,7 +314,7 @@ class TabComponent extends React.Component {
         render: (text, record) => (
           <span>
             <a href="javascript:;" className={styles.guohua} onClick={this.listProTeam.bind(this,text)}>项目队伍</a> 
-            <a href="javascript:;" onClick={this.listModify.bind(this)}>修改{record.name}</a>
+            <a href="javascript:;" onClick={this.listModify.bind(this,text)}>修改{record.name}</a>
             <Divider type="vertical" />
             <a href="javascript:;" onClick={this.storageDelList.bind(this, text)}>
               删除

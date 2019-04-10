@@ -3,43 +3,50 @@ import { Select } from 'antd';
 
 const Option = Select.Option;
 
-
-
 export default class InputSelectComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       option: [],
-      proClass:''
+      proClass:'',
+      proClassName:'',
+      proClassKey:''
     };
   }
+
   componentDidMount() {
     this.setState({
       option: this.props.newValues,
     });
   }
+
   componentWillReceiveProps(nextProps) { 
-    this.setState({
-      option: nextProps.newValues,
-      proClass: nextProps.ProClass
-    });
-  }
+    console.log(nextProps)
+        this.setState({
+        option: nextProps.newValues,
+        proClassKey: nextProps.ProClass,
+      },()=>{
+        if(this.state.option[this.state.proClassKey]){
+            this.setState({
+            proClassName:this.state.option[this.state.proClassKey].title
+          })
+        }
+      });
+    }
 
-  handleBlur = (value) => {
-    console.log(value)
-    this.props.TransmitProjectType(value);
-  }
   selOnChange(val,option){
-
+    console.log(val,option)
     this.setState({
-      proClass:val
+      proClassName:val
+    },()=>{
+      this.props.TransmitProjectType(option.key)
     })
   }
 
   render() {
     const children = [];
     for (let i = 0; i < this.state.option.length; i++) {
-      children.push(<Option key={i.toString(36) + i} value={this.state.option[i].title}>{this.state.option[i].title}</Option>);
+      children.push(<Option key={i.toString(36)} value={this.state.option[i].title}>{this.state.option[i].title}</Option>);
     }
 
     return (
@@ -48,7 +55,7 @@ export default class InputSelectComponent extends Component {
           showSearch
           style={{ width: 380 }}
           placeholder="微信小程序"
-          value = {this.state.proClass}
+          value = {this.state.proClassName}
           onChange = {this.selOnChange.bind(this)}
           onBlur={this.handleBlur}
         >
