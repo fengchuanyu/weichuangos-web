@@ -21,16 +21,23 @@ export default class InputSelectComponent extends Component {
   }
 
   componentWillReceiveProps(nextProps) { 
-    console.log(nextProps)
+    // console.log(nextProps)
         this.setState({
         option: nextProps.newValues,
         proClassKey: nextProps.ProClass,
       },()=>{
-        if(this.state.option[this.state.proClassKey]){
-            this.setState({
-            proClassName:this.state.option[this.state.proClassKey].title
+        if(this.state.proClassKey!=''){
+            if(this.state.option[this.state.proClassKey]){
+              this.setState({
+              proClassName:this.state.option[this.state.proClassKey].title
+            })
+          }
+        }else {
+          this.setState({
+            proClassName:''
           })
         }
+      
       });
     }
 

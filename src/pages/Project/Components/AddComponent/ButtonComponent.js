@@ -86,7 +86,7 @@ export default class ButtonComponent extends Component {
                   })
                }
             }else {
-                alert('false');
+                alert('请完整填写项目信息！');
               }
           }
   render() {
@@ -96,7 +96,7 @@ export default class ButtonComponent extends Component {
           onClick = {this.submit}>
           提交
         </Button>
-        <Button icon="close-circle" onClick = {this.reset}>取消</Button>
+        {/* <Button icon="close-circle" onClick = {this.reset}>取消</Button> */}
       </div>
     );
   }
