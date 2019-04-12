@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import InputSelectComponent from './InputSelectComponent';
 import AddComponent from './AddComponent';
 import  { connect } from 'dva';
-
 let flag = 0;
 @connect((classTypeList) => {
   return ({
@@ -10,25 +9,25 @@ let flag = 0;
   })
 })
 
-
 export default class ProjectType extends Component {
   constructor(props) {
     super(props);
     this.state = {
       list: [],
       nowId: 3,
-      projectClassValue:'',
-      reviseProClass:''
+      projectClassValue:''
     };
     this.getValue = this.getValue.bind(this);
   }
 
   componentDidMount(){
+    flag = 0;
     const { dispatch } = this.props;
       dispatch({
         type:'classTypeList/getProjectClassTypeList',
     })
-    flag = 0;
+    
+    console.log('pro-componentDidMount')
   }
 
   getValue(value) {
@@ -38,7 +37,7 @@ export default class ProjectType extends Component {
     obj.isActive = false;
     let newArray = this.state.list;   
     newArray.push(obj);
-    console.log(newArray);
+    // console.log(newArray);
     
     this.setState({
       list: newArray,
@@ -46,6 +45,7 @@ export default class ProjectType extends Component {
     },()=>{
       this.props.TransmitProjectTypeArray(this.state.list);
     });
+    console.log('pro-getValue')
   }
   setActive(item) {
     let temp = this.state.list;
@@ -59,6 +59,7 @@ export default class ProjectType extends Component {
     },()=>{
        this.props.TransmitProjectTypeArray(this.state.list);
     });
+    console.log('pro-setActive')
   }
   setItem(item, value) {
     // console.log(item)
@@ -66,7 +67,7 @@ export default class ProjectType extends Component {
     for (let i = 0; i < temp.length; i++) {
       if (temp[i].id == item.id) {
         // console.log(123);
-        
+        // temp[i].title = value;
         // temp[i].title = value;
         temp[i].isActive = !item.isActive;
         // console.log(temp[i].isActive);
@@ -78,17 +79,20 @@ export default class ProjectType extends Component {
       
       this.props.TransmitProjectTypeArray(this.state.list);
     });
+    console.log('pro-setItem')
   }
-  del(item) {
+  del(item) {console.log('pro-del')
     let temp = this.state.list;
     temp = temp.filter(function(x) {
       return x.id != item.id;
     });
-    // console.log(temp);
+    console.log(temp);
     
     this.setState({
       list: temp,
     },()=>{
+      console.log(this.state.list);
+      
       this.props.TransmitProjectTypeArray(this.state.list);
     });
     
@@ -98,25 +102,11 @@ export default class ProjectType extends Component {
     this.setState({
       projectClassValue:props
     },()=>{
-      this.props.TransmitProjectClassType(this.state.projectClassValue)
+      this.props.TransmitProjectClassType(this.state.projectClassValue);
       this.props.TransmitProjectTypeArray(this.state.list);
     }) 
+    console.log('pro-Temp')
   }
-
-  componentWillReceiveProps(nextProps){
-    console.log(nextProps)
-    if(nextProps.classTypeList.classTypeList.list.list){
-      this.setState({
-        list:nextProps.classTypeList.classTypeList.list.list
-      })
-    }
-    this.setState({
-      reviseProClass:nextProps.ReviseProClass,
-    },()=>{
-      console.log(this.state.reviseProClass)
-    })
-  } 
-
  setValue(item,value){
   let temp = this.state.list;
   for (let i = 0; i < temp.length; i++) {
@@ -130,15 +120,52 @@ export default class ProjectType extends Component {
   },()=>{
     this.props.TransmitProjectTypeArray(this.state.list);
   });
+  console.log('pro-setValue')
  }
-  render() {
+
+ componentWillReceiveProps(nextProps){
+  console.log(nextProps);
+ 
+  if(nextProps.classTypeList.classTypeList.list.list && flag == 0 ){
+    this.setState({
+      list:nextProps.classTypeList.classTypeList.list.list
+    },()=>{
+      flag ++
+    })
+  }  
+  this.setState({
+    reviseProClass:nextProps.ReviseProClass,
+  },()=>{
+    // console.log(this.state.reviseProClass)
+  })
+  console.log('pro-componentWillReceiveProps')
+ }
+ setValue(item,value){
+  let temp = this.state.list;
+  for (let i = 0; i < temp.length; i++) {
+    if (temp[i].id == item.id) {
+      temp[i].title = value;
+      temp[i].isActive = !item.isActive;
+    }
+  }
+  this.setState({
+    list: temp,
+  },()=>{
+    this.props.TransmitProjectTypeArray(this.state.list);
+  });
+ 
+} 
+ 
+  
+  render(){
     return (
       <div style={{ marginLeft: 25.4 + '%', marginBottom: 15 }}>
         项目分类：
         <InputSelectComponent 
           newValues={this.state.list}
-          TransmitProjectType = {this.Temp} 
-          ProClass = {this.state.reviseProClass}/>
+          TransmitProjectType = {this.Temp}
+          ProClass = {this.state.reviseProClass} />
+          
         <AddComponent
           getValues={this.getValue}
           newList={this.state.list}
@@ -150,4 +177,4 @@ export default class ProjectType extends Component {
       </div>
     );
   }
-}
+ }

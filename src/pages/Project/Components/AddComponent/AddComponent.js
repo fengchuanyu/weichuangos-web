@@ -18,23 +18,46 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
       this.setState({
         curList: this.props.newCur,
       });
+      console.log('addcomponent-componentdidmont')
     }
     componentWillReceiveProps(nextProps) {
-      console.log(nextProps);
-      
+      console.log(nextProps.newCur);
       this.setState({
         curList: nextProps.newCur,
         reset:nextProps.Reset,
+      },()=>{
+        console.log(this.state.curList);
+        
       });
+      console.log('addcomponent-componentwillreceiveprops')
     }
     setActive(item) {
       this.props.Active(item);
+      console.log('addcomponent-setactive')
     }
     setItem(item, value) {
       this.props.Item(item, value);
+      console.log('addcomponent-setitem')
+    }
+    setActive(item) {
+      this.props.Active(item);
+      console.log('addcomponent-setActive')
     }
     del(item) {
       this.props.Del(item);
+      console.log('addcomponent-del')
+    }
+    changeReset=(props)=>{
+      this.setState({
+        reset:props
+      },()=>{
+        this.props.changeReset(this.state.reset)
+      })
+      console.log('addcomponent-changereset')
+    }
+    setValue(item,value){
+      this.props.Value(item,value);
+      console.log('addcomponent-setvalue')
     }
     changeReset=(props)=>{
       this.setState({
@@ -68,6 +91,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
             TagList={this.state.curList}
             Active={this.setActive.bind(this)}
             Item={this.setItem.bind(this)}
+            Active={this.setActive.bind(this)}
             Value={this.setValue.bind(this)}
             Del={this.del.bind(this)}
             cReset={this.state.reset}
@@ -94,6 +118,7 @@ class AddComponent extends React.Component {
   // }
   showModal = () => {
     this.setState({ visible: true });
+    console.log('addcomponent-showmodal')
   };
   handleCancel = () => {
     const form = this.formRef.props.form;
@@ -102,6 +127,7 @@ class AddComponent extends React.Component {
       reset:true, 
     });
     form.resetFields();
+    console.log('addcomponent-handlecancel')
   };
   handleCreate = () => {
     const form = this.formRef.props.form;
@@ -116,18 +142,39 @@ class AddComponent extends React.Component {
       form.resetFields();
       this.props.getValues(values.title);
     });
+    console.log('addcomponent-handlecreate')
   };
   saveFormRef = formRef => {
     this.formRef = formRef;
+    console.log('addcomponent-saveformref')
   };
   setActive(item) {
     this.props.Active(item);
+    console.log('addcomponent-setactive')
   }
   setItem(item, value) {
     this.props.Item(item, value);
+    console.log('addcomponent-setitem')
+  }
+  setActive(item){
+    this.props.Active(item);
   }
   del(item) {
     this.props.Del(item);
+    console.log('addcomponent-del')
+  }
+  
+  changeReset=(props)=>{
+    this.setState({
+      reset:props,
+    },()=>{
+      // console.log(this.state.reset);     
+    })
+    console.log('addcomponent-changereset')
+  }
+  setValue(item,value){
+    this.props.Value(item,value);
+    console.log('addcomponent-setvalue')
   }
   
   changeReset=(props)=>{

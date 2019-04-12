@@ -22,16 +22,18 @@ const AddListComponent = Form.create({ name: 'form_in_modal' })(
           this.props.Value(item, value);
         }
       });
+      console.log('addlist-handleSubmit');
     };
     componentDidMount() {
       
       this.setState({
         list: this.props.TagList,
       });
+      console.log('addlist-componentDidMount');
     }
     componentWillReceiveProps(nextProps) {
-      console.log(nextProps);
-      
+      // console.log(nextProps);
+      console.log('addlist-componentWillReceiveProps');
       this.setState({
         list: nextProps.TagList,
         reset:nextProps.cReset
@@ -55,9 +57,11 @@ const AddListComponent = Form.create({ name: 'form_in_modal' })(
     });
     }
     setActive(item) {
-      this.props.Item(item);
+      console.log('addlist-setActive');
+      this.props.Active(item);
     }
     changeValue = (item, e) => {
+      console.log('addlist-changeValue');
       if (e.target.value == '') {
         this.setState({
           value: item.title,
@@ -69,9 +73,10 @@ const AddListComponent = Form.create({ name: 'form_in_modal' })(
       }
     };
     del(item) {
+      console.log('addlist-del');
       this.props.Del(item);
     }
-    
+   
     render() {
       const { visible, onCancel, onCreate, form } = this.props;
       const { getFieldDecorator } = form;
@@ -95,9 +100,9 @@ const AddListComponent = Form.create({ name: 'form_in_modal' })(
                 <div className={item.isActive ? styles.listActive : styles.addList}>
                   <Form>
                     <Form.Item className={styles.attention}>
-                      {getFieldDecorator('note', {
+                      {getFieldDecorator('note', {  
                         rules: [{ required: true, message: '项目名称不能为空' }],
-                      })(<Input type="text" onChange={this.changeValue.bind(this, item)}  value={item.title}/>)}
+                      })(<Input type="text" onChange={this.changeValue.bind(this, item)}/>)}
                     </Form.Item>
                     <Form.Item>
                       <Button
